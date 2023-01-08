@@ -1,0 +1,25 @@
+/*-- scss:defaults --*/
+
+/*-- > rgb(0.59766, 0.72266, 0.84375)
+[1] "#98B8D7"
+> rgb(0.79688, 0.79688, 0.79688)
+[1] "#CBCBCB"
+> rgb(0.00000, 0.31250, 0.60547)
+[1] "#00509A"
+--*/
+
+
+// colors
+$body-bg: #FFFFFF !default;
+$body-color: #000000 !default;
+$link-color: #C8D317 !default;
+$selection-bg: #26351c !default;
+
+// headings
+$presentation-heading-color: #00509B !default;
+
+/*-- scss:rules --*/
+
+.reveal a {
+  line-height: 1.3em;
+}
