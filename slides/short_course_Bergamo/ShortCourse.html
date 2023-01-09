@@ -890,6 +890,7 @@ Philipp Otto
 </div>
 </div>
 <p>There are certain measures describing characteristics/properties of a distribution function <span class="math inline">\(F\)</span>, like the expectation of <span class="math inline">\(F\)</span>, (co-)variance of <span class="math inline">\(F\)</span>, etc. These measures also define the spatial dependence.</p>
+<div class="fragment">
 <div class="callout callout-tip callout-captioned callout-style-simple">
 <div class="callout-body">
 <div class="callout-caption">
@@ -903,6 +904,8 @@ Philipp Otto
 </div>
 </div>
 </div>
+</div>
+<div class="fragment">
 <div class="callout callout-note callout-captioned callout-style-simple">
 <div class="callout-body">
 <div class="callout-caption">
@@ -930,6 +933,8 @@ Philipp Otto
 </div>
 </div>
 <p>This means that the distribution of the random process is the same in all locations and the dependence between the random variables does also not depend on the location, but only on the difference between two locations. In the special case that the dependence is the same into all directions (depending only on the distance between two locations, but not the orientation towards each other), the process is isotropic.</p>
+</div>
+<div class="fragment">
 <div class="callout callout-tip callout-captioned callout-style-simple">
 <div class="callout-body">
 <div class="callout-caption">
@@ -954,6 +959,7 @@ Philipp Otto
 </div>
 <div class="callout-content">
 <p>If the process is stationary and concurrently isotropic, it is called a <strong>homogeneous</strong> process.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1222,7 +1228,7 @@ R^2 = \frac{\sum_{i=1}^n \big(\widehat Y_i-\bar Y\big)^2}
 <p><span class="math display">\[\begin{alignat*}{3}
 RMSE &amp; = &amp; \sqrt{\frac{1}{n} \sum_{i = 1}^{n} (\hat{Y}_i - Y_i)^2} \\
 MAE &amp; = &amp; \frac{1}{n} \sum_{i = 1}^{n} | \hat{Y}_i - Y_i |\\
-MAE &amp; = &amp; \text{median}(| \hat{Y}_i - Y_i |)
+MAD &amp; = &amp; \text{median}(| \hat{Y}_i - Y_i |)
 \end{alignat*}\]</span></p>
 <p>Measure for the average/median deviation of the predicted values from the observed values (in the same units as the measurements of the response variable). In this sense, they provide more/different information compared to <span class="math inline">\(R^2\)</span>.</p>
 </div>
@@ -1282,7 +1288,7 @@ MAE &amp; = &amp; \text{median}(| \hat{Y}_i - Y_i |)
 </div>
 <div class="fragment">
 <p>Then, the minimisation is equivalent to the Lagrangian form <span class="math display">\[\begin{equation*}
-    \hat{\boldsymbol{\beta}} = \arg \min_{\boldsymbol{\beta} \in \mathbb{R}^{p}} \frac{1}{n} (\boldsymbol{Y} - \mathbf{X} \, \boldsymbol{\beta})^\prime (\boldsymbol{Y} - \mathbf{X} \, \boldsymbol{\beta}) + \lambda ||\beta||_1
+    \hat{\boldsymbol{\beta}}_{\text{Lasso}}(\lambda) = \arg \min_{\boldsymbol{\beta} \in \mathbb{R}^{p}} \frac{1}{n} (\boldsymbol{Y} - \mathbf{X} \, \boldsymbol{\beta})^\prime (\boldsymbol{Y} - \mathbf{X} \, \boldsymbol{\beta}) + \lambda ||\beta||_1
 \end{equation*}\]</span> with regularisation parameter <span class="math inline">\(\lambda \geq 0\)</span>.</p>
 </div>
 <div class="fragment">
@@ -1596,18 +1602,79 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 </section>
 <section class="slide level2">
 
+<p>Other penalties:</p>
 <ul>
 <li><span class="math inline">\(+ \lambda ||\boldsymbol{\beta}||_2\)</span>: ridge regression (Tikhonov regularisation, Tikhonov, A. N.; V. Y. Arsenin (1977). Solution of Ill-posed Problems.)</li>
 <li><span class="math inline">\(+ \lambda_1 ||\boldsymbol{\beta}||_1 + \lambda_2 ||\boldsymbol{\beta}||_2\)</span>: elastic net (is equivalent to linear support vector machines)</li>
-<li><span class="math inline">\(+ \lambda_1 ||\boldsymbol{w} \boldsymbol{\beta}||_1\)</span>: adaptive LASSO with some predefined weights from a prior (consistent) estimation, e.g., <span class="math inline">\(\boldsymbol{w} = (1/|\hat{\beta}_i|)_{i = 1, ...,p}\)</span> (adaptive LASSO estimates are ``nearly unbiased’’)</li>
+<li><span class="math inline">\(+ \lambda_1 ||\boldsymbol{w} \boldsymbol{\beta}||_1\)</span>: adaptive LASSO with some predefined weights from a prior (consistent) estimation, e.g., <span class="math inline">\(\boldsymbol{w} = (1/|\hat{\beta}_i|)_{i = 1, ...,p}\)</span> (adaptive LASSO estimates are “nearly unbiased”)</li>
 <li>and many more</li>
 </ul>
 </section>
 <section id="tikhonov-regularisation-ridge-regression" class="slide level2" data-number="3.3">
 <h2><span class="header-section-number">3.3</span> Tikhonov Regularisation (Ridge Regression)</h2>
+<p>Instead of an <span class="math inline">\(L_1\)</span> penalty, the Euclidean norm can be used in the Lagrangian minimisation <span class="math display">\[\begin{equation*}
+    \hat{\boldsymbol{\beta}}_{\text{Ridge}}(\lambda) = \arg \min_{\boldsymbol{\beta} \in \mathbb{R}^{p}} \frac{1}{n} (\boldsymbol{Y} - \mathbf{X} \, \boldsymbol{\beta})^\prime (\boldsymbol{Y} - \mathbf{X} \, \boldsymbol{\beta}) + \lambda ||\beta||_2
+\end{equation*}\]</span> with regularisation parameter <span class="math inline">\(\lambda \geq 0\)</span>.</p>
+<div class="fragment">
+<ul>
+<li>Closed-form solution of the estimators <span class="math display">\[\begin{equation*}
+  \hat{\boldsymbol{\beta}}_{\text{Ridge}}(\lambda) = (\mathbf{X}'\mathbf{X} + \lambda \mathbf{I})^{-1}\mathbf{X}'\boldsymbol{y}
+\end{equation*}\]</span></li>
+<li>If <span class="math inline">\(\lambda \rightarrow 0\)</span>, the estimator approaches the OLS solution</li>
+<li>Can be used for high-dimensional settings (i.e., if <span class="math inline">\(\text{rank}(\mathbf{X}'\mathbf{X}) &gt; p\)</span>)</li>
+</ul>
+</div>
+<div class="fragment">
+<p>Compared to Lasso:</p>
+<ul>
+<li>Estimated parameters are only close to zero (not exactly zero) <span class="math inline">\(\leadsto\)</span> Ridge cannot be used to reduce the model complexity</li>
+<li>Ridge-regression coefficients of correlated predictors are similar, while only one regressor has a large coefficient (and the others are (close to) zero) in a Lasso regression <span class="math inline">\(\leadsto\)</span> caution when Lasso is applied in settings of cross-correlated regressors</li>
+<li>Ridge regression works better when many parameters are significant</li>
+</ul>
+</div>
 </section>
 <section id="elastic-net" class="slide level2" data-number="3.4">
 <h2><span class="header-section-number">3.4</span> Elastic Net</h2>
+<p>Convex combination of both penalties: <span class="math display">\[\begin{equation*}
+    \hat{\boldsymbol{\beta}} = \arg \min_{\boldsymbol{\beta} \in \mathbb{R}^{p}} \frac{1}{n} (\boldsymbol{Y} - \mathbf{X} \, \boldsymbol{\beta})^\prime (\boldsymbol{Y} - \mathbf{X} \, \boldsymbol{\beta}) + \lambda_1 ||\beta||_1 + \lambda_2 ||\beta||_2
+\end{equation*}\]</span> with regularisation parameter <span class="math inline">\(\lambda \geq 0\)</span>.</p>
+<ul>
+<li>Grid-search over two-dimensional space <span class="math inline">\((\lambda_1, \lambda_2)'\)</span></li>
+<li>If <span class="math inline">\(\lambda_1 \rightarrow 0\)</span>, the <span class="math inline">\(\hat{\boldsymbol{\beta}}(\lambda_1, \lambda_2) \rightarrow \hat{\boldsymbol{\beta}}_{\text{Ridge}}(\lambda_2)\)</span></li>
+<li>If <span class="math inline">\(\lambda_2 \rightarrow 0\)</span>, the <span class="math inline">\(\hat{\boldsymbol{\beta}}(\lambda_1, \lambda_2) \rightarrow \hat{\boldsymbol{\beta}}_{\text{Lasso}}(\lambda_1)\)</span></li>
+<li>Elastic nets can be reduced to the linear support vector machine (i.e., SVM solvers can be applied)</li>
+</ul>
+<div class="fragment">
+<div class="cell columns column-output-location" data-layout-align="center">
+<div class="column">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb42-2"><a href="#cb42-2"></a></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="co"># Load the sample data</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb42-5"><a href="#cb42-5"></a></span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="co"># Convert the data to matrices</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mtcars[, <span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb42-8"><a href="#cb42-8"></a>y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mtcars[, <span class="dv">1</span>])</span>
+<span id="cb42-9"><a href="#cb42-9"></a></span>
+<span id="cb42-10"><a href="#cb42-10"></a>X <span class="ot">&lt;-</span> <span class="fu">scale</span>(X)</span>
+<span id="cb42-11"><a href="#cb42-11"></a></span>
+<span id="cb42-12"><a href="#cb42-12"></a><span class="co"># Fit the LASSO model</span></span>
+<span id="cb42-13"><a href="#cb42-13"></a>fit <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(X, y, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb42-14"><a href="#cb42-14"></a><span class="co"># alpha elastic net mixing parameter</span></span>
+<span id="cb42-15"><a href="#cb42-15"></a></span>
+<span id="cb42-16"><a href="#cb42-16"></a><span class="co"># Plot the lambda path</span></span>
+<span id="cb42-17"><a href="#cb42-17"></a><span class="fu">plot</span>(fit, <span class="at">xvar =</span> <span class="st">"lambda"</span>, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-21-3.png" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="selection-of-the-penalty-parameter" class="slide level2" data-number="3.5">
 <h2><span class="header-section-number">3.5</span> Selection of the Penalty Parameter</h2>
@@ -1663,27 +1730,27 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 
 <div class="cell columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">library</span>(glmnet)</span>
-<span id="cb42-2"><a href="#cb42-2"></a></span>
-<span id="cb42-3"><a href="#cb42-3"></a><span class="co"># Load the sample data</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a><span class="fu">data</span>(mtcars)</span>
-<span id="cb42-5"><a href="#cb42-5"></a></span>
-<span id="cb42-6"><a href="#cb42-6"></a><span class="co"># Convert the data to matrices</span></span>
-<span id="cb42-7"><a href="#cb42-7"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mtcars[, <span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb42-8"><a href="#cb42-8"></a>y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mtcars[, <span class="dv">1</span>])</span>
-<span id="cb42-9"><a href="#cb42-9"></a></span>
-<span id="cb42-10"><a href="#cb42-10"></a>X <span class="ot">&lt;-</span> <span class="fu">scale</span>(X)</span>
-<span id="cb42-11"><a href="#cb42-11"></a></span>
-<span id="cb42-12"><a href="#cb42-12"></a><span class="co"># Fit the LASSO model</span></span>
-<span id="cb42-13"><a href="#cb42-13"></a>fit <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">type.measure =</span> <span class="st">"mse"</span>)</span>
-<span id="cb42-14"><a href="#cb42-14"></a></span>
-<span id="cb42-15"><a href="#cb42-15"></a><span class="co"># Plot the lambda path</span></span>
-<span id="cb42-16"><a href="#cb42-16"></a><span class="fu">plot</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">library</span>(glmnet)</span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a><span class="co"># Load the sample data</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb43-5"><a href="#cb43-5"></a></span>
+<span id="cb43-6"><a href="#cb43-6"></a><span class="co"># Convert the data to matrices</span></span>
+<span id="cb43-7"><a href="#cb43-7"></a>X <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mtcars[, <span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb43-8"><a href="#cb43-8"></a>y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(mtcars[, <span class="dv">1</span>])</span>
+<span id="cb43-9"><a href="#cb43-9"></a></span>
+<span id="cb43-10"><a href="#cb43-10"></a>X <span class="ot">&lt;-</span> <span class="fu">scale</span>(X)</span>
+<span id="cb43-11"><a href="#cb43-11"></a></span>
+<span id="cb43-12"><a href="#cb43-12"></a><span class="co"># Fit the LASSO model</span></span>
+<span id="cb43-13"><a href="#cb43-13"></a>fit <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(X, y, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">type.measure =</span> <span class="st">"mse"</span>)</span>
+<span id="cb43-14"><a href="#cb43-14"></a></span>
+<span id="cb43-15"><a href="#cb43-15"></a><span class="co"># Plot the lambda path</span></span>
+<span id="cb43-16"><a href="#cb43-16"></a><span class="fu">plot</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-21-3.png" width="864"></p>
+<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-22-1.png" width="864"></p>
 </figure>
 </div>
 </div>
@@ -1694,42 +1761,42 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 
 <div class="cell columns column-output-location" data-layout-align="center">
 <div class="column">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="co"># Load the required libraries</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LassoCV</span>
-<span id="cb43-3"><a href="#cb43-3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb43-4"><a href="#cb43-4"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb43-5"><a href="#cb43-5"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb43-6"><a href="#cb43-6"></a></span>
-<span id="cb43-7"><a href="#cb43-7"></a><span class="co"># Load the sample data</span></span>
-<span id="cb43-8"><a href="#cb43-8"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">'sources/mtcars.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>, header <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb43-9"><a href="#cb43-9"></a></span>
-<span id="cb43-10"><a href="#cb43-10"></a>lambdas <span class="op">=</span> np.logspace(<span class="op">-</span><span class="fl">4.5</span>, <span class="fl">0.9</span>, <span class="dv">100</span>)</span>
-<span id="cb43-11"><a href="#cb43-11"></a></span>
-<span id="cb43-12"><a href="#cb43-12"></a><span class="co"># Split the data into features and target</span></span>
-<span id="cb43-13"><a href="#cb43-13"></a>X <span class="op">=</span> cars.drop(<span class="st">'mpg'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb43-14"><a href="#cb43-14"></a>y <span class="op">=</span> cars[<span class="st">'mpg'</span>]</span>
-<span id="cb43-15"><a href="#cb43-15"></a></span>
-<span id="cb43-16"><a href="#cb43-16"></a><span class="co"># Standardize data</span></span>
-<span id="cb43-17"><a href="#cb43-17"></a>X <span class="op">-=</span> X.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb43-18"><a href="#cb43-18"></a>X <span class="op">/=</span> X.std(axis<span class="op">=</span><span class="dv">0</span>)  </span>
-<span id="cb43-19"><a href="#cb43-19"></a></span>
-<span id="cb43-20"><a href="#cb43-20"></a><span class="co"># Fit LASSO model with cross-validation and k = 10 folds</span></span>
-<span id="cb43-21"><a href="#cb43-21"></a>model <span class="op">=</span> LassoCV(alphas <span class="op">=</span> lambdas, cv <span class="op">=</span> <span class="dv">10</span>).fit(X, y)<span class="op">;</span></span>
-<span id="cb43-22"><a href="#cb43-22"></a></span>
-<span id="cb43-23"><a href="#cb43-23"></a><span class="co"># Plot average MAE across the lambda sequence</span></span>
-<span id="cb43-24"><a href="#cb43-24"></a>plt.semilogx(model.alphas_, model.mse_path_, <span class="st">":"</span>)<span class="op">;</span></span>
-<span id="cb43-25"><a href="#cb43-25"></a>plt.semilogx(model.alphas_, model.mse_path_.mean(axis<span class="op">=</span><span class="dv">1</span>), <span class="st">'k'</span>,</span>
-<span id="cb43-26"><a href="#cb43-26"></a>         label<span class="op">=</span><span class="vs">r'Average across the folds'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb43-27"><a href="#cb43-27"></a>plt.xlabel(<span class="vs">r'$\lambda$'</span>)<span class="op">;</span></span>
-<span id="cb43-28"><a href="#cb43-28"></a>plt.ylabel(<span class="st">'Mean squared error'</span>)<span class="op">;</span></span>
-<span id="cb43-29"><a href="#cb43-29"></a>plt.title(<span class="st">'Mean squared error on each fold: Lasso'</span>)<span class="op">;</span></span>
-<span id="cb43-30"><a href="#cb43-30"></a>plt.axis(<span class="st">'tight'</span>)<span class="op">;</span></span>
-<span id="cb43-31"><a href="#cb43-31"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Load the required libraries</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LassoCV</span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb44-6"><a href="#cb44-6"></a></span>
+<span id="cb44-7"><a href="#cb44-7"></a><span class="co"># Load the sample data</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a>cars <span class="op">=</span> pd.read_csv(<span class="st">'sources/mtcars.csv'</span>, index_col <span class="op">=</span> <span class="dv">0</span>, header <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb44-9"><a href="#cb44-9"></a></span>
+<span id="cb44-10"><a href="#cb44-10"></a>lambdas <span class="op">=</span> np.logspace(<span class="op">-</span><span class="fl">4.5</span>, <span class="fl">0.9</span>, <span class="dv">100</span>)</span>
+<span id="cb44-11"><a href="#cb44-11"></a></span>
+<span id="cb44-12"><a href="#cb44-12"></a><span class="co"># Split the data into features and target</span></span>
+<span id="cb44-13"><a href="#cb44-13"></a>X <span class="op">=</span> cars.drop(<span class="st">'mpg'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb44-14"><a href="#cb44-14"></a>y <span class="op">=</span> cars[<span class="st">'mpg'</span>]</span>
+<span id="cb44-15"><a href="#cb44-15"></a></span>
+<span id="cb44-16"><a href="#cb44-16"></a><span class="co"># Standardize data</span></span>
+<span id="cb44-17"><a href="#cb44-17"></a>X <span class="op">-=</span> X.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb44-18"><a href="#cb44-18"></a>X <span class="op">/=</span> X.std(axis<span class="op">=</span><span class="dv">0</span>)  </span>
+<span id="cb44-19"><a href="#cb44-19"></a></span>
+<span id="cb44-20"><a href="#cb44-20"></a><span class="co"># Fit LASSO model with cross-validation and k = 10 folds</span></span>
+<span id="cb44-21"><a href="#cb44-21"></a>model <span class="op">=</span> LassoCV(alphas <span class="op">=</span> lambdas, cv <span class="op">=</span> <span class="dv">10</span>).fit(X, y)<span class="op">;</span></span>
+<span id="cb44-22"><a href="#cb44-22"></a></span>
+<span id="cb44-23"><a href="#cb44-23"></a><span class="co"># Plot average MAE across the lambda sequence</span></span>
+<span id="cb44-24"><a href="#cb44-24"></a>plt.semilogx(model.alphas_, model.mse_path_, <span class="st">":"</span>)<span class="op">;</span></span>
+<span id="cb44-25"><a href="#cb44-25"></a>plt.semilogx(model.alphas_, model.mse_path_.mean(axis<span class="op">=</span><span class="dv">1</span>), <span class="st">'k'</span>,</span>
+<span id="cb44-26"><a href="#cb44-26"></a>         label<span class="op">=</span><span class="vs">r'Average across the folds'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb44-27"><a href="#cb44-27"></a>plt.xlabel(<span class="vs">r'$\lambda$'</span>)<span class="op">;</span></span>
+<span id="cb44-28"><a href="#cb44-28"></a>plt.ylabel(<span class="st">'Mean squared error'</span>)<span class="op">;</span></span>
+<span id="cb44-29"><a href="#cb44-29"></a>plt.title(<span class="st">'Mean squared error on each fold: Lasso'</span>)<span class="op">;</span></span>
+<span id="cb44-30"><a href="#cb44-30"></a>plt.axis(<span class="st">'tight'</span>)<span class="op">;</span></span>
+<span id="cb44-31"><a href="#cb44-31"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-22-1.png" width="864"></p>
+<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-23-1.png" width="864"></p>
 </figure>
 </div>
 </div>
@@ -1743,6 +1810,15 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 </section>
 <section id="covariate-selection" class="slide level2" data-number="4.1">
 <h2><span class="header-section-number">4.1</span> Covariate Selection</h2>
+<ul>
+<li>Like for the linear regression example, the regularisation can be used for covariate selection <span class="citation" data-cites="Zhu10">(see, e.g., <a href="#/references" role="doc-biblioref" onclick="">J. Zhu, Huang, and Reyes 2010</a>)</span></li>
+</ul>
+<p>Caution:</p>
+<ul>
+<li>Often spatiotemporal variables are cross-correlated due to their spatial nature <span class="math inline">\(\leadsto\)</span> adaptive Lasso procedures</li>
+<li>Cross validation schemes must account for the spatial/temporal dependence</li>
+<li>Penalised maximum-likelihood estimators, GMM, 2-stage least squares, etc.</li>
+</ul>
 </section>
 <section id="dimensionality-reduction-covariance-matrix" class="slide level2" data-number="4.2">
 <h2><span class="header-section-number">4.2</span> Dimensionality Reduction Covariance Matrix</h2>
@@ -1759,53 +1835,57 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 </ul></li>
 </ul>
 <p>Regularised estimation procedures (with a shrinkage target of zero)</p>
+<div class="fragment">
 <p>We can typically find zeros if two observations across space/time are conditionally independent, but conditional independence is encoded in the <strong>precision matrix</strong> (i.e., inverse covariance matrix):</p>
 <ul>
 <li>Lasso procedure to induce zeros in the precision matrix <span class="citation" data-cites="krock2021nonstationary krock2021modeling">(see <a href="#/references" role="doc-biblioref" onclick="">Krock, Kleiber, and Becker 2021</a> for univariate processes; and <a href="#/references" role="doc-biblioref" onclick="">Krock et al. 2021</a> for multivariate processes)</span></li>
 <li>Graphical Lasso</li>
 </ul>
+</div>
+<div class="fragment">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">library</span>(gstat)</span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="fu">library</span>(glasso)</span>
-<span id="cb44-3"><a href="#cb44-3"></a></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="fu">set.seed</span>(<span class="dv">5515</span>)</span>
-<span id="cb44-5"><a href="#cb44-5"></a></span>
-<span id="cb44-6"><a href="#cb44-6"></a><span class="co"># Simulation of geostatistical process</span></span>
-<span id="cb44-7"><a href="#cb44-7"></a>xy <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb44-8"><a href="#cb44-8"></a><span class="fu">names</span>(xy) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x"</span>,<span class="st">"y"</span>)</span>
-<span id="cb44-9"><a href="#cb44-9"></a><span class="fu">gridded</span>(xy) <span class="ot">=</span> <span class="er">~</span>x<span class="sc">+</span>y</span>
-<span id="cb44-10"><a href="#cb44-10"></a>g.dummy <span class="ot">&lt;-</span> <span class="fu">gstat</span>(<span class="at">formula =</span> z <span class="sc">~</span> <span class="dv">1</span>, <span class="at">dummy =</span> <span class="cn">TRUE</span>, <span class="at">beta =</span> <span class="dv">0</span>,  <span class="at">model =</span> <span class="fu">vgm</span>(<span class="dv">1</span>, <span class="st">"Exp"</span>, <span class="dv">15</span>), <span class="at">nmax =</span> <span class="dv">100</span>) <span class="co"># for speed -- 10 is too small!!</span></span>
-<span id="cb44-11"><a href="#cb44-11"></a>yy <span class="ot">&lt;-</span> <span class="fu">predict</span>(g.dummy, xy, <span class="at">nsim =</span> <span class="dv">500</span>)</span>
-<span id="cb44-12"><a href="#cb44-12"></a><span class="fu">spplot</span>(yy[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">library</span>(gstat)</span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="fu">library</span>(glasso)</span>
+<span id="cb45-3"><a href="#cb45-3"></a></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="fu">set.seed</span>(<span class="dv">5515</span>)</span>
+<span id="cb45-5"><a href="#cb45-5"></a></span>
+<span id="cb45-6"><a href="#cb45-6"></a><span class="co"># Simulation of geostatistical process</span></span>
+<span id="cb45-7"><a href="#cb45-7"></a>xy <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb45-8"><a href="#cb45-8"></a><span class="fu">names</span>(xy) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x"</span>,<span class="st">"y"</span>)</span>
+<span id="cb45-9"><a href="#cb45-9"></a><span class="fu">gridded</span>(xy) <span class="ot">=</span> <span class="er">~</span>x<span class="sc">+</span>y</span>
+<span id="cb45-10"><a href="#cb45-10"></a>g.dummy <span class="ot">&lt;-</span> <span class="fu">gstat</span>(<span class="at">formula =</span> z <span class="sc">~</span> <span class="dv">1</span>, <span class="at">dummy =</span> <span class="cn">TRUE</span>, <span class="at">beta =</span> <span class="dv">0</span>,  <span class="at">model =</span> <span class="fu">vgm</span>(<span class="dv">1</span>, <span class="st">"Exp"</span>, <span class="dv">15</span>), <span class="at">nmax =</span> <span class="dv">100</span>) <span class="co"># for speed -- 10 is too small!!</span></span>
+<span id="cb45-11"><a href="#cb45-11"></a>yy <span class="ot">&lt;-</span> <span class="fu">predict</span>(g.dummy, xy, <span class="at">nsim =</span> <span class="dv">500</span>)</span>
+<span id="cb45-12"><a href="#cb45-12"></a><span class="fu">spplot</span>(yy[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-23-3.png" width="864"></p>
+<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-24-3.png" width="864"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># graphical Lasso </span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>x <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>, <span class="cf">function</span>(x) yy[x]<span class="sc">@</span>data)))</span>
-<span id="cb45-3"><a href="#cb45-3"></a>s <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
-<span id="cb45-4"><a href="#cb45-4"></a></span>
-<span id="cb45-5"><a href="#cb45-5"></a>lambda.seq <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">^</span><span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">to =</span> <span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">50</span>)</span>
-<span id="cb45-6"><a href="#cb45-6"></a>a <span class="ot">&lt;-</span> <span class="fu">glassopath</span>(s, <span class="at">rholist =</span> lambda.seq)</span>
-<span id="cb45-7"><a href="#cb45-7"></a></span>
-<span id="cb45-8"><a href="#cb45-8"></a><span class="co"># Plot the share of zeros in the estimated precision matrix </span></span>
-<span id="cb45-9"><a href="#cb45-9"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>) <span class="sc">+</span> <span class="fl">0.3</span>)  </span>
-<span id="cb45-10"><a href="#cb45-10"></a><span class="fu">plot</span>(<span class="fu">log</span>(a<span class="sc">$</span>rholist), <span class="fu">apply</span>(a<span class="sc">$</span>wi, <span class="dv">3</span>, <span class="cf">function</span>(x) <span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">0</span>)), </span>
-<span id="cb45-11"><a href="#cb45-11"></a>     <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">20</span>,</span>
-<span id="cb45-12"><a href="#cb45-12"></a>     <span class="at">xlab =</span> <span class="st">"Log Lambda"</span>, <span class="at">ylab =</span> <span class="st">"Sparsity degree (precision matrix)"</span>)</span>
-<span id="cb45-13"><a href="#cb45-13"></a><span class="fu">par</span>(<span class="at">new =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb45-14"><a href="#cb45-14"></a><span class="fu">plot</span>(<span class="fu">log</span>(a<span class="sc">$</span>rholist), <span class="fu">apply</span>(a<span class="sc">$</span>w, <span class="dv">3</span>, <span class="cf">function</span>(x) <span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">0</span>)),</span>
-<span id="cb45-15"><a href="#cb45-15"></a>      <span class="at">type =</span> <span class="st">"b"</span>, , <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">""</span>)</span>
-<span id="cb45-16"><a href="#cb45-16"></a><span class="fu">axis</span>(<span class="at">side=</span><span class="dv">4</span>, <span class="at">at =</span> <span class="fu">pretty</span>(<span class="fu">range</span>(<span class="fu">apply</span>(a<span class="sc">$</span>w, <span class="dv">3</span>, <span class="cf">function</span>(x) <span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">0</span>)))), <span class="at">col.axis =</span> <span class="st">"darkblue"</span>)</span>
-<span id="cb45-17"><a href="#cb45-17"></a><span class="fu">mtext</span>(<span class="st">"Sparsity degree (covariance matrix)"</span>, <span class="at">side =</span> <span class="dv">4</span>, <span class="at">line =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"darkblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># graphical Lasso </span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>x <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">do.call</span>(cbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>, <span class="cf">function</span>(x) yy[x]<span class="sc">@</span>data)))</span>
+<span id="cb46-3"><a href="#cb46-3"></a>s <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
+<span id="cb46-4"><a href="#cb46-4"></a></span>
+<span id="cb46-5"><a href="#cb46-5"></a>lambda.seq <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">^</span><span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">to =</span> <span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">50</span>)</span>
+<span id="cb46-6"><a href="#cb46-6"></a>a <span class="ot">&lt;-</span> <span class="fu">glassopath</span>(s, <span class="at">rholist =</span> lambda.seq)</span>
+<span id="cb46-7"><a href="#cb46-7"></a></span>
+<span id="cb46-8"><a href="#cb46-8"></a><span class="co"># Plot the share of zeros in the estimated precision matrix </span></span>
+<span id="cb46-9"><a href="#cb46-9"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>) <span class="sc">+</span> <span class="fl">0.3</span>)  </span>
+<span id="cb46-10"><a href="#cb46-10"></a><span class="fu">plot</span>(<span class="fu">log</span>(a<span class="sc">$</span>rholist), <span class="fu">apply</span>(a<span class="sc">$</span>wi, <span class="dv">3</span>, <span class="cf">function</span>(x) <span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">0</span>)), </span>
+<span id="cb46-11"><a href="#cb46-11"></a>     <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">20</span>,</span>
+<span id="cb46-12"><a href="#cb46-12"></a>     <span class="at">xlab =</span> <span class="st">"Log Lambda"</span>, <span class="at">ylab =</span> <span class="st">"Sparsity degree (precision matrix)"</span>)</span>
+<span id="cb46-13"><a href="#cb46-13"></a><span class="fu">par</span>(<span class="at">new =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-14"><a href="#cb46-14"></a><span class="fu">plot</span>(<span class="fu">log</span>(a<span class="sc">$</span>rholist), <span class="fu">apply</span>(a<span class="sc">$</span>w, <span class="dv">3</span>, <span class="cf">function</span>(x) <span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">0</span>)),</span>
+<span id="cb46-15"><a href="#cb46-15"></a>      <span class="at">type =</span> <span class="st">"b"</span>, , <span class="at">pch =</span> <span class="dv">20</span>, <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">""</span>)</span>
+<span id="cb46-16"><a href="#cb46-16"></a><span class="fu">axis</span>(<span class="at">side=</span><span class="dv">4</span>, <span class="at">at =</span> <span class="fu">pretty</span>(<span class="fu">range</span>(<span class="fu">apply</span>(a<span class="sc">$</span>w, <span class="dv">3</span>, <span class="cf">function</span>(x) <span class="fu">mean</span>(x <span class="sc">==</span> <span class="dv">0</span>)))), <span class="at">col.axis =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb46-17"><a href="#cb46-17"></a><span class="fu">mtext</span>(<span class="st">"Sparsity degree (covariance matrix)"</span>, <span class="at">side =</span> <span class="dv">4</span>, <span class="at">line =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"darkblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-23-4.png" width="864"></p>
+<p><img data-src="ShortCourse_files/figure-revealjs/unnamed-chunk-24-4.png" width="864"></p>
 </figure>
+</div>
 </div>
 </div>
 </div>
@@ -1820,7 +1900,10 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 <li><span class="citation" data-cites="stein2004approximating">Stein, Chi, and Welty (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span> proposed to approximate the likelihood for large spatial data sets based on Vecchia approximations <span class="citation" data-cites="vecchia1988estimation">(<a href="#/references" role="doc-biblioref" onclick="">Vecchia 1988</a>)</span></li>
 <li>sparse Cholesky factors have be considered first by <span class="citation" data-cites="schaefer2021sparse">Schäfer, Katzfuss, and Owhadi (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span> for spatial models</li>
 </ul>
+<div class="fragment">
 <p>Aim: reduce dimension of <span class="math inline">\(\mathbf{P}\)</span> (<span class="math inline">\(N \times r\)</span>-dimensional), such that <span class="math inline">\(r \ll N\)</span></p>
+</div>
+<div class="fragment">
 <ul>
 <li>Low-rank covariance matrices have been considered first by <span class="citation" data-cites="banerjee2008gaussian">Banerjee et al. (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span>, <span class="citation" data-cites="cressie2008fixed">Cressie and Johannesson (<a href="#/references" role="doc-biblioref" onclick="">2008</a>)</span> (spatial fixed-rank kriging), and <span class="citation" data-cites="cressie2010fixed">Cressie, Shi, and Kang (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span> (spatiotemporal fixed-rank filtering)</li>
 </ul>
@@ -1831,6 +1914,7 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 <li><span class="citation" data-cites="hsu2012group">Hsu, Chang, and Huang (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span> suggested a penalised procedures to choose these local basis functions for spatiotemporal processes</li>
 </ul>
 <p>The same idea could also be employed for sparse inverse Cholesky factors <span class="citation" data-cites="kang2021correlation">(see <a href="#/references" role="doc-biblioref" onclick="">Kang and Katzfuss 2021</a>)</span></p>
+</div>
 </section>
 <section class="slide level2">
 
@@ -1884,7 +1968,7 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 <p>Precision matrix of spatial autoregressive models is given by <span class="math display">\[\begin{equation}
     (\mathbf{I} - \rho \mathbf{W})' \mathbf{\Sigma}_{\varepsilon}^{-1} (\mathbf{I} - \rho \mathbf{W})
 \end{equation}\]</span> showing the relation to the above-mentioned Cholesky decomposition of geostatistical models.</p>
-<p>That is, the spatial weight matrix <span class="math inline">\(\mathbf{W}\)</span> implies a certain (geographical) structure of the Cholesky factors. <span class="citation" data-cites="zhu2009estimating">Zhu and Liu (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> proposed LASSO procedure to estimate the precision matrix exploiting the fact that geographically distant observation are likely to be conditionally independent (i.e., the precision matrix is a sparse matrix).</p>
+<p>That is, the spatial weight matrix <span class="math inline">\(\mathbf{W}\)</span> implies a certain (geographical) structure of the Cholesky factors. <span class="citation" data-cites="zhu2009estimating">Z. Zhu and Liu (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> proposed LASSO procedure to estimate the precision matrix exploiting the fact that geographically distant observation are likely to be conditionally independent (i.e., the precision matrix is a sparse matrix).</p>
 </div>
 <div class="fragment">
 <p>Spatial interactions can be modelled using a series of different weight structures, e.g., <span class="math inline">\(\sum_{i = 1}^{k} \rho_i \mathbf{W}_i\)</span> with <span class="math inline">\(k\)</span> different weight matrices <span class="math inline">\(\mathbf{W}_i\)</span> (e.g., directional matrices, see <span class="citation" data-cites="merk2021directional">Merk and Otto (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>)</p>
@@ -1908,11 +1992,14 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 <li>two-sided but directed links between A and B (i.e., <span class="math inline">\(w_{ab}\)</span> and <span class="math inline">\(w_{ba}\)</span>)</li>
 </ul></li>
 </ul>
+</div>
+<div class="fragment">
 <p>Spatiotemporal models:</p>
 <p><span class="citation" data-cites="bhattacharjee2013estimation">Bhattacharjee and Jensen-Butler (<a href="#/references" role="doc-biblioref" onclick="">2013</a>)</span> first proposed the idea of estimating the full matrix <span class="math inline">\(\mathbf{B}\)</span> with further structural constraints for identification (i.e., symmetry). <span class="citation" data-cites="ahrens2015two">Ahrens and Bhattacharjee (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> proposed a two-step LASSO procedure; <span class="citation" data-cites="lam2020estimation">Lam and Souza (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> suggested a regularised estimation for spatial lag models.</p>
 <p>Constrained two-step Lasso procedure with an unknown number of structural breaks in the mean <span class="citation" data-cites="otto2022estimation">(<a href="#/references" role="doc-biblioref" onclick="">Otto and Steinert 2022</a>)</span>.</p>
 <ul>
 <li>Selection criterion based on the similarity between the model and sample cross-correlation</li>
+<li>Remember: estimated parameters are not necessarily uniquely identifiable, but the fitted observations are unique <span class="math inline">\(\leadsto\)</span> single weights should be interpreted with caution</li>
 </ul>
 
 <!--
@@ -1937,6 +2024,7 @@ library("glmnet")
 library("doParallel")
 library("foreach")
 library("spdep")
+library("Matrix")
 library("ROI")
 library("ROI.plugin.qpoases")
 library("plotrix")
@@ -1979,6 +2067,7 @@ row.names(ndvimat) <- regions
 ndvimat[ndvimat == 0] <- mean(ndvimat[ndvimat != 0])
 ndvimat[ndvimat > quantile(ndvimat, 0.98) | ndvimat < quantile(ndvimat, 0.02) ] <- mean(ndvimat[ndvimat != 0])
 
+ndvimat <- (ndvimat - mean(ndvimat)) / sd(ndvimat)
 
 ndvimat <- t(ndvimat)
 save.colnames <- colnames(ndvimat)
@@ -2086,8 +2175,8 @@ for (i.n in 1:n) {
 
 Y.mat.new <- Y.mat
 Y.new <- as.numeric(Y.mat.new)
-X.new <- matrix(0, length(Y.new), n * n)
-X.CP_mean <- matrix(0, length(Y.new), T * n)
+X.new <- Matrix(0, length(Y.new), n * n)
+X.CP_mean <- Matrix(0, length(Y.new), T * n)
 
 for (i in 1:n) {
   X.new[(1:T) + T * (i - 1), (1:n) + n * (i - 1)] <- Y.mat.new  ## copy the mat alongside the 'diagonal'
@@ -2169,8 +2258,8 @@ for(i.cv in 1:n_cv){
       ind_full_roi <- ind_full_roi[-leftout_rand]
       
       
-      X.full.train <- X.full[ind_full_roi, full_col]
-      Y.new.train <- (Y.new[ind_full_roi])
+      X.full.train <- as.matrix(X.full[ind_full_roi, full_col])
+      Y.new.train <- as.matrix(Y.new[ind_full_roi])
       
       if(length(ind_cp_single) == 1){
         get.zero <- which(X.full.train[, 1:length(ind_cp_single)] == 0) ## in the case we will have some 0 value rows due to the cv split
@@ -2816,6 +2905,9 @@ Van Erp, Sara, Daniel L Oberski, and Joris Mulder. 2019. <span>“Shrinkage Prio
 </div>
 <div id="ref-vecchia1988estimation" class="csl-entry" role="doc-biblioentry">
 Vecchia, Aldo V. 1988. <span>“Estimation and Model Identification for Continuous Spatial Processes.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 50 (2): 297–312.
+</div>
+<div id="ref-Zhu10" class="csl-entry" role="doc-biblioentry">
+Zhu, Jun, Hsin-Cheng Huang, and Perla E Reyes. 2010. <span>“On Selection of Spatial Linear Models for Lattice Data.”</span> <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 72 (3): 389–402.
 </div>
 <div id="ref-zhu2009estimating" class="csl-entry" role="doc-biblioentry">
 Zhu, Zhengyuan, and Yufeng Liu. 2009. <span>“Estimating Spatial Covariance Using Penalised Likelihood with Weighted <span class="math inline">\(L_1\)</span> Penalty.”</span> <em>Journal of Nonparametric Statistics</em> 21 (7): 925–42.
