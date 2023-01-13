@@ -1689,11 +1689,15 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 <p>Example: <span class="math inline">\(Y = f(x) + \varepsilon\)</span></p>
 <ul>
 <li>The goodness of fit results from the estimated residuals, i.e., <span class="math inline">\(\hat{\varepsilon} = y - \hat{f}(x)\)</span></li>
-<li>Thus, [ E((Y - (x))^2 ) = Var (f) + </li>
+<li>Thus, <span class="math display">\[\begin{equation}
+E((Y - \hat{f}(x))^2 ) = Var (\hat f) + \text{bias}^2
+\end{equation}\]</span></li>
 <li>Most machine learning methods start exactly at this point (i.e., improving prediction accuracies by reducing the variance of the estimators)</li>
-<li>Regularised regressions (lasso or ridge regression) lead to a bias in the estimation of the model, but at the same time the variance of the estimated models decreases.</li>
+<li>Regularised regressions (e.g., Lasso or ridge regression) lead to a bias in the estimation of the model, but at the same time the variance of the estimated models decreases.</li>
 <li>MSE can be lowered, resulting in higher prediction accuracies</li>
 </ul>
+</div>
+<div class="fragment">
 <div class="callout callout-tip callout-captioned callout-style-simple">
 <div class="callout-body">
 <div class="callout-caption">
@@ -1707,6 +1711,8 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 </div>
 </div>
 </div>
+</div>
+<div class="fragment">
 <p>Bias: High bias can cause an algorithm to miss the relevant relations between features and target outputs (underfitting).</p>
 <p>Variance: High variance may result from an algorithm modelling the random noise in the training data (overfitting).</p>
 </div>
@@ -1722,7 +1728,12 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 <li>Note: this procedure is often computationally expensive</li>
 </ul>
 <div class="fragment">
-<p>Valid cross-validation schemes must satisfy three properties <span class="citation" data-cites="JiangWang2017">(<a href="#/references" role="doc-biblioref" onclick="">Jiang and Wang 2017</a>)</span>: - Randomness of partition - Mutual independence of test errors - Independence between training set and test set.</p>
+<p>Valid cross-validation schemes must satisfy three properties <span class="citation" data-cites="JiangWang2017">(<a href="#/references" role="doc-biblioref" onclick="">Jiang and Wang 2017</a>)</span>:</p>
+<ul>
+<li>Randomness of partition</li>
+<li>Mutual independence of test errors</li>
+<li>Independence between training set and test set.</li>
+</ul>
 <p><strong>Note:</strong> this is particularly relevant for spatiotemporal data (see Motivation) and random cross-validation schemes are typically not applicable</p>
 </div>
 </section>
@@ -1968,7 +1979,7 @@ Hornet Sportabout  18.7    8  360.0  175  3.15  ...  17.02   0   0     3     2
 <p>Precision matrix of spatial autoregressive models is given by <span class="math display">\[\begin{equation}
     (\mathbf{I} - \rho \mathbf{W})' \mathbf{\Sigma}_{\varepsilon}^{-1} (\mathbf{I} - \rho \mathbf{W})
 \end{equation}\]</span> showing the relation to the above-mentioned Cholesky decomposition of geostatistical models.</p>
-<p>That is, the spatial weight matrix <span class="math inline">\(\mathbf{W}\)</span> implies a certain (geographical) structure of the Cholesky factors. <span class="citation" data-cites="zhu2009estimating">Z. Zhu and Liu (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> proposed LASSO procedure to estimate the precision matrix exploiting the fact that geographically distant observation are likely to be conditionally independent (i.e., the precision matrix is a sparse matrix).</p>
+<p>That is, the spatial weight matrix <span class="math inline">\(\mathbf{W}\)</span> implies a certain (geographical) structure of the Cholesky factors. <span class="citation" data-cites="zhu2009estimating">Z. Zhu and Liu (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> proposed a Lasso procedure to estimate the precision matrix exploiting the fact that geographically distant observation are likely to be conditionally independent (i.e., the precision matrix is a sparse matrix).</p>
 </div>
 <div class="fragment">
 <p>Spatial interactions can be modelled using a series of different weight structures, e.g., <span class="math inline">\(\sum_{i = 1}^{k} \rho_i \mathbf{W}_i\)</span> with <span class="math inline">\(k\)</span> different weight matrices <span class="math inline">\(\mathbf{W}_i\)</span> (e.g., directional matrices, see <span class="citation" data-cites="merk2021directional">Merk and Otto (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span>)</p>
