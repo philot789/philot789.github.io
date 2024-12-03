@@ -26,7 +26,20 @@
                     font-weight: bold;
                     color: #7a76ef;
                 }
-            </style>
+        </style>
+        <style>
+            .numbered-list {
+                counter-reset: list-counter; /* Dynamically set this based on total items */
+            }
+            .numbered-list li {
+                list-style: none; /* Remove default bullets */
+                counter-increment: list-counter -1; /* Decrement the counter */
+            }
+            .numbered-list li::before {
+                content: counter(list-counter) ". "; /* Add reversed numbering */
+                font-weight: bold; /* Optional */
+            }
+        </style>
         <script type="text/javascript" src="https://arxiv.org/js/myarticles.js">
         </script>
 	</head>
@@ -94,12 +107,17 @@
 										</p>
 									</header>
 									<!-- <a href="#" class="image featured"><img src="images/panorama.jpg" alt="" /></a> -->
+                                    
+                                                                       
+                                    
                                     <h3>Peer-reviewed Journals</h3>
                                     <p>
-                                    2024
-                                    </p>
-                                    <p>
-                                        <ul>
+                                        <ol reversed>
+                                            <div>
+                                            <h3>
+                                            2024
+                                            </h3>
+                                            
                                             <li><strong>Otto, P.</strong>, Dogan, O., Taspinar, S., Schmid, W., Bera, A. K. (2024): Spatial and Spatiotemporal Volatility Models: A Review. <span class="highlight-journal">Journal of Economic Surveys</span> <a href="https://doi.org/10.1111/joes.12643">(DOI)</a></li>
                                             <li><strong>Otto, P.</strong>, Fassò, A., Maranzano, P. (2024): A review of regularised estimation methods and cross-validation in spatiotemporal statistics. <span class="highlight-journal">Statistics Surveys</span> <a href="https://doi.org/10.1214/24-SS150">(DOI)</a></li>
                                             <li><strong>Otto, P.</strong> (2024): A multivariate spatial and spatiotemporal ARCH model. <span class="highlight-journal">Spatial Statistics</span> 60 <a href="https://doi.org/10.1016/j.spasta.2024.100823">(DOI)</a></li>
@@ -113,13 +131,14 @@
                                             <li>Tzung, H. K., Pathmanathan, D., <strong>Otto, P.</strong>, Dabo-Niang, S. (2024): A Markov-switching spatio-temporal ARCH model. <span class="highlight-journal">Stat</span> (<a href="https://doi.org/10.1002/sta4.713">DOI</a>)</li>
                                             <li>Mohammadi, R., Taleai, M., <strong>Otto, P.</strong>, Sester, M. (2024): Analyzing urban crash incidents: an advanced endogenous approach using spatiotemporal weights matrix. <span class="highlight-journal">Transactions in GIS</span> 28(2) <a href="http://doi.org/10.1111/tgis.13138">(DOI)</a></li>
                                             <li>Bahlau, S., Butenhof, F., Schumacher, R., Kelm, A., Meins-Becker, A., Indorf, K., Steinmann, R., Linhard, K., <strong>Otto, P.</strong>, Nasiriboroujeni, M. (2024): BIM-Effizienz: Innovatives Kostenmanagement auf Basis objektorientierter Bauwerksmodelle. BBSR-Online-Publikation 10/2024, Bonn <a href="https://www.bbsr.bund.de/BBSR/DE/veroeffentlichungen/bbsr-online/2024/bbsr-online-10-2024.html">(html)</a></li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                    2023
-                                    </p>
-                                    <p>
-                                        <ul>
+                                            </div>
+                                            
+                                            
+                                            <div>
+                                            <h3>
+                                            2023
+                                            </h3>
+                                    
                                             <li> <strong>Otto, P.</strong>, Dogan, O., Taspinar, S. (2023): A Dynamic Spatiotemporal Stochastic Volatility Model with an Application to Environmental Risks. <span class="highlight-journal">Econometrics and Statistics</span> (<a href="https://doi.org/10.1016/j.ecosta.2023.11.002">DOI</a>, <a href="https://philot789.github.io/SVM_EnvRisk/" target="_blank" rel="noopener noreferrer">MATLAB-Code</a>)</li>
                                             <li> Fülle, M., <strong>Otto, P.</strong> (2023): Spatial GARCH Models for Unknown Spatial Locations – An Application to Financial Stock Returns. <span class="highlight-journal">Spatial Economic Analysis</span> (<a href="https://doi.org/10.1080/17421772.2023.2237067">DOI</a>, <a href="https://github.com/MJFullness/spatialGARCH" target="_blank" rel="noopener noreferrer">R-Code</a>)</li>
                                             <li> <strong>Otto, P.</strong>, Steinert, R. (2023): Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks. <span class="highlight-journal">Journal of Computational and Graphical Statistics</span>, 32:2, 696-711 (<a href="https://doi.org/10.1080/10618600.2022.2107530">DOI</a>, <a href="https://www.tandfonline.com/doi/suppl/10.1080/10618600.2022.2107530?scroll=top" target="_blank" rel="noopener noreferrer">R-Code</a>)</li>
@@ -127,78 +146,85 @@
                                             <li> Fassò, A., Rodeschini, J., Fusta Moro, A., Shaboviq, Q., Maranzano, P., Cameletti, M., Finazzi, F., Golini, N., Ignaccolo, R., <strong>Otto, P.</strong> (2023): Agrimonia: a dataset on livestock, meteorology and air quality in the Lombardy region, Italy. <span class="highlight-journal">nature Scientific Data</span> 10(143) (<a href="https://doi.org/10.1038/s41597-023-02034-0">DOI</a>, <a href="https://doi.org/10.5281/zenodo.7956006" target="_blank" rel="noopener noreferrer">Zenodo dataset</a>)</li>
                                             <li> <strong>Otto, P.</strong>, Otto, P. (2023): What's in a name? <span class="highlight-journal">Significance</span> 20(1) <a href="https://doi.org/10.1093/jrssig/qmad010">(DOI)</a></li>
                                             <li> Harke, F. H., <strong>Otto, P.</strong> (2023): Solar Self-Sufficient Households as a Driving Factor for Sustainability Transformation. <span class="highlight-journal">Sustainability</span> 15(3) <a href="https://doi.org/10.3390/su15032734">(DOI)</a></li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        2022
-                                    </p>
-                                    <p>
-                                        <ul>
+                                            </div>
+                                   
+                                            <div>
+                                            <h3>
+                                            2022
+                                            </h3>
+                                    
                                             <li> <strong>Otto, P.</strong>, Schmid, W. (2022): A general framework for spatial GARCH models. <span class="highlight-journal">Statistical Papers</span> <a href="https://doi.org/10.1007/s00362-022-01357-1">(DOI)</a></li>
                                             <li> Piter, A., <strong>Otto, P.</strong>, Alkhatib, H. (2022): The Helsinki Bike-Sharing Systems - Insights gained from a spatiotemporal functional model. <span class="highlight-journal">Journal of the Royal Statistical Society Series A</span> <a href="https://doi.org/10.1111/rssa.12834">(DOI)</a></li>
                                             <li> Harke, F. H., Merk, M., <strong>Otto, P.</strong> (2022): Estimation of Asymmetric Spatial Autoregressive Dependence on Irregular Lattices. <span class="highlight-journal">Symmetry</span> 14(7)<a href="https://doi.org/10.3390/sym14071474"> (DOI)</a></li>
                                             <li> Merk, M., <strong>Otto, P.</strong> (2022): Estimation of the spatial weighting matrix for regular lattice data -- An adaptive lasso approach with cross-sectional resampling. <span class="highlight-journal">Environmetrics</span> 33(1) <a href="https://doi.org/10.1002/env.2705">(DOI)</a></li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        2021
-                                    </p>
-                                    <p>
-                                        <ul>
+                                            </div>
+                                            
+                                            <div>
+                                            <h3>
+                                            2021
+                                            </h3>
+                                    
+                                    
                                             <li> <strong>Otto, P.</strong>, Piter, A., Gijsman, R. (2021): Statistical Analysis of Beach Profile Evolution and External Influences: Applying a Spatiotemporal Functional Approach. <span class="highlight-journal">Coastal Engineering</span> 170 <a href="https://doi.org/10.1016/j.coastaleng.2021.103999">(DOI)</a></li>
                                             <li> Fassò, A., Maranzano, P., <strong>Otto, P.</strong> (2021): Spatiotemporal variable selection and air quality impact assessment of COVID-19 lockdown. <span class="highlight-journal">Spatial Statistics</span> (online first) <a href="https://doi.org/10.1016/j.spasta.2021.100549">(DOI)</a></li>
                                             <li> <strong>Otto, P.</strong>, Schmid, W., Garthoff, R. (2021): Stochastic Properties of Spatial and Spatiotemporal ARCH Models. <span class="highlight-journal">Statistical Papers</span> 62 <a href="https://doi.org/10.1007/s00362-019-01106-x">(DOI)</a> </li>
                                             <li> Merk, M., <strong>Otto, P.</strong> (2021): Directional spatial autoregressive dependence in the conditional first- and second-order moments. <span class="highlight-journal">Spatial Statistics</span> 41 <a href="https://doi.org/10.1016/j.spasta.2020.100490">(DOI)</a></li>
                                             <li> Malinovskaya, A., <strong>Otto, P.</strong> (2021): Online network monitoring. <span class="highlight-journal">Statistical Methods & Applications</span>, Special Issue on Network Modelling 30 <a href="https://doi.org/10.1007/s10260-021-00589-z">(DOI)</a></li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        2020
-                                    </p>
-                                    <p>
-                                        <ul>
+                                            </div>
+                                            
+                                            <div>
+                                            <h3>
+                                            2020
+                                            </h3>
+                                    
                                             <li> Merk, M., <strong>Otto, P.</strong> (2020): Estimation of Anisotropic, Time‐Varying Spatial Spillovers of Fine Particulate Matter Due to Wind Direction. <span class="highlight-journal">Geographical Analysis</span> 52(2) <a href="https://doi.org/10.1111/gean.12205">(DOI)</a></li>
                                             <li> <strong>Otto, P.</strong>, <strong>Otto, P.</strong> (2020): Impact of academic authorship characteristics on article citations. <span class="highlight-journal">REVSTAT</span> (online first) <a href="https://www.ine.pt/revstat/pdf/Impactofacademicauthorshipcharacteristicsonarticlecitations.pdf">(DOI)</a></li>
                                             <li> Garthoff, R., <strong>Otto, P.</strong> (2020): Spatiotemporal procedures for the statistical surveillance of spatial autoregressive models with heavy tails. <span class="highlight-journal">Communications in Statistics - Simulation and Computation</span></li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        2019
-                                    </p>
-                                    <p>
-                                        <ul>
+                                            </div>
+                                            
+                                            <div>
+                                            <p>
+                                            2019
+                                            </p>
+                                    
                                             <li> <strong>Otto, P.</strong> (2019): spGARCH: An R-Package for Spatial ARCH and GARCH Models. <span class="highlight-journal">The R Journal</span> 11(2) (<a href="https://doi.org/10.32614/RJ-2019-053">DOI</a>, <a href="https://cran.r-project.org/web/packages/spGARCH/index.html" target="_blank" rel="noopener noreferrer">CRAN</a>)</li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        2018
-                                    </p>
-                                    <p>
-                                        <ul>
+                                            </div>
+                                            
+                                            
+                                            <div>
+                                            <h3>
+                                            2018
+                                            </h3>
+                                    
                                             <li> <strong>Otto, P.</strong>, Schmid, W., Garthoff, R. (2018): Generalised Spatial and Spatiotemporal Autoregressive Conditional Heteroscedasticity. <span class="highlight-journal">Spatial Statistics</span> 26 <a href="https://doi.org/10.1016/j.spasta.2018.07.005">(DOI)</a></li>
                                             <li> <strong>Otto, P.</strong>, Schmid, W. (2018): Spatiotemporal Analysis of German Real Estate Prices. <span class="highlight-journal">The Annals of Regional Science</span>  60(1) <a href="https://doi.org/10.1007/s00168-016-0789-y">(DOI)</a></li>
                                             <li> <strong>Otto, P.</strong>, Schmid, W. (2018): Discussion of "Statistical methods for network surveillance" by Daniel Jeske, Nathaniel Stevens, Alexander Tartakovsky, and James Wilson. <span class="highlight-journal">Applied Stochastic Models in Business and Industry</span> 34(4) <a href="https://doi.org/10.1002/asmb.2360">(DOI)</a></li>
                                             <li> Garthoff, R., <strong>Otto, P.</strong> (2018): Verfahren zur Überwachung räumlicher autoregressiver Prozesse mit externen Regressoren. <span class="highlight-journal">AStA Wirtschafts- und Sozialstatistisches Archiv</span> <a href="https://doi.org/10.1007/s11943-018-0224-1">(DOI)</a></li>
                                             <li> Garthoff, R., <strong>Otto, P.</strong> (2018): Control charts for multivariate spatial autoregressive models. <span class="highlight-journal">AStA - Advances in Statistical Analysis</span> 101(1) <a href="https://doi.org/10.1007/s10182-016-0276-x">(DOI)</a></li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        2017
-                                    </p>
-                                    <p>
-                                        <ul>
+                                            </div>
+                                  
+                                  
+                                            <div>
+                                            <h3>
+                                            2017
+                                            </h3>
+                                            
                                             <li> <strong>Otto, P.</strong> (2017): A Note on Efficient Simulation of Multidimensional Spatial Autoregressive Processes. <span class="highlight-journal">Communications in Statistics - Simulation and Computation</span> 46(6) <a href="https://doi.org/10.1080/03610918.2015.1122050">(DOI)</a></li>
-                                        </ul>
-                                    </p>
-                                    <p>
-                                        2016
-                                    </p>
-                                    <p>
-                                        <ul>
+                                            </div>
+                                            
+                                            <div>
+                                            <h3>
+                                            2016
+                                            </h3>
+                                    
                                             <li> <strong>Otto, P.</strong>, Schmid, W. (2016): Detection of Spatial Change Points in the Mean and Covariances of Multivariate Simultaneous Autoregressive Models. <span class="highlight-journal">Biometrical Journal</span> 58(5) <a href="https://doi.org/10.1002/bimj.201500148">(DOI)</a></li>
                                             <li> Lange, A.-L., <strong>Otto, P.</strong> (2016): Bayes'sche Statistik in der Dienstleistungsforschung. <span class="highlight-journal">AStA Wirtschafts- und Sozialstatistisches Archiv</span> 10(4) <a href="https://doi.org/10.1007/s11943-016-0189-x">(DOI)</a></li>
-                                        </ul>
+                                            </div>
+                                            
+                                            </ol>
                                     </p>
+                                    
+                                    
                                     <h3>Peer-reviewed Book Chapters and Conference Proceedings</h3>
                                     <p>
                                         <ul>
