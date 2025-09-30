@@ -11,6 +11,34 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        
+          <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+          
+          <!-- SEO metadata -->
+          <meta name="author" content="Philipp Otto, Osman Doğan, Süleyman Taşpınar, Wolfgang Schmid, Anil K. Bera">
+          <meta name="keywords" content="Spatial volatility, spatiotemporal volatility, GARCH, ARCH, stochastic volatility, spatial econometrics, Philipp Otto, volatility clustering, heteroscedasticity, survey">
+          <meta name="description" content="Review article summarising the development of spatial and spatiotemporal volatility models, including ARCH/GARCH-type and stochastic volatility extensions to spatial data, applications, estimation strategies, and open challenges.">
+          
+          <!-- Schema.org structured data -->
+          <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "ScholarlyArticle",
+            "name": "Spatial and Spatiotemporal Volatility Models: A Review",
+            "author": [
+              { "@type": "Person", "name": "Philipp Otto" },
+              { "@type": "Person", "name": "Osman Doğan" },
+              { "@type": "Person", "name": "Süleyman Taşpınar" },
+              { "@type": "Person", "name": "Wolfgang Schmid" },
+              { "@type": "Person", "name": "Anil K. Bera" }
+            ],
+            "datePublished": "2024-06-05",
+            "publisher": "Journal of Economic Surveys",
+            "url": "https://doi.org/10.1111/joes.12643"
+          }
+          </script>
+          
+          
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">
@@ -58,6 +86,7 @@
                             <li><a href="teaching.html">Teaching</a></li>
                             <li><a href="cv.html">Curriculum Vitae</a></li>
                             <li><a href="team.html">Team</a></li>
+                            <li><a href="consulting.html">Consulting</a></li>
                         </ul>
                     </nav>
 
@@ -80,6 +109,96 @@
                                     <p>
                                     Spatial and spatiotemporal volatility models are a class of models designed to capture spatial dependence in the volatility of spatial and spatiotemporal data. Spatial dependence in the volatility may arise due to spatial spillovers among locations; that is, in the case of positive spatial dependence, if two locations are in close proximity, they can exhibit similar volatilities. In this paper, we aim to provide a comprehensive review of the recent literature on spatial and spatiotemporal volatility models. We first briefly review time series volatility models and their multivariate extensions to motivate their spatial and spatiotemporal counterparts. We then review various spatial and spatiotemporal volatility specifications proposed in the literature along with their underlying motivations and estimation strategies. Through this analysis, we effectively compare all models and provide practical recommendations for their appropriate usage. We highlight possible extensions and conclude by outlining directions for future research.
                                     </p>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <section>
+                                       <h3>Background</h3>
+                                       <p>
+                                         Volatility models such as ARCH and GARCH are essential tools for time series analysis,
+                                         especially in finance, where volatility clustering is a hallmark of asset returns.
+                                         In many modern applications, however, data are not only observed over time but also across space
+                                         (regions, networks, markets). This review collects and organises the rapidly growing literature
+                                         on <em>spatial and spatiotemporal volatility models</em>, which extend classical volatility concepts
+                                         to geo-referenced and cross-sectional data.
+                                       </p>
+                                     </section>
+
+                                     <section aria-labelledby="key-takeaways">
+                                       <h3 id="key-takeaways">Key takeaways</h3>
+                                       <ul>
+                                         <li><strong>Unified perspective:</strong> The review connects classical time series models (ARCH, GARCH, stochastic volatility) with their spatial and spatiotemporal counterparts.</li>
+                                         <li><strong>Types of models:</strong> Covers spatial ARCH/GARCH, spatial log-ARCH/GARCH, and spatial stochastic volatility (SSV) models, as well as spatiotemporal and multivariate extensions.</li>
+                                         <li><strong>Practical diagnostics:</strong> Significant spatial correlation/dependence in squared residuals often indicates missing spatial volatility structure.</li>
+                                         <li><strong>Applications:</strong> Financial networks, property markets, health data, insurance risk, and environmental monitoring.</li>
+                                         <li><strong>Methods:</strong> Estimation strategies include quasi-maximum likelihood (QML), GMM, and Bayesian MCMC approaches.</li>
+                                         <li><strong>Future work:</strong> Open challenges include high-dimensional scaling, structural interpretation, and integration with modern machine learning.</li>
+                                       </ul>
+                                     </section>
+
+                                     <section>
+                                       <h3>Main idea</h3>
+                                       <p>
+                                         Just as volatility today can depend on yesterday’s shocks in time series,
+                                         volatility at one location may depend on volatility at neighbouring locations.
+                                         This reflects Tobler’s law (“near things are more related”) not only for means but also for uncertainty.
+                                         Spatial volatility models make this explicit, allowing us to capture risk spillovers across space and networks.
+                                       </p>
+                                     </section>
+
+                                     <section>
+                                       <h3>Intuition and interpretation</h3>
+                                       <p>
+                                         The models can be used in two ways:
+                                       </p>
+                                       <ul>
+                                         <li><strong>As error processes:</strong> To model residual heteroscedasticity when omitted spatial drivers leave clustered uncertainty in regression errors.</li>
+                                         <li><strong>As direct processes:</strong> To model volatility itself, e.g. financial returns in a network or property price changes across regions.</li>
+                                       </ul>
+                                       <p>
+                                         Volatility clustering in time translates here to volatility clustering in space:
+                                         if one region or firm experiences high risk, its neighbours are more likely to do so as well.
+                                       </p>
+                                     </section>
+
+                                     <section>
+                                       <h3>Applications</h3>
+                                       <p>
+                                         The review highlights diverse applications:
+                                         <ul>
+                                           <li><em>Finance:</em> network-based volatility and systemic risk propagation,</li>
+                                           <li><em>Real estate:</em> location-driven risk in property markets,</li>
+                                           <li><em>Health:</em> regional variations in disease mortality and uncertainty,</li>
+                                           <li><em>Environment:</em> monitoring of pollution, climate extremes, and spatial clustering of uncertainty.</li>
+                                         </ul>
+                                       </p>
+                                     </section>
+
+                                     <section>
+                                       <h3>Practical advice</h3>
+                                       <p>
+                                       When analysing spatial or panel data, always check the squared residuals from your mean model.
+                                             If Moran’s I indicates significant spatial autocorrelation, it is likely that volatility is not being modelled adequately.
+                                             This may arise not only from clustering in the true volatility process but also from <em>omitted or unobserved variables</em>
+                                             that leave behind local pockets of uncertainty.
+                                             In such cases, spatial or spatiotemporal volatility models provide an appropriate extension and help capture
+                                             the heteroscedastic structure explicitly.
+                                       </p>
+                                     </section>
+
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     <a href="https://www.scimagojr.com/journalsearch.php?q=24353&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=24353" alt="SCImago Journal &amp; Country Rank"  /></a>
 								</article>
 							</div>

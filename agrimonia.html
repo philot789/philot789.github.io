@@ -11,6 +11,37 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        
+        <!-- SEO metadata -->
+          <meta name="author" content="Alessandro Fassò, Jacopo Rodeschini, Alessandro Fusta Moro, Qendrim Shaboviq, Paolo Maranzano, Michela Cameletti, Francesco Finazzi, Natalia Golini, Rosaria Ignaccolo, Philipp Otto">
+          <meta name="keywords" content="Agrimonia dataset, Lombardy air quality, livestock emissions, ammonia, spatiotemporal data, environmental statistics, Scientific Data, air pollution, agriculture">
+          <meta name="description" content="Explainer of the open-access Agrimonia dataset (2016–2021), combining daily livestock, emissions, meteorology, land use, and air quality in Lombardy, Italy. Designed for reproducible research on agriculture’s role in air pollution.">
+
+          <!-- Schema.org structured data -->
+          <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Dataset",
+            "name": "Agrimonia: a dataset on livestock, meteorology and air quality in the Lombardy region, Italy",
+            "author": [
+              { "@type": "Person", "name": "Alessandro Fassò" },
+              { "@type": "Person", "name": "Jacopo Rodeschini" },
+              { "@type": "Person", "name": "Alessandro Fusta Moro" },
+              { "@type": "Person", "name": "Qendrim Shaboviq" },
+              { "@type": "Person", "name": "Paolo Maranzano" },
+              { "@type": "Person", "name": "Michela Cameletti" },
+              { "@type": "Person", "name": "Francesco Finazzi" },
+              { "@type": "Person", "name": "Natalia Golini" },
+              { "@type": "Person", "name": "Rosaria Ignaccolo" },
+              { "@type": "Person", "name": "Philipp Otto" }
+            ],
+            "datePublished": "2023-03-01",
+            "publisher": "Nature Scientific Data",
+            "url": "https://doi.org/10.1038/s41597-023-02034-0"
+          }
+          </script>
+          
+          
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">
@@ -58,6 +89,7 @@
                             <li><a href="teaching.html">Teaching</a></li>
                             <li><a href="cv.html">Curriculum Vitae</a></li>
                             <li><a href="team.html">Team</a></li>
+                            <li><a href="consulting.html">Consulting</a></li>
                         </ul>
                     </nav>
 
@@ -80,6 +112,108 @@
                                     <p>
                                     The air in the Lombardy region, Italy, is one of the most polluted in Europe because of limited air circulation and high emission levels. There is a large scientific consensus that the agricultural sector has a significant impact on air quality. To support studies quantifying the role of the agricultural and livestock sectors on the Lombardy air quality, this paper presents a harmonised dataset containing daily values of air quality, weather, emissions, livestock, and land and soil use in the years 2016–2021, for the Lombardy region. The daily scale is obtained by averaging hourly data and interpolating other variables. In fact, the pollutant data come from the European Environmental Agency and the Lombardy Regional Environment Protection Agency, weather and emissions data from the European Copernicus programme, livestock data from the Italian zootechnical registry, and land and soil use data from the CORINE Land Cover project. The resulting dataset is designed to be used as is by those using air quality data for research.
                                     </p>
+                                    
+                                    
+                                    
+                                    <section>
+                                      <h3>Background</h3>
+                                      <p>
+                                        The Lombardy region in Northern Italy suffers from some of Europe’s highest air pollution levels.
+                                        A large share of particulate matter (PM10, PM2.5) is formed from ammonia emissions, of which
+                                        more than 90% originate from agriculture and livestock. To understand these dynamics,
+                                        the Agrimonia dataset provides harmonised, open-access spatiotemporal data for the years 2016–2021.
+                                      </p>
+                                    </section>
+
+                                    <section>
+                                      <h3>Key takeaways</h3>
+                                      <ul>
+                                        <li><strong>Scope:</strong> Daily observations for 141 monitoring stations, covering air quality, weather, emissions, livestock, and land/soil use.</li>
+                                        <li><strong>Integration:</strong> Combines multiple European and Italian sources (EEA, ARPA Lombardia, Copernicus, BDN, CORINE Land Cover) into a single dataset.</li>
+                                        <li><strong>Accessibility:</strong> Data are available in CSV, RData, and MATLAB formats, ready for direct analysis.</li>
+                                        <li><strong>Applications:</strong> Designed for research on air quality, agriculture’s role in pollution, sustainable development, and health impacts.</li>
+                                        <li><strong>Validation:</strong> Includes metadata and uncertainty estimates, especially for missing data imputation via Kalman smoothing.</li>
+                                      </ul>
+                                    </section>
+
+                                    <section>
+                                      <h3>Main idea</h3>
+                                      <p>
+                                        The dataset harmonises heterogeneous sources — from satellite reanalysis to ground monitoring and
+                                        livestock registries — into a daily, station-level panel. This enables reproducible analyses of how
+                                        livestock activity and meteorological conditions drive air quality patterns in Lombardy.
+                                        By standardising formats and resolutions, Agrimonia lowers the barrier for environmental statisticians
+                                        and data scientists to work with complex spatiotemporal data.
+                                      </p>
+                                    </section>
+
+                                    <section>
+                                      <h3>Applications</h3>
+                                      <ul>
+                                        <li><em>Air quality research:</em> disentangling agricultural contributions to PM formation.</li>
+                                        <li><em>Health studies:</em> linking pollution exposure to morbidity and mortality.</li>
+                                        <li><em>Policy evaluation:</em> assessing the effectiveness of ammonia reduction measures.</li>
+                                        <li><em>Sustainability:</em> studying land use, soil management, and ecosystem impacts.</li>
+                                        <li><em>Comparative studies:</em> benchmarking Lombardy against other European regions.</li>
+                                      </ul>
+                                    </section>
+
+                                    <section>
+                                      <h3>Practical advice</h3>
+                                      <p>
+                                        <ul>
+                                            <li>Use the dataset’s <strong>metadata files</strong> for correct interpretation of variables, land-use classes, and imputation uncertainties.</li>
+                                            <li>Bear <em>systematic missingness</em> in mind (e.g. few ammonia sensors) and check the uncertainty columns when modelling.</li>
+                                        </ul>
+                                      </p>
+                                    </section>
+
+                                    <section>
+                                      <h3>Data access</h3>
+                                      <p>
+                                        The full Agrimonia dataset (version 2.0.1) and metadata are openly available on Zenodo:
+                                        <a href="https://doi.org/10.5281/zenodo.6620529">https://doi.org/10.5281/zenodo.6620529</a>.
+                                        Source code for data processing is on GitHub:
+                                        <a href="https://github.com/Agrimonia-project/Agrimonia_Data">Agrimonia_Data repository</a>.
+                                      </p>
+                                    </section>
+                                    
+                                    
+                                    <section>
+                                        <h3>Methodological follow-up: comparative modelling study</h3>
+                                        <p>
+                                        The Agrimonia dataset has also been used in a follow-up study
+                                              (<a href="https://doi.org/10.1007/s10651-023-00589-0">Otto et al., 2024</a>),
+                                              which systematically compared spatiotemporal models for
+                                              PM2.5 concentrations in Lombardy (2016–2020).
+                                          Three classes with of models were investigated:
+                                        </p>
+                                        <ul>
+                                          <li><strong>Hidden Dynamic Geostatistical Models (HDGM):</strong>
+                                              state-space based models with latent processes, capturing spatiotemporal dependence explicitly
+                                              and offering interpretable parameter estimates.</li>
+                                          <li><strong>Generalised Additive Mixed Models (GAMM):</strong>
+                                              regression-based models with spline terms and random effects, balancing flexibility and interpretability.</li>
+                                          <li><strong>Random Forest Spatiotemporal Kriging (RFSTK):</strong>
+                                              a hybrid machine learning approach combining random forests with residual kriging to exploit both
+                                              nonlinear predictor-response relationships and spatial autocorrelation.</li>
+                                        </ul>
+                                        <p>
+                                          The comparison showed that all three approaches successfully captured spatiotemporal dependence.
+                                          Cross-validation confirmed HDGM as the most robust choice,
+                                          providing stable predictions and interpretable dynamics.
+                                          RFSTK achieved high predictive accuracy but required careful treatment to avoid overfitting,
+                                          while GAMM offered a transparent compromise between model structure and flexibility.
+                                          This study highlights Agrimonia’s value not only as an environmental dataset
+                                          but also as a benchmark for testing advanced statistical and machine learning models.
+                                        </p>
+                                        
+                                        <p>
+                                        Otto, P., Alessandro Fusta Moro, Jacopo Rodeschini, Qendrim Shaboviq, Rosaria Ignaccolo, Natalia Golini, Michela Cameletti, Paolo Maranzano, Francesco Finazzi, Alessandro Fassò (2024): Spatiotemporal modelling of PM2.5 concentrations in Lombardy (Italy) -- A comparative study. Environmental and Ecological Statistics
+                                        </p>
+                                      </section>
+                                    
+                                    
                                     <a href="https://www.scimagojr.com/journalsearch.php?q=21100451321&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=21100451321" alt="SCImago Journal &amp; Country Rank"  /></a>
 								</article>
 							</div>

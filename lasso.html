@@ -11,6 +11,41 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        
+        <!-- SEO -->
+         <meta name="author" content="Philipp Otto, Rick Steinert" />
+         <meta name="description" content="Explainer of a two-stage adaptive LASSO method to estimate full spatial weight matrices in spatiotemporal autoregressive models while accounting for location-specific structural breaks in the mean." />
+         <meta name="keywords" content="spatial weights, structural breaks, spatiotemporal autoregression, adaptive LASSO, SAR models, change points, statistical learning, Otto, Steinert, JCGS 2022" />
+         <link rel="canonical" href="https://doi.org/10.1080/10618600.2022.2107530"/>
+
+         <!-- Open Graph -->
+         <meta property="og:title" content="Estimating Spatial Weights with Structural Breaks" />
+         <meta property="og:description" content="Two-stage adaptive LASSO for spatial weight matrix estimation under structural breaks in spatiotemporal data." />
+         <meta property="og:type" content="article" />
+         <meta property="og:url" content="https://doi.org/10.1080/10618600.2022.2107530" />
+
+         <!-- Schema.org -->
+         <script type="application/ld+json">
+         {
+           "@context":"https://schema.org",
+           "@type":"ScholarlyArticle",
+           "name":"Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks",
+           "author":[
+             {"@type":"Person","name":"Philipp Otto"},
+             {"@type":"Person","name":"Rick Steinert"}
+           ],
+           "datePublished":"2022-10-04",
+           "isPartOf":{"@type":"Periodical","name":"Journal of Computational and Graphical Statistics"},
+           "identifier":"https://doi.org/10.1080/10618600.2022.2107530",
+           "url":"https://doi.org/10.1080/10618600.2022.2107530",
+           "keywords":["spatial weights","spatiotemporal autoregressive models","structural breaks","adaptive LASSO","change-point detection"]
+         }
+         </script>
+
+         <!-- MathJax (equations below) -->
+         <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+         
+         
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">
@@ -58,6 +93,7 @@
                             <li><a href="teaching.html">Teaching</a></li>
                             <li><a href="cv.html">Curriculum Vitae</a></li>
                             <li><a href="team.html">Team</a></li>
+                            <li><a href="consulting.html">Consulting</a></li>
                         </ul>
                     </nav>
 
@@ -80,6 +116,115 @@
                                     <p>
                                     In this paper, we propose a two-stage LASSO estimation approach for the estimation of a full spatial weights matrix of spatiotemporal autoregressive models. In addition, we allow for an unknown number of structural breaks in the local means of each spatial location. These locally varying mean levels, however, can easily be mistaken as spatial dependence and vice versa. Thus, the proposed approach jointly estimates the spatial dependence, all structural breaks, and the local mean levels. For selection of the penalty parameter, we propose a completely new selection criterion based on the distance between the empirical spatial autocorrelation and the spatial dependence estimated in the model. Through simulation studies, we will show the finite-sample performance of the estimators and provide practical guidance as to when the approach could be applied. Finally, the invented method will be illustrated by an empirical example of regional monthly real-estate prices in Berlin between 1995 and 2014. The spatial units will be defined by the respective ZIP codes. The new approach allows us to estimate local mean levels and quantify the deviation of the observed prices from these levels due to spatial spillover effects.
                                     </p>
+                                    
+                                    
+                                    <section>
+                                        <h3>Background</h3>
+                                        <p>
+                                          Spatial autoregressive (SAR) and related models require a spatial weighting matrix \(W\). In practice, \(W\) is often assumed
+                                          or selected from a small candidate set, which risks misspecification. This work proposes a data-driven method to
+                                          <em>estimate the full matrix \(W\)</em> while also allowing for an unknown number of <em>location-specific structural breaks</em> in the mean.
+                                        </p>
+                                      </section>
+
+                                      <section>
+                                        <h3>Key takeaways</h3>
+                                        <ul>
+                                          <li><strong>Joint problem:</strong> Spatial dependence and mean breaks can be easily confounded. The method estimates both simultaneously.</li>
+                                          <li><strong>Two-stage adaptive LASSO:</strong> Stage 1 finds candidate change points per location; Stage 2 estimates \(W\) and local mean paths with constraints.</li>
+                                          <li><strong>Model-based selection of \(\lambda\):</strong> A criterion aligns sample and model-implied spatial autocorrelation to choose the penalty parameter.</li>
+                                          <li><strong>Output:</strong> A sparse, interpretable estimate of \(W\) (nonnegative, row sums \(\le 1\)) and location-wise mean trajectories over time.</li>
+                                          <li><strong>Use cases:</strong> Panels with possible regime shifts (policy, markets) where spatial link strength and directionality are unknown.</li>
+                                        </ul>
+                                      </section>
+
+                                      <section>
+                                        <h3>Intuition</h3>
+                                        <p>
+                                          If means jump at different times across locations, those jumps can mimic spatial spillovers; conversely, strong spatial spillovers
+                                          can look like simultaneous breaks. The estimator separates these by first over-detecting plausible change points in each local series,
+                                          then letting the full spatiotemporal model retain only those needed while estimating \(W\).
+                                        </p>
+                                      </section>
+
+                                      <section>
+                                        <h3>Model</h3>
+                                        <p>
+                                          Observations at time \(t=1,\dots,T\) and locations \(s_1,\dots,s_n\):
+                                        </p>
+                                        <p>
+                                        \[
+                                          Y_t = W Y_t + a_t + \varepsilon_t,\quad \varepsilon_t \sim \mathcal{N}(0,\sigma^2 I_n),\qquad
+                                          \text{with } \rho(W) < 1,\; \mathrm{diag}(W)=0,\; W\ge 0.
+                                        \]
+                                        </p>
+                                        <p>
+                                          The vector \(a_t\) collects location-specific mean levels that may change at unknown times (structural breaks, not necessarily synchronized across locations).
+                                          Reduced form:
+                                        </p>
+                                        <p>
+                                        \[
+                                          Y_t = (I - W)^{-1} a_t + (I - W)^{-1}\varepsilon_t.
+                                        \]
+                                        </p>
+                                      </section>
+
+                                      <section>
+                                        <h3>Estimation (two-stage adaptive LASSO)</h3>
+                                        <ol>
+                                          <li><strong>Stage 1: change-point candidates (per location).</strong>
+                                            For each location \(i\), fit a lower-triangular “step” design with adaptive LASSO to detect level changes in the overall mean trajectory
+                                            \(\alpha_{t,i}\) (which already contains spillovers). Collect candidate change times \(\mathcal{T}^{(1)}_i\).</li>
+                                          <li><strong>Stage 2: joint estimation of \(W\) and local means.</strong>
+                                            Stack all times/locations and solve a constrained LASSO:
+                                            \[
+                                              \min_{\tilde a,\;\xi}\;\|Z\xi + \Phi \tilde a - y\|_2^2 + \lambda_b \|\xi\|_1,
+                                            \]
+                                            subject to \( \tilde a_{t,i}=0\) for \(t\notin \mathcal{T}^{(1)}_i\), \(w_{ii}=0\), \(w_{ij}\ge 0\), and \(\sum_j w_{ij}\le 1\) for all \(i\).
+                                            Here \( \xi=\mathrm{vec}(W)\), \( \Phi\) maps change increments to levels, and \(Z = I_n \otimes Y\).</li>
+                                        </ol>
+                                      </section>
+
+                                      <section>
+                                        <h3>Penalty selection</h3>
+                                        <p>
+                                          Standard CV on prediction error can neglect spatial error correlation. The paper proposes selecting \(\lambda_b\) by matching
+                                          the <em>sample spatial autocorrelation</em> (from mean-adjusted data) with the <em>model-implied spatial autocorrelation</em>
+                                          (from \((I-W)^{-1}\varepsilon\)), e.g., via an MAE between correlation matrices. This targets the correct strength and pattern of \(W\).
+                                        </p>
+                                      </section>
+
+                                      <section>
+                                        <h3>Practical guidance</h3>
+                                        <ul>
+                                          <li><strong>Diagnostics:</strong> If residual maps suggest level shifts at different times across locations, and SAR estimates depend heavily on the chosen \(W\),
+                                            consider this estimator.</li>
+                                          <li><strong>Weights interpretation:</strong> Estimated links need not be purely geographic; they may reflect network or functional proximity.
+                                            Inspect on a map or network graph.</li>
+                                          <li><strong>Directionality:</strong> In short panels with few breaks, one-way links can be partially mirrored (weak reverse links). Focus on the stronger edge.</li>
+                                          <li><strong>Constraints:</strong> Nonnegativity and row-sum \(\le 1\) stabilize estimation and ensure \((I-W)\) invertibility in practice.</li>
+                                        </ul>
+                                      </section>
+
+                                      <section>
+                                        <h3>Application</h3>
+                                        <p>
+                                        The method is illustrated with Berlin condominium prices (1995–2014),
+                                              where both spatial spillovers and structural breaks are evident.
+                                              It detected location-specific regime shifts (e.g. around the 2008 financial crisis)
+                                              and recovered a spatial weights matrix \(W\) that highlighted heterogeneous connections between districts.
+                                              Importantly, the analysis shows that intra-city dependence often extends beyond simple geographical proximity,
+                                              reflecting similarities in culture, lifestyle, or socio-economic conditions.
+                                              This provides a more realistic picture of market dynamics than standard SAR models with pre-specified weights
+                                              and is particularly valuable for real-estate pricing, where overlooking such hidden dependencies can lead
+                                              to biased valuations and misguided investment or policy decisions.
+                                              The approach is broadly relevant for urban economics, finance, and regional studies,
+                                              where simultaneous spatial spillovers and regime changes are common.
+                                        </p>
+                                      </section>
+                                      
+                                      
+                                      
                                     <a href="https://www.scimagojr.com/journalsearch.php?q=23863&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=23863" alt="SCImago Journal &amp; Country Rank"  /></a>
 								</article>
 							</div>

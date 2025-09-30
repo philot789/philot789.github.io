@@ -11,6 +11,37 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+        
+        <!-- MathJax support -->
+        <script type="text/javascript" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+
+        <!-- SEO metadata -->
+        <meta name="author" content="Philipp Otto">
+        <meta name="keywords" content="Spatial ARCH, spatiotemporal heteroscedasticity, volatility, spatial econometrics, Philipp Otto, GARCH, statistics, statistical modelling, spatial statistics">
+        <meta name="description" content="Explanation and technical summary of the spatial ARCH process by Philipp Otto et al. including formulas, context, and links.">
+
+        <!-- Schema.org structured data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          "headline": "Spatial ARCH (spARCH): modelling uncertainty clusters in space",
+          "about": ["spatial statistics","heteroscedasticity","spARCH","SARspARCH","variance clusters"],
+          "author": [{"@type":"Person","name":"Philipp Otto"}],
+          "isBasedOn": {
+            "@type": "ScholarlyArticle",
+            "name": "Generalised spatial and spatiotemporal autoregressive conditional heteroscedasticity",
+            "author": [{"@type":"Person","name":"Philipp Otto"},{"@type":"Person","name":"Wolfgang Schmid"},{"@type":"Person","name":"Robert Garthoff"}],
+            "datePublished": "2018-07-26",
+            "identifier": "https://doi.org/10.1016/j.spasta.2018.07.005"
+          },
+          "learningResourceType": "Explainer",
+          "keywords": "Spatial ARCH, SARspARCH, spatial heteroscedasticity, variance clustering, spatial econometrics"
+        }
+        </script>
+        
 	</head>
 	<body class="right-sidebar is-preload">
 		<div id="page-wrapper">
@@ -58,6 +89,7 @@
                             <li><a href="teaching.html">Teaching</a></li>
                             <li><a href="cv.html">Curriculum Vitae</a></li>
                             <li><a href="team.html">Team</a></li>
+                            <li><a href="consulting.html">Consulting</a></li>
                         </ul>
                     </nav>
 
@@ -81,6 +113,86 @@
                                     <p>
                                     In this paper, we introduce a new spatial model that incorporates heteroscedastic variance depending on neighbouring locations. The proposed process is considered as the spatial equivalent to the temporal autoregressive conditional heteroscedasticity (ARCH) model. We also show how the newly introduced spatial ARCH model can be used in spatiotemporal settings. In contrast to the temporal ARCH model, in which the distribution is known given the full information set for the prior periods, the distribution is not straightforward in the spatial and spatiotemporal setting. However, the model parameters can be estimated using the maximum-likelihood approach. Via Monte Carlo simulations, we demonstrate the performance of the estimator for a specific spatial weighting matrix. Moreover, we combine the known spatial autoregressive model with the spatial ARCH model assuming heteroscedastic errors. Eventually, the proposed autoregressive process is illustrated by an empirical example. Specifically, we model lung cancer mortality in 3108 U.S. counties and compare the newly introduced model with four benchmark approaches.
                                     </p>
+                                    
+                                    
+                                    
+                                    <h3>Background</h3>
+                                        <p>
+                                          ARCH and GARCH models are widely used for time series with volatility clustering, for example in finance.
+                                          In our 2018 paper we introduced a spatial analogue, the <em>spatial ARCH (spARCH) process</em>.
+                                          Here, conditional variances depend on neighbouring observations, rather than on past values in time.
+                                          This provides a natural extension of the ARCH idea to spatial data,
+                                          where uncertainty itself often shows spatial structure.
+                                        </p>
+                                      </section>
+
+                                      <section aria-labelledby="key-takeaways">
+                                        <h3 id="key-takeaways">Key takeaways</h3>
+                                        <ul>
+                                          <li><strong>Novelty:</strong> spARCH generalises ARCH/GARCH from time series to space by allowing local variances to depend on neighbouring values.</li>
+                                          <li><strong>Two uses:</strong> as an <em>error process</em> (SARspARCH, improving regression models) or as a <em>direct model</em> for observed processes (e.g. financial networks).</li>
+                                          <li><strong>Interpretation:</strong> extends Tobler’s law (“near things are more related”) from means to variances — volatility also clusters in space.</li>
+                                          <li><strong>Practical gain:</strong> reduces residual variance clustering, improves fit, and yields more reliable inference and risk maps.</li>
+                                          <li><strong>Flag to watch for:</strong> significant spatial dependence (e.g., measured by Moran's I for areal data) on squared residuals of your mean model is a clear signal that spARCH may be appropriate.</li>
+                                        </ul>
+                                      </section>
+
+                                      <section>
+                                        <h3>Main idea</h3>
+                                        <p>
+                                          In time series, ARCH captures that today’s volatility depends on yesterday’s squared return.
+                                          In spARCH, a location’s variance depends on the squared residuals of its neighbours.
+                                          If your neighbours are noisy, your location is more likely to be noisy as well.
+                                          This mirrors how pollution, disease risk, or financial shocks spread across connected regions or agents.
+                                        </p>
+                                      </section>
+
+                                      <section>
+                                        <h3>Model representation</h3>
+                                        <p>
+                                          A compact formulation is:
+                                        </p>
+                                        <p>
+                                        \[
+                                          Y = m(X, \theta) + \xi, \quad
+                                          \xi = \mathrm{diag}(h)^{1/2}\varepsilon, \quad
+                                          h = \alpha + W\,\mathrm{diag}(\xi)\,\xi.
+                                        \]
+                                        </p>
+                                        <p>
+                                          Here \(Y\) is the observed vector, \(m(X, \theta)\) is any mean model (e.g., linear regression, GAM, (deep) neural networks, etc.), \(\xi\) the residuals, and \(h\) their variances.
+                                          The spatial weights matrix \(W\) defines neighbours (contiguity, distance, or network).
+                                          This is directly analogous to ARCH, with “space” replacing “time”.
+                                        </p>
+                                      </section>
+
+                                      <section>
+                                        <h3>Interpretation and intuition</h3>
+                                        <p>
+                                          spARCH translates Tobler’s law of geography from the mean to the variance:
+                                          <em>uncertainty is also spatially related</em>.
+                                          Variance is not homogeneous, but clustered across space.
+                                          This can be used either:
+                                        </p>
+                                        <ul>
+                                          <li><strong>As an error process:</strong> SARspARCH models residual heteroscedasticity in regression settings, improving inference when covariates miss local drivers.</li>
+                                          <li><strong>As a direct process:</strong> spARCH can model observed outcomes directly, e.g. volatility in financial networks.</li>
+                                        </ul>
+                                      </section>
+
+                                      <section>
+                                        <h3>Applications</h3>
+                                        <p>
+                                          In U.S. county-level lung-cancer mortality, SARspARCH removed residual variance clustering,
+                                          improved fit statistics, and identified regions with higher uncertainty.
+                                          More broadly, spARCH is relevant for financial returns in networks,
+                                          environmental monitoring, or regional economics — any setting where volatility itself shows spatial patterns.
+                                        </p>
+                                      </section>
+
+                                    
+                                    
+                                    
                                     <a href="https://www.scimagojr.com/journalsearch.php?q=21100206605&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=21100206605" alt="SCImago Journal &amp; Country Rank"  /></a>
 								</article>
 							</div>
