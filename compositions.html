@@ -1,0 +1,483 @@
+<!DOCTYPE HTML>
+<!--
+    Helios by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+    <head>
+        <title>Spatiotemporal Autoregressive Models for Areal Compositional Data | Eckardt &amp; Otto</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+        <!-- Search-engine and scholarly metadata -->
+        <meta name="author" content="Matthias Eckardt, Philipp Otto" />
+        <meta name="description" content="Technical explainer of Eckardt and Otto (2026), Spatiotemporal Autoregressive Models for Areal Compositional Data, accepted in The Annals of Applied Statistics. The model combines isometric log-ratio transformations with multivariate spatial and temporal autoregression, quasi-maximum likelihood inference, and interpretable effects on the simplex." />
+        <meta name="keywords" content="spatiotemporal compositional data, compositional data analysis, CoDA, areal data, spatial autoregression, multivariate simultaneous autoregression, spatial econometrics, isometric log-ratio, ilr transformation, simplex, quasi maximum likelihood, QML, spatial spillovers, temporal dependence, Berlin housing market, Philipp Otto, Matthias Eckardt" />
+        <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
+        <link rel="canonical" href="https://www.maths.gla.ac.uk/philipp.otto/compositions.html" />
+
+        <!-- Highwire / Google Scholar-style citation metadata -->
+        <meta name="citation_title" content="Spatiotemporal Autoregressive Models for Areal Compositional Data" />
+        <meta name="citation_author" content="Matthias Eckardt" />
+        <meta name="citation_author" content="Philipp Otto" />
+        <meta name="citation_publication_date" content="2026" />
+        <meta name="citation_journal_title" content="The Annals of Applied Statistics" />
+        <meta name="citation_issn" content="1932-6157" />
+        <meta name="citation_pdf_url" content="https://eprints.gla.ac.uk/395513/2/395513.pdf" />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Spatiotemporal Autoregressive Models for Areal Compositional Data" />
+        <meta property="og:description" content="A spatiotemporal autoregressive framework for composition-valued areal panel data, combining ilr geometry, spatial spillovers, temporal dynamics, QML inference, and interpretable effects on the simplex." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.maths.gla.ac.uk/philipp.otto/compositions.html" />
+
+        <!-- Schema.org: this page is an explainer based on the scholarly article -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          "headline": "Spatiotemporal Autoregressive Models for Areal Compositional Data",
+          "description": "Technical explainer of a spatiotemporal multivariate autoregressive model for composition-valued areal panel data. The framework combines isometric log-ratio transformations, spatial and temporal autoregression, quasi-maximum likelihood inference, and interpretation on the original simplex.",
+          "mainEntityOfPage": "https://www.maths.gla.ac.uk/philipp.otto/compositions.html",
+          "dateModified": "2026-09-29",
+          "author": [
+            {"@type": "Person", "name": "Matthias Eckardt"},
+            {"@type": "Person", "name": "Philipp Otto", "sameAs": "https://orcid.org/0000-0002-9796-6682"}
+          ],
+          "about": [
+            "compositional data analysis",
+            "spatiotemporal statistics",
+            "spatial econometrics",
+            "areal panel data",
+            "isometric log-ratio transformation",
+            "spatial autoregression",
+            "temporal autoregression",
+            "quasi-maximum likelihood",
+            "simplex-valued data"
+          ],
+          "learningResourceType": "Explainer",
+          "keywords": "spatiotemporal compositional data, CoDA, areal data, spatial autoregression, multivariate simultaneous autoregression, ilr, simplex, QML, spatial spillovers, temporal dependence",
+          "isBasedOn": {
+            "@type": "ScholarlyArticle",
+            "name": "Spatiotemporal Autoregressive Models for Areal Compositional Data",
+            "author": [
+              {"@type": "Person", "name": "Matthias Eckardt"},
+              {"@type": "Person", "name": "Philipp Otto", "sameAs": "https://orcid.org/0000-0002-9796-6682"}
+            ],
+            "datePublished": "2026",
+            "isPartOf": {
+              "@type": "Periodical",
+              "name": "The Annals of Applied Statistics",
+              "issn": ["1932-6157", "1941-7330"]
+            },
+            "url": "https://eprints.gla.ac.uk/395513/",
+            "sameAs": "https://arxiv.org/abs/2507.14389",
+            "encoding": {
+              "@type": "MediaObject",
+              "contentUrl": "https://eprints.gla.ac.uk/395513/2/395513.pdf",
+              "encodingFormat": "application/pdf"
+            }
+          }
+        }
+        </script>
+
+        <!-- MathJax -->
+        <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+    </head>
+    <body class="right-sidebar is-preload">
+        <div id="page-wrapper">
+
+            <!-- Header -->
+                <div id="header">
+
+                    <!-- Inner -->
+                        <div class="inner">
+                            <header>
+                                <h1><a href="index.html" id="logo">Selected papers</a></h1>
+                            </header>
+                        </div>
+
+                    <!-- Nav -->
+                    <nav id="nav">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+<!--                                <li>
+                                <a href="#">Dropdown</a>
+                                <ul>
+                                    <li><a href="#">Lorem ipsum dolor</a></li>
+                                    <li><a href="#">Magna phasellus</a></li>
+                                    <li><a href="#">Etiam dolore nisl</a></li>
+                                    <li>
+                                        <a href="#">And a submenu &hellip;</a>
+                                        <ul>
+                                            <li><a href="#">Lorem ipsum dolor</a></li>
+                                            <li><a href="#">Phasellus consequat</a></li>
+                                            <li><a href="#">Magna phasellus</a></li>
+                                            <li><a href="#">Etiam dolore nisl</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Veroeros feugiat</a></li>
+                                </ul>
+                            </li>
+-->
+                            <li><a href="research.html">Research</a>
+                                <ul>
+                                    <li><a href="research.html">Publications</a></li>
+                                    <li><a href="projects.html">Projects</a></li>
+                                    <li><a href="presentations.html">Presentations</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="teaching.html">Teaching</a></li>
+                            <li><a href="cv.html">Curriculum Vitae</a></li>
+                            <li><a href="team.html">Team</a></li>
+                            <li><a href="consulting.html">Consulting</a></li>
+                        </ul>
+                    </nav>
+
+                </div>
+
+            <!-- Main -->
+                <div class="wrapper style1">
+
+                    <div class="container">
+                        <div class="row gtr-200">
+
+                            <div class="col-8 col-12-mobile" id="content">
+                                <article id="main">
+
+                                    <header>
+                                        <h2>Spatiotemporal Autoregressive Models for Areal Compositional Data</h2>
+                                        <p>
+                                            Eckardt, M., <strong>Otto, P.</strong> (2026):
+                                            Spatiotemporal Autoregressive Models for Areal Compositional Data.
+                                            <em>The Annals of Applied Statistics</em>, accepted for publication.
+                                            <a href="https://eprints.gla.ac.uk/395513/">Open-access accepted manuscript</a>
+                                            &nbsp;|&nbsp;
+                                            <a href="https://arxiv.org/abs/2507.14389">arXiv</a>
+                                        </p>
+                                    </header>
+
+                                    <section aria-labelledby="summary">
+                                        <h3 id="summary">Summary</h3>
+                                        <p>
+                                            Many regional data sets are <em>compositional</em>: several non-negative shares describe parts of a whole and therefore sum to a fixed total. Examples include housing-market segments, land-use shares, industrial structures, demographic compositions, or ecological proportions. When such compositions are observed repeatedly for neighbouring regions, three dependencies occur simultaneously: dependence between the parts of the composition, temporal dependence within each region, and spatial dependence between regions.
+                                        </p>
+                                        <p>
+                                            We introduce a spatiotemporal multivariate autoregressive model for this setting. The approach maps compositions from the simplex to Euclidean coordinates using an isometric log-ratio (ilr) transformation and then models contemporaneous spatial spillovers, temporal dynamics, and cross-component interactions jointly. Parameters are estimated by quasi-maximum likelihood (QML), with identifiability, consistency, and asymptotic normality established under increasing-domain panel asymptotics. Effects can subsequently be mapped back to the simplex, so that results are interpreted as changes in the original compositional shares rather than only as changes in log-ratio coordinates.
+                                        </p>
+                                    </section>
+
+                                    <section aria-labelledby="key-contributions">
+                                        <h3 id="key-contributions">Main contributions</h3>
+                                        <ul>
+                                            <li><strong>Spatiotemporal model for areal compositions:</strong> a multivariate simultaneous autoregressive framework for composition-valued observations recorded across spatial units and over time.</li>
+                                            <li><strong>Correct compositional geometry:</strong> the model uses the isometric log-ratio transformation, avoiding direct modelling of constrained shares in ordinary Euclidean space.</li>
+                                            <li><strong>Spatial, temporal, and cross-component dependence:</strong> separate coefficient matrices describe contemporaneous spatial interaction and higher-order temporal lags, including interactions between different compositional balances.</li>
+                                            <li><strong>Likelihood-based inference:</strong> a Gaussian quasi-maximum likelihood estimator is derived together with conditions for identification, consistency, and asymptotic normality.</li>
+                                            <li><strong>Interpretation on the simplex:</strong> direct and indirect spatial effects, covariate effects, and dynamic responses can be transformed back to changes in the original shares. These simplex-scale effects are invariant to orthonormal reparameterisations of the ilr coordinates.</li>
+                                            <li><strong>Empirical demonstration:</strong> monthly housing-market compositions for 24 Berlin postcode regions from 1995 to 2015 show strong temporal persistence and seasonality, but comparatively modest contemporaneous spatial spillovers.</li>
+                                        </ul>
+                                    </section>
+
+                                    <section aria-labelledby="why-needed">
+                                        <h3 id="why-needed">Why a special model is needed</h3>
+                                        <p>
+                                            Suppose a region is described by a composition
+                                            \(Z_t(s_i)=(Z_{1t}(s_i),\ldots,Z_{Dt}(s_i))^\top\), with positive components that satisfy
+                                            \(\sum_{d=1}^{D}Z_{dt}(s_i)=1\). The unit-sum constraint means that the components are intrinsically dependent: increasing one share necessarily decreases at least one other share. Standard multivariate autoregressions applied directly to the shares therefore ignore the geometry of the simplex and may produce incoherent interpretations.
+                                        </p>
+                                        <p>
+                                            The ilr transformation provides an isometric mapping
+                                            \[
+                                                \operatorname{ilr}: \mathcal{S}^{D} \longrightarrow \mathbb{R}^{D-1},
+                                            \]
+                                            preserving the Aitchison geometry of compositions while allowing standard multivariate statistical modelling in \(\mathbb{R}^{D-1}\). The resulting coordinates can be constructed as interpretable balances between groups of compositional parts.
+                                        </p>
+                                    </section>
+
+                                    <section aria-labelledby="model">
+                                        <h3 id="model">Spatiotemporal autoregressive model</h3>
+                                        <p>
+                                            Let \(Y_t=\operatorname{ilr}(Z_t)\) be the \(n\times(D-1)\) matrix of transformed compositions at time \(t\). The proposed model is
+                                        </p>
+                                        <p>
+                                        \[
+                                            Y_t
+                                            = \sum_{i=1}^{q} X_{t,i}\operatorname{diag}(\beta_i)
+                                            + W Y_t\Psi
+                                            + \sum_{\ell=1}^{L} Y_{t-\tau_\ell}\Pi_\ell
+                                            + E_t.
+                                        \]
+                                        </p>
+                                        <p>
+                                            Here \(W\) is a known \(n\times n\) spatial weight matrix describing neighbouring areal units. The \((D-1)\times(D-1)\) matrix \(\Psi\) controls contemporaneous spatial dependence, while \(\Pi_\ell\) controls temporal dependence at lag \(\tau_\ell\). Diagonal elements describe dependence within the same ilr coordinate; off-diagonal elements describe cross-component or cross-balance transmission. The regression term allows exogenous covariates to affect the different compositional coordinates.
+                                        </p>
+                                        <p>
+                                            In vectorised form, the reduced model can be written as
+                                        </p>
+                                        <p>
+                                        \[
+                                            \operatorname{vec}(Y_t)
+                                            = \left[I_{n(D-1)}-\Psi^\top\otimes W\right]^{-1}
+                                            \left\{
+                                                x_t(B)
+                                                + \sum_{\ell=1}^{L}(\Pi_\ell^\top\otimes I_n)\operatorname{vec}(Y_{t-\tau_\ell})
+                                                + u_t
+                                            \right\}.
+                                        \]
+                                        </p>
+                                        <p>
+                                            The inverse term is the spatial multiplier. It propagates shocks across both locations and compositional coordinates. A convenient sufficient condition for its existence is \(\rho(\Psi)\rho(W)&lt;1\); for a row-standardised \(W\), \(\rho(\Psi)&lt;1\) is sufficient.
+                                        </p>
+                                    </section>
+
+                                    <section aria-labelledby="inference">
+                                        <h3 id="inference">Quasi-maximum likelihood inference</h3>
+                                        <p>
+                                            Estimation is based on the Gaussian quasi log-likelihood. Gaussianity is used to construct the objective function, but the estimator is treated as a QML estimator rather than requiring exact Gaussian innovations. Under regularity, identification, stability, and moment conditions, the paper establishes consistency when the temporal dimension increases and the spatial dimension may also increase with it.
+                                        </p>
+                                        <p>
+                                            With effective sample size \(N=n(D-1)T^\star\), the asymptotic result has the sandwich form
+                                        </p>
+                                        <p>
+                                        \[
+                                            \sqrt{N}\left[
+                                                (\widehat{\vartheta},\widehat{\sigma}^2)
+                                                -(\vartheta_0,\sigma_0^2)
+                                            \right]
+                                            \xrightarrow{d}
+                                            \mathcal{N}\!\left(0,J^{-1}IJ^{-1}\right).
+                                        \]
+                                        </p>
+                                        <p>
+                                            The joint asymptotic theory permits \(n=n(T)\) to increase, subject to the growth condition \(n(T)/T\to0\). Under correct Gaussian specification, the information identity gives \(I=J\). In empirical work, sandwich or HAC covariance estimation can be used when residual temporal dependence or non-Gaussianity remains.
+                                        </p>
+                                    </section>
+
+                                    <section aria-labelledby="interpretation">
+                                        <h3 id="interpretation">Interpreting effects on the original composition</h3>
+                                        <p>
+                                            Autoregressive coefficients are linear in ilr space, but their meaning on the simplex is nonlinear and state dependent. We therefore interpret the model using local marginal effects after applying the inverse ilr transformation. The spatial multiplier yields the usual spatial-econometric decomposition into <strong>direct effects</strong> on the affected region and <strong>indirect effects</strong> transmitted to other regions.
+                                        </p>
+                                        <p>
+                                            Mapping the reduced-form effect through the Jacobian of the inverse ilr transformation produces changes in the original shares that sum to zero, as required for a composition. Importantly, although the numerical entries of \(\Psi\) and \(\Pi_\ell\) depend on the selected ilr basis, the induced effects on the simplex are invariant under orthonormal reparameterisations. This provides a coordinate-independent interpretation of spatial spillovers, covariate effects, and impulse responses.
+                                        </p>
+                                    </section>
+
+                                    <section aria-labelledby="simulation">
+                                        <h3 id="simulation">Monte Carlo evidence</h3>
+                                        <p>
+                                            The finite-sample study considers spatial grids with \(n\in\{16,36,64\}\), several time-series lengths, moderate and highly persistent dynamic regimes, and both Gaussian and contaminated Gaussian-mixture innovations. Across 1,064 replications per design, average bias is small and decreases with the temporal dimension, while RMSE decreases as both \(n\) and \(T\) grow. In the more persistent design, convergence is slower because the effective temporal information is reduced. Coverage approaches the nominal 95% level as \(T\) increases; robust sandwich/HAC covariance estimators are most useful under high persistence and departures from Gaussianity.
+                                        </p>
+                                    </section>
+
+                                    <section aria-labelledby="berlin">
+                                        <h3 id="berlin">Application: the composition of Berlin's housing market</h3>
+                                        <p>
+                                            The application analyses monthly real-estate transactions in 24 Berlin postcode regions from 1995 to 2015. Each observation is a three-part composition: the shares of transactions involving <strong>developed land</strong>, <strong>condominiums</strong>, and <strong>undeveloped land</strong>. A row-standardised contiguity matrix represents neighbouring postcode regions.
+                                        </p>
+                                        <p>
+                                            Information criteria select temporal lags of 1, 6, and 12 months. The fitted model indicates that <strong>temporal persistence and seasonal dynamics are substantially stronger than contemporaneous spatial spillovers</strong>. The diagonal spatial autoregressive effects are positive but small, whereas the lag-1 temporal effects are large and highly significant, and the 6- and 12-month lags capture semi-annual and annual recurrence. Cross-coordinate transmission exists mainly at short horizons and is much weaker than within-coordinate persistence.
+                                        </p>
+                                        <p>
+                                            On the original compositional scale, evaluation at the mean reference composition shows that the baseline seasonal level is associated with a reallocation towards condominium transactions: approximately +2.2 percentage points for condominiums, -0.9 percentage points for developed land, and -1.3 percentage points for undeveloped land. Spatial spillovers of this baseline effect are economically negligible on average.
+                                        </p>
+                                        <p>
+                                            Simplex-valued impulse responses further show that local shocks mainly reallocate transaction shares within the originating district. Responses decay over time, with smaller recurring peaks around 6 and 12 months because of the seasonal lag structure. Direct effects dominate average indirect effects throughout, implying that cross-district propagation plays a secondary role relative to persistent local dynamics.
+                                        </p>
+                                    </section>
+
+                                    <section aria-labelledby="use-cases">
+                                        <h3 id="use-cases">When is this framework useful?</h3>
+                                        <p>
+                                            The model is designed for panel data in which each spatial unit carries a composition observed repeatedly over time. Relevant examples include regional sector shares, land-use compositions, housing-market segments, demographic shares, ecological compositions, agricultural allocations, and other areal systems in which the response is relative rather than absolute. It is particularly useful when researchers need to distinguish local temporal persistence from contemporaneous spatial spillovers and cross-component interactions.
+                                        </p>
+                                        <p>
+                                            Standard ilr coordinates require strictly positive compositional parts. When structural or sampling zeros are present, an appropriate zero-handling strategy or a transformation designed for zero-containing compositions should be considered before fitting the autoregressive model.
+                                        </p>
+                                    </section>
+
+                                    <section aria-labelledby="citation-links">
+                                        <h3 id="citation-links">Paper and open-access version</h3>
+                                        <p>
+                                            <strong>Reference:</strong> Eckardt, M. and Otto, P. (2026),
+                                            <em>Spatiotemporal Autoregressive Models for Areal Compositional Data</em>,
+                                            The Annals of Applied Statistics, accepted for publication.
+                                        </p>
+                                        <p>
+                                            <a href="https://eprints.gla.ac.uk/395513/" class="button">Accepted manuscript</a>
+                                            <a href="https://arxiv.org/abs/2507.14389" class="button">arXiv</a>
+                                        </p>
+                                    </section>
+
+                                </article>
+                            </div>
+
+                            <div class="col-4 col-12-mobile" id="sidebar">
+                                <hr class="first" />
+                                <section>
+                                    <header>
+                                        <h3><a href="#">Research interests</a></h3>
+                                    </header>
+                                    <p>
+                                        I am interested in statistical data science and statistical methodology for data in multidimensional spaces, e.g., geo-referenced data. Most of my papers have one theory in common - Tobler's first law of geography: "everything is related to everything else, but near things are more related than distant things."
+                                    </p>
+                                    <div class="row gtr-50">
+                                        <div class="col-4">
+                                            <a href="#" class="image fit"><img src="images/ststat.jpg" alt="" /></a>
+                                        </div>
+                                        <div class="col-8">
+                                            <h4>Spatiotemporal statistics</h4>
+                                            <p>
+                                                Spatial econometric modelling, spatiotemporal GARCH models, computational statistics
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#" class="image fit"><img src="images/statlearn.jpg" alt="" /></a>
+                                        </div>
+                                        <div class="col-8">
+                                            <h4>Statistical learning</h4>
+                                            <p>
+                                                Estimation of spatial weights, big geospatial data, spatiotemporal LASSO
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#" class="image fit"><img src="images/env.jpg" alt="" /></a>
+                                        </div>
+                                        <div class="col-8">
+                                            <h4>Environmetrics</h4>
+                                            <p>
+                                                Functional geostatistical modelling, bootstrapping procedures, profile modelling
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#" class="image fit"><img src="images/spc.jpg" alt="" /></a>
+                                        </div>
+                                        <div class="col-8">
+                                            <h4>Statistical process control</h4>
+                                            <p>
+                                                Control charts under spatiotemporal dependence, monitoring deep learning algorithms
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#" class="image fit"><img src="images/network.jpg" alt="" /></a>
+                                        </div>
+                                        <div class="col-8">
+                                            <h4>Network modelling</h4>
+                                            <p>
+                                                Exponential random graphs models, change detection in graphs, neural networks
+                                            </p>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <hr />
+
+                                <section>
+                                    <header>
+                                        <h3><a href="#">Current projects</a></h3>
+                                    </header>
+                                    <p>
+                                        Information about the external research funding can be found here:
+                                    </p>
+
+                                    <footer>
+                                        <a href="projects.html" class="button">More details</a>
+                                    </footer>
+                                </section>
+
+                                <hr />
+
+                                <section>
+                                    <header>
+                                        <h3><a href="#">Other IDs:</a></h3>
+                                    </header>
+                                    <p>
+                                        ORCID: <a href="https://orcid.org/0000-0002-9796-6682">0000-0002-9796-6682</a>
+                                    </p>
+                                    <p>
+                                        ResearcherID: <a href="https://publons.com/researcher/P-7870-2015/">P-7870-2015</a>
+                                    </p>
+                                    <p>
+                                        Scopus: <a href="https://www.scopus.com/authid/detail.uri?authorId=57210684279">57210684279</a>
+                                    </p>
+                                    <p>
+                                        Google Scholar: <a href="https://scholar.google.de/citations?user=URsnzm8AAAAJ">URsnzm8AAAAJ</a>
+                                    </p>
+                                    <p>
+                                        ResearchGate: <a href="https://www.researchgate.net/profile/Philipp-Otto-2">Philipp-Otto-2</a>
+                                    </p>
+                                    <p>
+                                        Loop: <a href="https://loop.frontiersin.org/people/1156815/overview">1156815</a>
+                                    </p>
+                                </section>
+
+                                <hr />
+
+                                <section>
+                                    <header>
+                                        <h3><a href="#">My arXiv publications</a></h3>
+                                    </header>
+                                    <p>
+                                         I usually publish all my research first on arXiv open access:
+                                    </p>
+
+                                    <footer>
+                                        <a href="https://arxiv.org/a/otto_p_1.html" class="button">arXiv</a>
+                                    </footer>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                    <div id="footer">
+                            <div class="row">
+                                <div class="col-12">
+
+                                    <!-- Contact -->
+                                        <section class="contact">
+                                            <header>
+                                                <h3>Missing anything?</h3>
+                                            </header>
+                                            <p>You can also find my profiles here:</p>
+                                            <ul class="icons">
+                                                <li><a href="https://www.researchgate.net/profile/Philipp-Otto-2" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
+                                                <li><a href="https://www.instagram.com/stats.o.phil.e/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                                                <li><a href="https://www.linkedin.com/in/philipp-otto-0a9887264/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                                                <li><a href="https://www.xing.com/profile/Philipp_Otto8/cv" class="icon brands fa-xing"><span class="label">Xing</span></a></li>
+                                                <li><a href="https://twitter.com/PhilOt5" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                                            </ul>
+                                        </section>
+
+                                    <!-- Copyright -->
+                                        <div class="copyright">
+                                            <ul class="menu">
+                                                <li>&copy; Untitled. All rights reserved.</li>
+                                                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                                            </ul>
+                                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+
+        <!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.dropotron.min.js"></script>
+            <script src="assets/js/jquery.scrolly.min.js"></script>
+            <script src="assets/js/jquery.scrollex.min.js"></script>
+            <script src="assets/js/browser.min.js"></script>
+            <script src="assets/js/breakpoints.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+
+    </body>
+</html>
