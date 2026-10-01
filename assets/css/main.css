@@ -1,6 +1,21 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
 @import url("fontawesome-all.min.css");
 
+/* Site colour system — University of Glasgow inspired */
+:root {
+    --uofg-navy: #011451;
+    --uofg-blue: #005398;
+    --uofg-cyan: #4DBBC6;
+    --uofg-light-purple: #A5A1CE;
+    --uofg-yellow: #F2D25C;
+
+    --site-bg: #F3F6F7;
+    --site-surface: #FFFFFF;
+    --site-text: #50535A;
+    --site-border: #DDE4E7;
+}
+
+
 /*
 	Helios by HTML5 UP
 	html5up.net | @ajlkn
@@ -83,8 +98,8 @@ input, select, textarea {
 	}
 
 	body {
-		background: #f0f4f4;
-		color: #5b5b5b;
+		background: var(--site-bg);
+		color: var(--site-text);
 		font-size: 15pt;
 		line-height: 1.85em;
 		font-family: 'Source Sans Pro', sans-serif;
@@ -111,7 +126,7 @@ input, select, textarea {
 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
-		color: #3a3949;
+		color: var(--uofg-navy);
 		line-height: 1.25em;
 	}
 
@@ -140,7 +155,7 @@ input, select, textarea {
 
 	strong, b {
 		font-weight: 400;
-		color: #3a3949;
+		color: var(--uofg-navy);
 	}
 
 	em, i {
@@ -158,7 +173,7 @@ input, select, textarea {
 	}
 
 		a:hover {
-			color: #7a76ef;
+			color: var(--uofg-blue);
 			border-bottom-color: transparent;
 		}
 
@@ -1935,7 +1950,7 @@ input, select, textarea {
 			}
 
 				ul.icons li a:hover {
-					color: #7a76ef;
+					color: var(--uofg-blue);
 				}
 
 /* Form */
@@ -1943,7 +1958,7 @@ input, select, textarea {
 	form label {
 		display: block;
 		font-weight: 400;
-		color: #3a3949;
+		color: var(--uofg-navy);
 		margin: 0 0 1em 0;
 	}
 
@@ -1972,7 +1987,7 @@ input, select, textarea {
 		form select:focus,
 		form textarea:focus {
 			background: #fff;
-			border-color: #666edf;
+			border-color: var(--uofg-blue);
 		}
 
 	form input[type="text"],
@@ -2055,7 +2070,7 @@ input, select, textarea {
 	.button {
 		position: relative;
 		display: inline-block;
-		background: #666edf;
+		background: var(--uofg-blue);
 		color: #fff;
 		text-align: center;
 		border-radius: 0.5em;
@@ -2077,7 +2092,7 @@ input, select, textarea {
 		button:hover,
 		.button:hover {
 			color: #fff;
-			background: #7a76ef;
+			background: var(--uofg-blue);
 		}
 
 		input[type="button"].alt,
@@ -2085,7 +2100,7 @@ input, select, textarea {
 		input[type="reset"].alt,
 		button.alt,
 		.button.alt {
-			background: #2B252C;
+			background: var(--uofg-navy);
 		}
 
 			input[type="button"].alt:hover,
@@ -2093,7 +2108,7 @@ input, select, textarea {
 			input[type="reset"].alt:hover,
 			button.alt:hover,
 			.button.alt:hover {
-				background: #3B353C;
+				background: var(--uofg-blue);
 			}
 
 /* Post */
@@ -2146,7 +2161,7 @@ input, select, textarea {
 		.icon.circled {
 			position: relative;
 			display: inline-block;
-			background: #2b252c;
+			background: var(--uofg-navy);
 			color: #fff;
 			border-radius: 100%;
 			width: 3em;
@@ -2257,7 +2272,7 @@ input, select, textarea {
 
 		body.homepage #header:after {
 			content: '';
-			background: #1C0920;
+			background: var(--uofg-navy);
 			display: block;
 			position: absolute;
 			left: 0;
@@ -2367,7 +2382,7 @@ input, select, textarea {
 
 		.dropotron li {
 			border-top: solid 1px rgba(128, 128, 128, 0.2);
-			color: #5b5b5b;
+			color: var(--site-text);
 			padding-left: 0;
 		}
 
@@ -2376,7 +2391,7 @@ input, select, textarea {
 			}
 
 			.dropotron li:hover {
-				color: #7a76ef;
+				color: var(--uofg-blue);
 			}
 
 			.dropotron li a, .dropotron li span {
@@ -2460,13 +2475,13 @@ input, select, textarea {
 		position: relative;
 		overflow: hidden;
 		padding: 6em 0 6em 0;
-		background: #2b252c;
+		background: var(--uofg-navy);
 		color: #fff;
 	}
 
 		#footer .icon.circled {
 			background: #fff;
-			color: #2b252c;
+			color: var(--uofg-navy);
 		}
 
 		#footer header {
@@ -2489,17 +2504,17 @@ input, select, textarea {
 
 		#footer .copyright {
 			text-align: center;
-			color: rgba(128, 128, 128, 0.75);
+			color: rgba(255, 255, 255, 0.68);
 			font-size: 0.8em;
 			cursor: default;
 		}
 
 			#footer .copyright a {
-				color: rgba(128, 128, 128, 0.75);
+				color: rgba(255, 255, 255, 0.68);
 			}
 
 				#footer .copyright a:hover {
-					color: rgba(212, 212, 212, 0.85);
+					color: rgba(255, 255, 255, 0.95);
 				}
 
 /* Carousel */
@@ -2526,7 +2541,7 @@ input, select, textarea {
 				width: 6em;
 				height: 6em;
 				border-radius: 100%;
-				background-color: rgba(58, 57, 73, 0.55);
+				background-color: rgba(1, 20, 81, 0.60);
 				position: absolute;
 				top: 50%;
 				margin-top: -3em;
@@ -2549,7 +2564,7 @@ input, select, textarea {
 			}
 
 			.carousel .forward:hover:before, .carousel .backward:hover:before {
-				background-color: rgba(102, 110, 223, 0.85);
+				background-color: rgba(0, 83, 152, 0.88);
 			}
 
 		.carousel .forward {
@@ -2618,6 +2633,7 @@ input, select, textarea {
 			.carousel article p {
 				text-align: center;
 			}
+
 
 /* Wide */
 
@@ -2925,7 +2941,7 @@ input, select, textarea {
 						position: absolute;
 						left: 50%;
 						margin-left: -40px;
-						background: rgba(132, 128, 136, 0.75);
+						background: rgba(1, 20, 81, 0.82);
 						border-top: 0;
 						border-radius: 0 0 0.35em 0.35em;
 					}
@@ -2951,7 +2967,7 @@ input, select, textarea {
 				top: 0;
 				width: 100%;
 				z-index: 10002;
-				background: #1f1920;
+				background: var(--uofg-navy);
 				box-shadow: inset 0px -2px 5px 0px rgba(0, 0, 0, 0.25);
 				font-size: 1em;
 			}
@@ -3136,3 +3152,162 @@ input, select, textarea {
 					}
 
 	}
+
+/* ========================================================================== */
+/* Site refinements: UofG-inspired colour system + native research carousel   */
+/* ========================================================================== */
+
+/* Keep interface accents consistent with the site palette. */
+a:hover,
+ul.icons li a:hover,
+.dropotron li:hover {
+    color: var(--uofg-blue);
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--uofg-cyan);
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button,
+.button {
+    background: var(--uofg-blue);
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+button:hover,
+.button:hover {
+    background: var(--uofg-navy);
+}
+
+input[type="button"].alt,
+input[type="submit"].alt,
+input[type="reset"].alt,
+button.alt,
+.button.alt {
+    background: var(--uofg-navy);
+}
+
+input[type="button"].alt:hover,
+input[type="submit"].alt:hover,
+input[type="reset"].alt:hover,
+button.alt:hover,
+.button.alt:hover {
+    background: var(--uofg-blue);
+}
+
+/*
+ * Native horizontal carousel.
+ *
+ * Helios' JavaScript carousel writes overflow/transform styles inline after
+ * page load. The !important declarations below deliberately take control back
+ * from those inline styles so touch, trackpad and native browser scrolling work.
+ */
+.carousel {
+    overflow: hidden;
+}
+
+.carousel .reel {
+    display: block;
+    position: relative;
+
+    /* Constrain the reel itself so its children overflow horizontally. */
+    width: 100% !important;
+    max-width: 100%;
+
+    /* Override the legacy JavaScript carousel's inline styles. */
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    transform: none !important;
+    -moz-transform: none !important;
+    -webkit-transform: none !important;
+    -ms-transform: none !important;
+    left: auto !important;
+
+    /* Native scrolling and snapping. */
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 2em;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+
+    /* Leave vertical page gestures available while the pointer is over it. */
+    touch-action: pan-x pan-y pinch-zoom;
+
+    /* Visible but restrained scrollbar. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--uofg-blue) #E9EEF1;
+
+    /* Avoid content touching the scrollbar. */
+    padding-bottom: 0.55em;
+}
+
+/*
+ * The original Helios arrows move the reel with JavaScript transforms.
+ * They are hidden because that mechanism conflicts with native scroll snap.
+ */
+.carousel .forward,
+.carousel .backward {
+    display: none !important;
+}
+
+.carousel article {
+    vertical-align: top;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* Slightly tighter image-to-title spacing for the research cards. */
+.carousel article .image {
+    margin-bottom: 2em;
+}
+
+.carousel .reel::-webkit-scrollbar {
+    height: 7px;
+}
+
+.carousel .reel::-webkit-scrollbar-track {
+    background: #E9EEF1;
+    border-radius: 999px;
+}
+
+.carousel .reel::-webkit-scrollbar-thumb {
+    background: var(--uofg-blue);
+    border-radius: 999px;
+}
+
+.carousel .reel::-webkit-scrollbar-thumb:hover {
+    background: var(--uofg-navy);
+}
+
+.highlight-journal {
+    font-weight: 600;
+    color: #005398;
+}
+
+/* Keyboard users should be able to see where focus is. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--uofg-cyan);
+    outline-offset: 3px;
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+    .carousel .reel {
+        scroll-behavior: auto;
+    }
+}
+

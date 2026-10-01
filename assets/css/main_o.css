@@ -111,7 +111,7 @@ input, select, textarea {
 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 400;
-		color: #483949;
+		color: #3a3949;
 		line-height: 1.25em;
 	}
 
@@ -140,7 +140,7 @@ input, select, textarea {
 
 	strong, b {
 		font-weight: 400;
-		color: #483949;
+		color: #3a3949;
 	}
 
 	em, i {
@@ -158,7 +158,7 @@ input, select, textarea {
 	}
 
 		a:hover {
-			color: #ef8376;
+			color: #7a76ef;
 			border-bottom-color: transparent;
 		}
 
@@ -1935,7 +1935,7 @@ input, select, textarea {
 			}
 
 				ul.icons li a:hover {
-					color: #ef8376;
+					color: #7a76ef;
 				}
 
 /* Form */
@@ -1943,7 +1943,7 @@ input, select, textarea {
 	form label {
 		display: block;
 		font-weight: 400;
-		color: #483949;
+		color: #3a3949;
 		margin: 0 0 1em 0;
 	}
 
@@ -1972,7 +1972,7 @@ input, select, textarea {
 		form select:focus,
 		form textarea:focus {
 			background: #fff;
-			border-color: #df7366;
+			border-color: #666edf;
 		}
 
 	form input[type="text"],
@@ -2055,7 +2055,7 @@ input, select, textarea {
 	.button {
 		position: relative;
 		display: inline-block;
-		background: #df7366;
+		background: #666edf;
 		color: #fff;
 		text-align: center;
 		border-radius: 0.5em;
@@ -2077,7 +2077,7 @@ input, select, textarea {
 		button:hover,
 		.button:hover {
 			color: #fff;
-			background: #ef8376;
+			background: #7a76ef;
 		}
 
 		input[type="button"].alt,
@@ -2376,7 +2376,7 @@ input, select, textarea {
 			}
 
 			.dropotron li:hover {
-				color: #ef8376;
+				color: #7a76ef;
 			}
 
 			.dropotron li a, .dropotron li span {
@@ -2526,7 +2526,7 @@ input, select, textarea {
 				width: 6em;
 				height: 6em;
 				border-radius: 100%;
-				background-color: rgba(72, 57, 73, 0.5);
+				background-color: rgba(58, 57, 73, 0.55);
 				position: absolute;
 				top: 50%;
 				margin-top: -3em;
@@ -2549,7 +2549,7 @@ input, select, textarea {
 			}
 
 			.carousel .forward:hover:before, .carousel .backward:hover:before {
-				background-color: rgba(239, 131, 118, 0.75);
+				background-color: rgba(102, 110, 223, 0.85);
 			}
 
 		.carousel .forward {
@@ -2618,6 +2618,43 @@ input, select, textarea {
 			.carousel article p {
 				text-align: center;
 			}
+
+/* Improved research carousel */
+.carousel {
+    overflow: hidden;
+}
+
+.carousel .reel {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+    scrollbar-color: #005398 #eef2f4;
+}
+
+.carousel article {
+    scroll-snap-align: start;
+}
+
+.carousel .reel::-webkit-scrollbar {
+    height: 7px;
+}
+
+.carousel .reel::-webkit-scrollbar-track {
+    background: #eef2f4;
+}
+
+.carousel .reel::-webkit-scrollbar-thumb {
+    background: #005398;
+    border-radius: 4px;
+}
+
+.carousel .reel::-webkit-scrollbar-thumb:hover {
+    background: #011451;
+}
 
 /* Wide */
 
@@ -3136,3 +3173,6 @@ input, select, textarea {
 					}
 
 	}
+
+
+
