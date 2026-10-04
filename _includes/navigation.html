@@ -1,39 +1,27 @@
-
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="index.html">Home</a></li>
-<!--								<li>
-									<a href="#">Dropdown</a>
-									<ul>
-										<li><a href="#">Lorem ipsum dolor</a></li>
-										<li><a href="#">Magna phasellus</a></li>
-										<li><a href="#">Etiam dolore nisl</a></li>
-										<li>
-											<a href="#">And a submenu &hellip;</a>
-											<ul>
-												<li><a href="#">Lorem ipsum dolor</a></li>
-												<li><a href="#">Phasellus consequat</a></li>
-												<li><a href="#">Magna phasellus</a></li>
-												<li><a href="#">Etiam dolore nisl</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Veroeros feugiat</a></li>
-									</ul>
-								</li>
--->
-                                <li><a href="research.html">Research</a>
-                                    <ul>
-                                        <li><a href="research.html">Publications</a></li>
-                                        <li><a href="projects.html">Grants</a></li>
-                                        <li><a href="presentations.html">Conferences</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="teaching.html">Teaching</a></li>
-                                <li><a href="cv.html">Curriculum Vitae</a></li>
-                                <li><a href="team.html">Team</a></li>
-                                <li><a href="consulting.html">Consulting</a></li>
-							</ul>
-						</nav>
-
-    
+<nav id="nav" aria-label="Primary navigation">
+    <ul>
+        <li{% if page.nav_section == "home" %} class="active"{% endif %}>
+            <a href="{{ '/index.html' | relative_url }}">Home</a>
+        </li>
+        <li{% if page.nav_section == "research" %} class="active"{% endif %}>
+            <a href="{{ '/research.html' | relative_url }}">Research</a>
+            <ul>
+                <li><a href="{{ '/research.html' | relative_url }}">Publications</a></li>
+                <li><a href="{{ '/projects.html' | relative_url }}">Projects</a></li>
+                <li><a href="{{ '/presentations.html' | relative_url }}">Presentations</a></li>
+            </ul>
+        </li>
+        <li{% if page.nav_section == "teaching" %} class="active"{% endif %}>
+            <a href="{{ '/teaching.html' | relative_url }}">Teaching</a>
+        </li>
+        <li{% if page.nav_section == "cv" %} class="active"{% endif %}>
+            <a href="{{ '/cv.html' | relative_url }}">Curriculum Vitae</a>
+        </li>
+        <li{% if page.nav_section == "team" %} class="active"{% endif %}>
+            <a href="{{ '/team.html' | relative_url }}">Team</a>
+        </li>
+        <li{% if page.nav_section == "consulting" %} class="active"{% endif %}>
+            <a href="{{ '/consulting.html' | relative_url }}">Consulting</a>
+        </li>
+    </ul>
+</nav>

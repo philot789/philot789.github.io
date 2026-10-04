@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<!--
+    Helios by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+<head>
+    <title>{{ page.title }}{% if page.title_suffix %} | {{ page.title_suffix }}{% endif %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+    <noscript><link rel="stylesheet" href="{{ '/assets/css/noscript.css' | relative_url }}" /></noscript>
+
+    {% if page.meta_author %}<meta name="author" content="{{ page.meta_author | escape }}" />{% endif %}
+    {% if page.description %}<meta name="description" content="{{ page.description | escape }}" />{% endif %}
+    {% if page.keywords %}<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}" />{% endif %}
+    <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
+    {% if page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}" />{% endif %}
+
+    {% if page.citation_title %}<meta name="citation_title" content="{{ page.citation_title | escape }}" />{% endif %}
+    {% for author in page.citation_authors %}<meta name="citation_author" content="{{ author | escape }}" />{% endfor %}
+    {% if page.citation_publication_date %}<meta name="citation_publication_date" content="{{ page.citation_publication_date }}" />{% endif %}
+    {% if page.citation_journal_title %}<meta name="citation_journal_title" content="{{ page.citation_journal_title | escape }}" />{% endif %}
+    {% if page.citation_issn %}<meta name="citation_issn" content="{{ page.citation_issn }}" />{% endif %}
+    {% if page.citation_pdf_url %}<meta name="citation_pdf_url" content="{{ page.citation_pdf_url }}" />{% endif %}
+
+    <meta property="og:title" content="{{ page.title | escape }}" />
+    <meta property="og:description" content="{{ page.og_description | default: page.description | escape }}" />
+    <meta property="og:type" content="article" />
+    {% if page.canonical_url %}<meta property="og:url" content="{{ page.canonical_url }}" />{% endif %}
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": {{ page.title | jsonify }},
+      "description": {{ page.description | jsonify }},
+      "mainEntityOfPage": {{ page.canonical_url | jsonify }},
+      "dateModified": {{ page.date_modified | jsonify }},
+      "author": {{ page.schema_authors | jsonify }},
+      "about": {{ page.schema_about | jsonify }},
+      "learningResourceType": "Explainer",
+      "keywords": {{ page.keywords | join: ", " | jsonify }},
+      "isBasedOn": {{ page.based_on | jsonify }}
+    }
+    </script>
+
+    {% if page.mathjax %}
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
+    {% endif %}
+
+    <style>
+        /* Keep "Selected papers" as visual site context, not as the page H1. */
+        #header .paper-site-title {
+            color: #fff;
+            font-size: 3em;
+            line-height: 1em;
+            margin: 0;
+        }
+        #header .paper-site-title a {
+            color: inherit;
+            border-bottom: 0;
+        }
+
+        /* main.css sizes H2 but not a content-page H1, so match the former title size. */
+        #main > header > h1 {
+            font-size: 2.85em;
+            line-height: 1.25em;
+        }
+
+        @media screen and (max-width: 736px) {
+            #header .paper-site-title { font-size: 1.75em; }
+            #main > header > h1 { font-size: 1.75em; }
+        }
+    </style>
+</head>
+
+<body class="{{ page.body_class | default: 'right-sidebar is-preload' }}">
+<div id="page-wrapper">
+
+    <div id="header">
+        <div class="inner">
+            <header>
+                <p class="paper-site-title">
+                    <a href="{{ '/index.html' | relative_url }}" id="logo">{{ page.site_section_label | default: 'Selected papers' }}</a>
+                </p>
+            </header>
+        </div>
+        {% include navigation.html %}
+    </div>
+
+    {{ content }}
+
+    {% include footer.html %}
+</div>
+
+<script src="{{ '/assets/js/jquery.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/jquery.dropotron.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/jquery.scrolly.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/jquery.scrollex.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/browser.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/breakpoints.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/util.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
