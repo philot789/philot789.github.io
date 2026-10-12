@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="robots" content="noindex"><title>Spatial Risk Lab · Friend challenge</title>
+<style>body{font:17px/1.5 system-ui,sans-serif;background:#f2f5fa;color:#152331;margin:0;padding:24px}main{max-width:540px;margin:9vh auto;background:white;padding:30px;border-radius:22px}h1{font-size:30px;line-height:1.15}p{color:#4b5b6b}a,button{display:block;width:100%;box-sizing:border-box;border:0;border-radius:12px;padding:15px;text-align:center;font:600 17px system-ui;text-decoration:none;margin:12px 0;background:#005398;color:white}button{background:#e8eef5;color:#005398}#details{white-space:pre-wrap;background:#f2f5fa;padding:15px;border-radius:12px}small{display:block;color:#4b5b6b}a[hidden],button[hidden]{display:none}</style>
+<main><small>SPATIAL RISK LAB</small><h1 id="title">Friend challenge</h1><p id="intro">Play the same mission with your own strategy.</p><p id="details"></p><a id="open" hidden>Open in Spatial Risk Lab</a><button id="copy" hidden>Copy mission code</button><small id="help">If the app does not open, import the code in Challenges → Play a friend. A compatible installed app is required.</small></main>
+<script>
+'use strict';
+const words={
+en:['Friend challenge','Play the same mission with your own strategy.','Open in Spatial Risk Lab','Copy mission code','Code copied','Invalid challenge link. Ask your friend to share it again.','If the app does not open, import the code in Challenges → Play a friend. A compatible installed app is required.'],
+de:['Freundesduell','Spiele dieselbe Mission mit deiner eigenen Strategie.','In Spatial Risk Lab öffnen','Missionscode kopieren','Code kopiert','Ungültiger Link. Bitte deinen Freund, ihn erneut zu teilen.','Öffnet sich die App nicht, importiere den Code unter Herausforderungen → Freundesduell. Eine kompatible installierte App ist erforderlich.'],
+ru:['Испытание для друга','Пройдите ту же миссию со своей стратегией.','Открыть в Spatial Risk Lab','Скопировать код миссии','Код скопирован','Недействительная ссылка. Попросите друга отправить её снова.','Если приложение не открывается, импортируйте код в разделе испытаний → игра с другом. Нужна установленная совместимая версия.'],
+it:['Sfida per un amico','Gioca la stessa missione con la tua strategia.','Apri in Spatial Risk Lab','Copia il codice della missione','Codice copiato','Link non valido. Chiedi al tuo amico di inviarlo di nuovo.','Se l’app non si apre, importa il codice in Sfide → gioca con un amico. Serve una versione compatibile installata.'],
+fr:['Défi entre amis','Jouez la même mission avec votre propre stratégie.','Ouvrir dans Spatial Risk Lab','Copier le code de mission','Code copié','Lien invalide. Demandez à votre ami de le partager à nouveau.','Si l’application ne s’ouvre pas, importez le code dans Défis → jouer avec un ami. Une version compatible doit être installée.'],
+es:['Reto para un amigo','Juega la misma misión con tu propia estrategia.','Abrir en Spatial Risk Lab','Copiar código de misión','Código copiado','Enlace no válido. Pide a tu amigo que lo comparta de nuevo.','Si la app no se abre, importa el código en Retos → jugar con un amigo. Se necesita una versión compatible instalada.'],
+pt:['Desafio para um amigo','Joga a mesma missão com a tua estratégia.','Abrir no Spatial Risk Lab','Copiar código da missão','Código copiado','Ligação inválida. Pede ao teu amigo que a partilhe novamente.','Se a aplicação não abrir, importa o código em Desafios → jogar com um amigo. É necessária uma versão compatível instalada.']};
+const lang=(navigator.languages||[navigator.language]).map(x=>x.split('-')[0]).find(x=>words[x])||'en';
+const w=words[lang];document.documentElement.lang=lang==='pt'?'pt-PT':lang;
+for(const [id,index] of [['title',0],['intro',1],['open',2],['copy',3],['help',6]])document.getElementById(id).textContent=w[index];
+try{
+ const query=new URLSearchParams(location.search);if([...query.keys()].length!==1||query.getAll('code').length!==1)throw Error();
+ const code=query.get('code');if(!code||code.length>3000||!code.startsWith('SRL1:'))throw Error();
+ const data=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(code.slice(5)),x=>x.charCodeAt(0))));
+ if(data.format!==1||typeof data.scenarioID!=='string'||typeof data.engineID!=='string'||typeof data.rules!=='number'||!['number','string'].includes(typeof data.seed))throw Error();
+ // The native parser validates all mission/rule fields. A browser must not parse UInt64 seeds as an exact JS Number.
+ document.getElementById('details').textContent=data.scenarioID+' · '+data.engineID+(Number.isInteger(data.score)?' · '+data.score+'/100':'');
+ const open=document.getElementById('open');open.href='spatialrisklab://challenge?code='+encodeURIComponent(code);open.hidden=false;
+ const copy=document.getElementById('copy');copy.hidden=false;
+ copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(code);copy.textContent=w[4]}catch{document.getElementById('details').textContent=code}});
+}catch{document.getElementById('intro').textContent=w[5];document.getElementById('details').hidden=true;}
+</script></html>
