@@ -1,0 +1,39 @@
+Spatial Risk Lab — privacy and iOS support pages
+Prepared 27 October 2026. Contact: spatialrisklab@gmail.com. Publisher: Philipp Otto.
+
+Files to host together in the same public website directory:
+  privacy-ios.html       iOS/iPadOS privacy policy
+  support-ios.html       iOS/iPadOS support page
+  privacy-android.html   Android privacy policy with the new contact address
+
+The pages are self-contained English HTML with responsive light/dark styling.
+No external fonts, images, scripts, analytics, forms or tracking are included.
+Internal links are relative, so the pages can share any public hosting directory.
+
+App Store Connect:
+  Privacy Policy URL: the public HTTPS address of privacy-ios.html
+  Support URL: the public HTTPS address of support-ios.html
+Google Play Console:
+  Privacy policy: the public HTTPS address of privacy-android.html
+
+These are prepared files, not published pages. No deployment or store submission
+was performed. After hosting, check each address without signing in.
+
+Source review: iOS v40 and Android v5. The iOS policy distinguishes Apple Maps
+network requests from gameplay held on-device. It also covers voluntary sharing,
+website hosting requests, OS backups and correspondence sent to the Gmail address.
+The prepared Android hosting file in Android v5 has the same updated contents.
+
+No native app source or release binary was changed by this task. Existing builds
+still contain the previous contact email and should use the new address in the
+next app update. The previous multilingual iOS page is preserved as an archive;
+use privacy-ios.html from this package for the new English website policy.
+
+Validation: HTML structure, mail links and relative page links were checked
+locally. Browser rendering could not be checked in this environment because
+local-page previews are blocked. Review the layout after hosting.
+
+Requirements checked against:
+https://developer.apple.com/app-store/review/guidelines/#privacy
+https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information
+https://support.google.com/googleplay/android-developer/answer/10144311
