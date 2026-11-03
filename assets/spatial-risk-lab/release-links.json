@@ -1,0 +1,15 @@
+{
+  "updated": "2026-10-27",
+  "ios": {
+    "url": "https://apps.apple.com/app/id6826859066",
+    "available": false
+  },
+  "android": {
+    "url": "https://play.google.com/store/apps/details?id=com.philippotto.spatialrisklab",
+    "available": false
+  },
+  "androidTest": {
+    "groupUrl": "https://groups.google.com/g/spatialrisklab",
+    "optInUrl": null
+  }
+}
