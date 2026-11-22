@@ -1,122 +1,81 @@
-<!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Spatial ARCH Process</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-        
-        <!-- MathJax support -->
-        <script type="text/javascript" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-        </script>
+---
+layout: paper
+nav_section: research
+title: Spatial ARCH models for volatility clustering across locations
+title_suffix: Philipp Otto
+description: Spatial ARCH links the scale of a response at one location to squared
+  responses at connected locations. Large deviations of either sign can therefore
+  occur near one another even when a map of the mean shows little spatial structure.
+meta_author: Philipp Otto
+keywords:
+- Spatial ARCH
+- spatiotemporal heteroscedasticity
+- volatility
+- spatial econometrics
+- Philipp Otto
+- GARCH
+- statistics
+- statistical modelling
+- spatial statistics
+canonical_url: https://philot789.github.io/spARCH.html
+date_modified: '2026-11-22'
+mathjax: true
+citation_title: Generalised spatial and spatiotemporal autoregressive conditional
+  heteroscedasticity
+citation_authors:
+- Philipp Otto
+- Wolfgang Schmid
+- Robert Garthoff
+citation_publication_date: '2018'
+citation_journal_title: Spatial Statistics
+schema_authors:
+- "@type": Person
+  name: Philipp Otto
+  sameAs: https://orcid.org/0000-0002-9796-6682
+schema_about:
+- Spatial ARCH
+- spatiotemporal heteroscedasticity
+- volatility
+- spatial econometrics
+- Philipp Otto
+based_on:
+  "@type": ScholarlyArticle
+  name: Generalised spatial and spatiotemporal autoregressive conditional heteroscedasticity
+  author:
+  - "@type": Person
+    name: Philipp Otto
+  - "@type": Person
+    name: Wolfgang Schmid
+  - "@type": Person
+    name: Robert Garthoff
+  datePublished: '2018'
+  isPartOf:
+    "@type": Periodical
+    name: Spatial Statistics
+  url: https://doi.org/10.1016/j.spasta.2018.07.005
+  identifier: https://doi.org/10.1016/j.spasta.2018.07.005
+---
 
-        <!-- SEO metadata -->
-        <meta name="author" content="Philipp Otto">
-        <meta name="keywords" content="Spatial ARCH, spatiotemporal heteroscedasticity, volatility, spatial econometrics, Philipp Otto, GARCH, statistics, statistical modelling, spatial statistics">
-        <meta name="description" content="Explanation and technical summary of the spatial ARCH process by Philipp Otto et al. including formulas, context, and links.">
-
-        <!-- Schema.org structured data -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "TechArticle",
-          "headline": "Spatial ARCH (spARCH): modelling uncertainty clusters in space",
-          "about": ["spatial statistics","heteroscedasticity","spARCH","SARspARCH","variance clusters"],
-          "author": [{"@type":"Person","name":"Philipp Otto"}],
-          "isBasedOn": {
-            "@type": "ScholarlyArticle",
-            "name": "Generalised spatial and spatiotemporal autoregressive conditional heteroscedasticity",
-            "author": [{"@type":"Person","name":"Philipp Otto"},{"@type":"Person","name":"Wolfgang Schmid"},{"@type":"Person","name":"Robert Garthoff"}],
-            "datePublished": "2018-07-26",
-            "identifier": "https://doi.org/10.1016/j.spasta.2018.07.005"
-          },
-          "learningResourceType": "Explainer",
-          "keywords": "Spatial ARCH, SARspARCH, spatial heteroscedasticity, variance clustering, spatial econometrics"
-        }
-        </script>
-        
-	</head>
-	<body class="right-sidebar is-preload">
-		<div id="page-wrapper">
-
-			<!-- Header -->
-				<div id="header">
-
-					<!-- Inner -->
-						<div class="inner">
-							<header>
-								<h1><a href="index.html" id="logo">Selected papers</a></h1>
-							</header>
-						</div>
-
-					<!-- Nav -->
-                    <nav id="nav">
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-<!--                                <li>
-                                <a href="#">Dropdown</a>
-                                <ul>
-                                    <li><a href="#">Lorem ipsum dolor</a></li>
-                                    <li><a href="#">Magna phasellus</a></li>
-                                    <li><a href="#">Etiam dolore nisl</a></li>
-                                    <li>
-                                        <a href="#">And a submenu &hellip;</a>
-                                        <ul>
-                                            <li><a href="#">Lorem ipsum dolor</a></li>
-                                            <li><a href="#">Phasellus consequat</a></li>
-                                            <li><a href="#">Magna phasellus</a></li>
-                                            <li><a href="#">Etiam dolore nisl</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Veroeros feugiat</a></li>
-                                </ul>
-                            </li>
--->
-                            <li><a href="research.html">Research</a>
-                                <ul>
-                                    <li><a href="research.html">Publications</a></li>
-                                    <li><a href="projects.html">Projects</a></li>
-                                    <li><a href="presentations.html">Presentations</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="teaching.html">Teaching</a></li>
-                            <li><a href="cv.html">Curriculum Vitae</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="consulting.html">Consulting</a></li>
-                        </ul>
-                    </nav>
-
-				</div>
-
-			<!-- Main -->
-				<div class="wrapper style1">
+<div class="wrapper style1">
 
 					<div class="container">
 						<div class="row gtr-200">
 							<div class="col-8 col-12-mobile" id="content">
 								<article id="main">
 									<header>
-										<h2><a href="https://doi.org/10.1016/j.spasta.2018.07.005">Generalised spatial and spatiotemporal
-                                            autoregressive conditional heteroscedasticity</a></h2>
-										<p>
-                                        <strong>Otto, P.</strong>, Schmid, W., Garthoff, R. (2018): Generalised Spatial and Spatiotemporal Autoregressive Conditional Heteroscedasticity. Spatial Statistics 26 <a href="https://doi.org/10.1016/j.spasta.2018.07.005">(DOI)</a>
-										</p>
-									</header>
-                                    <h3>Abstract</h3>
+<h1>{{ page.title | escape }}</h1>
+<p>Philipp Otto, Wolfgang Schmid, Robert Garthoff (2018). <a href="https://doi.org/10.1016/j.spasta.2018.07.005">Generalised spatial and spatiotemporal autoregressive conditional heteroscedasticity</a>. <em>Spatial Statistics</em>.</p>
+</header>
+<h2 id="research-question">How does spatial ARCH represent volatility clustering?</h2>
+<p>Spatial ARCH links the scale of a response at one location to squared responses at connected locations. Large deviations of either sign can therefore occur near one another even when a map of the mean shows little spatial structure.</p>
+                                    <h2 id="abstract">Abstract</h2>
                                     <p>
                                     In this paper, we introduce a new spatial model that incorporates heteroscedastic variance depending on neighbouring locations. The proposed process is considered as the spatial equivalent to the temporal autoregressive conditional heteroscedasticity (ARCH) model. We also show how the newly introduced spatial ARCH model can be used in spatiotemporal settings. In contrast to the temporal ARCH model, in which the distribution is known given the full information set for the prior periods, the distribution is not straightforward in the spatial and spatiotemporal setting. However, the model parameters can be estimated using the maximum-likelihood approach. Via Monte Carlo simulations, we demonstrate the performance of the estimator for a specific spatial weighting matrix. Moreover, we combine the known spatial autoregressive model with the spatial ARCH model assuming heteroscedastic errors. Eventually, the proposed autoregressive process is illustrated by an empirical example. Specifically, we model lung cancer mortality in 3108 U.S. counties and compare the newly introduced model with four benchmark approaches.
                                     </p>
-                                    
-                                    
-                                    
-                                    <h3>Background</h3>
+
+
+
+                                    <h2 id="background">Background</h2>
                                         <p>
                                           ARCH and GARCH models are widely used for time series with volatility clustering, for example in finance.
                                           In our 2018 paper we introduced a spatial analogue, the <em>spatial ARCH (spARCH) process</em>.
@@ -138,7 +97,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Main idea</h3>
+                                        <h2 id="main-idea">Main idea</h2>
                                         <p>
                                           In time series, ARCH captures that today’s volatility depends on yesterday’s squared return.
                                           In spARCH, a location’s variance depends on the squared residuals of its neighbours.
@@ -148,7 +107,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Model representation</h3>
+                                        <h2 id="model-representation">Model representation</h2>
                                         <p>
                                           A compact formulation is:
                                         </p>
@@ -167,7 +126,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Interpretation and intuition</h3>
+                                        <h2 id="interpretation-and-intuition">Interpretation and intuition</h2>
                                         <p>
                                           spARCH translates Tobler’s law of geography from the mean to the variance:
                                           <em>uncertainty is also spatially related</em>.
@@ -181,7 +140,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Applications</h3>
+                                        <h2 id="applications">Applications</h2>
                                         <p>
                                           In U.S. county-level lung-cancer mortality, SARspARCH removed residual variance clustering,
                                           improved fit statistics, and identified regions with higher uncertainty.
@@ -190,13 +149,13 @@
                                         </p>
                                       </section>
 
-                                    
-                                    
-                                    
+
+
+
                                     <a href="https://www.scimagojr.com/journalsearch.php?q=21100206605&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=21100206605" alt="SCImago Journal &amp; Country Rank"  /></a>
 								</article>
 							</div>
-                            
+
 							<div class="col-4 col-12-mobile" id="sidebar">
 								<hr class="first" />
 								<section>
@@ -262,7 +221,7 @@
 									<p>
 										Information about the external research funding can be found here:
 									</p>
-									
+
 									<footer>
 										<a href="projects.html" class="button">More details</a>
 									</footer>
@@ -299,168 +258,16 @@
                                     <p>
                                          I usually publish all my research first on arXiv open access:
                                     </p>
-                                    
+
                                     <footer>
                                         <a href="https://arxiv.org/a/otto_p_1.html" class="button">arXiv</a>
                                     </footer>
                                 </section>
 							</div>
 						</div>
-						
-                        
-						
+
+
+
 					</div>
 
 				</div>
-
-                <!-- Footer -->
-                    <div id="footer">
-    <!--                    <div class="container">-->
-    <!--                        <div class="row">-->
-    <!--                            <!-- Tweets -->
-    <!--                                <section class="col-4 col-12-mobile">-->
-    <!--                                    <header>-->
-    <!--                                        <h2 class="icon brands fa-twitter circled"><span class="label">Tweets</span></h2>-->
-    <!--                                    </header>-->
-    <!--                                    <ul class="divided">-->
-    <!--                                        <li>-->
-    <!--                                            <article class="tweet">-->
-    <!--                                                Amet nullam fringilla nibh nulla convallis tique ante sociis accumsan.-->
-    <!--                                                <span class="timestamp">5 minutes ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="tweet">-->
-    <!--                                                Hendrerit rutrum quisque.-->
-    <!--                                                <span class="timestamp">30 minutes ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="tweet">-->
-    <!--                                                Curabitur donec nulla massa laoreet nibh. Lorem praesent montes.-->
-    <!--                                                <span class="timestamp">3 hours ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="tweet">-->
-    <!--                                                Lacus natoque cras rhoncus curae dignissim ultricies. Convallis orci aliquet.-->
-    <!--                                                <span class="timestamp">5 hours ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                    </ul>-->
-    <!--                                </section>-->
-    <!---->
-    <!--                            <!-- Posts -->
-    <!--                                <section class="col-4 col-12-mobile">-->
-    <!--                                    <header>-->
-    <!--                                        <h2 class="icon solid fa-file circled"><span class="label">Posts</span></h2>-->
-    <!--                                    </header>-->
-    <!--                                    <ul class="divided">-->
-    <!--                                        <li>-->
-    <!--                                            <article class="post stub">-->
-    <!--                                                <header>-->
-    <!--                                                    <h3><a href="#">Nisl fermentum integer</a></h3>-->
-    <!--                                                </header>-->
-    <!--                                                <span class="timestamp">3 hours ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="post stub">-->
-    <!--                                                <header>-->
-    <!--                                                    <h3><a href="#">Phasellus portitor lorem</a></h3>-->
-    <!--                                                </header>-->
-    <!--                                                <span class="timestamp">6 hours ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="post stub">-->
-    <!--                                                <header>-->
-    <!--                                                    <h3><a href="#">Magna tempus consequat</a></h3>-->
-    <!--                                                </header>-->
-    <!--                                                <span class="timestamp">Yesterday</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="post stub">-->
-    <!--                                                <header>-->
-    <!--                                                    <h3><a href="#">Feugiat lorem ipsum</a></h3>-->
-    <!--                                                </header>-->
-    <!--                                                <span class="timestamp">2 days ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                    </ul>-->
-    <!--                                </section>-->
-    <!---->
-    <!--                            <!-- Photos -->
-    <!--                                <section class="col-4 col-12-mobile">-->
-    <!--                                    <header>-->
-    <!--                                        <h2 class="icon solid fa-camera circled"><span class="label">Photos</span></h2>-->
-    <!--                                    </header>-->
-    <!--                                    <div class="row gtr-25">-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic10.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic11.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic12.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic13.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic14.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic15.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                    </div>-->
-    <!--                                </section>-->
-    <!--                        </div>-->
-    <!--                        <hr />-->
-                            <div class="row">
-                                <div class="col-12">
-
-                                    <!-- Contact -->
-                                        <section class="contact">
-                                            <header>
-                                                <h3>Missing anything?</h3>
-                                            </header>
-                                            <p>You can also find my profiles here:</p>
-                                            <ul class="icons">
-                                                <li><a href="https://www.researchgate.net/profile/Philipp-Otto-2" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
-                                                <li><a href="https://www.instagram.com/stats.o.phil.e/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                                                <li><a href="https://www.linkedin.com/in/philipp-otto-0a9887264/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                                                <li><a href="https://www.xing.com/profile/Philipp_Otto8/cv" class="icon brands fa-xing"><span class="label">Xing</span></a></li>
-                                                <li><a href="https://twitter.com/PhilOt5" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                                            </ul>
-                                        </section>
-
-                                    <!-- Copyright -->
-                                        <div class="copyright">
-                                            <ul class="menu">
-                                                <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                                            </ul>
-                                        </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-            </div>
-            
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
-</html>

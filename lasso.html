@@ -1,125 +1,81 @@
-<!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Spatial Weight Matrix Estimation</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-        
-        <!-- SEO -->
-         <meta name="author" content="Philipp Otto, Rick Steinert" />
-         <meta name="description" content="Explainer of a two-stage adaptive LASSO method to estimate full spatial weight matrices in spatiotemporal autoregressive models while accounting for location-specific structural breaks in the mean." />
-         <meta name="keywords" content="spatial weights, structural breaks, spatiotemporal autoregression, adaptive LASSO, SAR models, change points, statistical learning, Otto, Steinert, JCGS 2022" />
-         <link rel="canonical" href="https://doi.org/10.1080/10618600.2022.2107530"/>
+---
+layout: paper
+nav_section: research
+title: Estimating spatial weights in panels with structural breaks
+title_suffix: Philipp Otto
+description: Otto and Steinert use a two-stage LASSO approach to estimate connections
+  among locations while allowing for structural breaks in local mean levels. Accounting
+  for these breaks matters because simultaneous changes in level can otherwise resemble
+  dependence between locations.
+meta_author: Philipp Otto
+keywords:
+- spatial weights
+- structural breaks
+- spatiotemporal autoregression
+- adaptive LASSO
+- SAR models
+- change points
+- statistical learning
+- Otto
+- Steinert
+- JCGS 2022
+canonical_url: https://philot789.github.io/lasso.html
+date_modified: '2026-11-22'
+mathjax: true
+citation_title: Estimation of the Spatial Weighting Matrix for Spatiotemporal Data
+  under the Presence of Structural Breaks
+citation_authors:
+- Philipp Otto
+- Rick Steinert
+citation_publication_date: '2023'
+citation_journal_title: Journal of Computational and Graphical Statistics
+schema_authors:
+- "@type": Person
+  name: Philipp Otto
+  sameAs: https://orcid.org/0000-0002-9796-6682
+schema_about:
+- spatial weights
+- structural breaks
+- spatiotemporal autoregression
+- adaptive LASSO
+- SAR models
+based_on:
+  "@type": ScholarlyArticle
+  name: Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the
+    Presence of Structural Breaks
+  author:
+  - "@type": Person
+    name: Philipp Otto
+  - "@type": Person
+    name: Rick Steinert
+  datePublished: '2023'
+  isPartOf:
+    "@type": Periodical
+    name: Journal of Computational and Graphical Statistics
+  url: https://doi.org/10.1080/10618600.2022.2107530
+  identifier: https://doi.org/10.1080/10618600.2022.2107530
+---
 
-         <!-- Open Graph -->
-         <meta property="og:title" content="Estimating Spatial Weights with Structural Breaks" />
-         <meta property="og:description" content="Two-stage adaptive LASSO for spatial weight matrix estimation under structural breaks in spatiotemporal data." />
-         <meta property="og:type" content="article" />
-         <meta property="og:url" content="https://doi.org/10.1080/10618600.2022.2107530" />
-
-         <!-- Schema.org -->
-         <script type="application/ld+json">
-         {
-           "@context":"https://schema.org",
-           "@type":"ScholarlyArticle",
-           "name":"Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks",
-           "author":[
-             {"@type":"Person","name":"Philipp Otto"},
-             {"@type":"Person","name":"Rick Steinert"}
-           ],
-           "datePublished":"2022-10-04",
-           "isPartOf":{"@type":"Periodical","name":"Journal of Computational and Graphical Statistics"},
-           "identifier":"https://doi.org/10.1080/10618600.2022.2107530",
-           "url":"https://doi.org/10.1080/10618600.2022.2107530",
-           "keywords":["spatial weights","spatiotemporal autoregressive models","structural breaks","adaptive LASSO","change-point detection"]
-         }
-         </script>
-
-         <!-- MathJax (equations below) -->
-         <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="text/javascript"></script>
-         
-         
-	</head>
-	<body class="right-sidebar is-preload">
-		<div id="page-wrapper">
-
-			<!-- Header -->
-				<div id="header">
-
-					<!-- Inner -->
-						<div class="inner">
-							<header>
-								<h1><a href="index.html" id="logo">Selected papers</a></h1>
-							</header>
-						</div>
-
-					<!-- Nav -->
-                    <nav id="nav">
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-<!--                                <li>
-                                <a href="#">Dropdown</a>
-                                <ul>
-                                    <li><a href="#">Lorem ipsum dolor</a></li>
-                                    <li><a href="#">Magna phasellus</a></li>
-                                    <li><a href="#">Etiam dolore nisl</a></li>
-                                    <li>
-                                        <a href="#">And a submenu &hellip;</a>
-                                        <ul>
-                                            <li><a href="#">Lorem ipsum dolor</a></li>
-                                            <li><a href="#">Phasellus consequat</a></li>
-                                            <li><a href="#">Magna phasellus</a></li>
-                                            <li><a href="#">Etiam dolore nisl</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Veroeros feugiat</a></li>
-                                </ul>
-                            </li>
--->
-                            <li><a href="research.html">Research</a>
-                                <ul>
-                                    <li><a href="research.html">Publications</a></li>
-                                    <li><a href="projects.html">Projects</a></li>
-                                    <li><a href="presentations.html">Presentations</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="teaching.html">Teaching</a></li>
-                            <li><a href="cv.html">Curriculum Vitae</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="consulting.html">Consulting</a></li>
-                        </ul>
-                    </nav>
-
-				</div>
-
-			<!-- Main -->
-				<div class="wrapper style1">
+<div class="wrapper style1">
 
 					<div class="container">
 						<div class="row gtr-200">
 							<div class="col-8 col-12-mobile" id="content">
 								<article id="main">
 									<header>
-										<h2><a href="https://arxiv.org/abs/1810.06940">Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks</a></h2>
-										<p>
-                                        <strong>Otto, P.</strong>, Steinert, R. (2019): Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks, Journal of Computational and Graphical Statistics <a href="https://arxiv.org/abs/1810.06940">(arXiv)</a>
-										</p>
-									</header>
-                                    <h3>Abstract</h3>
+<h1>{{ page.title | escape }}</h1>
+<p>Philipp Otto, Rick Steinert (2023). <a href="https://doi.org/10.1080/10618600.2022.2107530">Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks</a>. <em>Journal of Computational and Graphical Statistics</em>. <a href="https://arxiv.org/abs/1810.06940">Open preprint</a>.</p>
+</header>
+<h2 id="research-question">How can a spatial weights matrix be estimated when local means change?</h2>
+<p>Otto and Steinert use a two-stage LASSO approach to estimate connections among locations while allowing for structural breaks in local mean levels. Accounting for these breaks matters because simultaneous changes in level can otherwise resemble dependence between locations.</p>
+                                    <h2 id="abstract">Abstract</h2>
                                     <p>
                                     In this paper, we propose a two-stage LASSO estimation approach for the estimation of a full spatial weights matrix of spatiotemporal autoregressive models. In addition, we allow for an unknown number of structural breaks in the local means of each spatial location. These locally varying mean levels, however, can easily be mistaken as spatial dependence and vice versa. Thus, the proposed approach jointly estimates the spatial dependence, all structural breaks, and the local mean levels. For selection of the penalty parameter, we propose a completely new selection criterion based on the distance between the empirical spatial autocorrelation and the spatial dependence estimated in the model. Through simulation studies, we will show the finite-sample performance of the estimators and provide practical guidance as to when the approach could be applied. Finally, the invented method will be illustrated by an empirical example of regional monthly real-estate prices in Berlin between 1995 and 2014. The spatial units will be defined by the respective ZIP codes. The new approach allows us to estimate local mean levels and quantify the deviation of the observed prices from these levels due to spatial spillover effects.
                                     </p>
-                                    
-                                    
+
+
                                     <section>
-                                        <h3>Background</h3>
+                                        <h2 id="background">Background</h2>
                                         <p>
                                           Spatial autoregressive (SAR) and related models require a spatial weighting matrix \(W\). In practice, \(W\) is often assumed
                                           or selected from a small candidate set, which risks misspecification. This work proposes a data-driven method to
@@ -128,7 +84,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Key takeaways</h3>
+                                        <h2 id="key-takeaways">Key takeaways</h2>
                                         <ul>
                                           <li><strong>Joint problem:</strong> Spatial dependence and mean breaks can be easily confounded. The method estimates both simultaneously.</li>
                                           <li><strong>Two-stage adaptive LASSO:</strong> Stage 1 finds candidate change points per location; Stage 2 estimates \(W\) and local mean paths with constraints.</li>
@@ -139,7 +95,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Intuition</h3>
+                                        <h2 id="intuition">Intuition</h2>
                                         <p>
                                           If means jump at different times across locations, those jumps can mimic spatial spillovers; conversely, strong spatial spillovers
                                           can look like simultaneous breaks. The estimator separates these by first over-detecting plausible change points in each local series,
@@ -148,7 +104,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Model</h3>
+                                        <h2 id="model">Model</h2>
                                         <p>
                                           Observations at time \(t=1,\dots,T\) and locations \(s_1,\dots,s_n\):
                                         </p>
@@ -170,7 +126,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Estimation (two-stage adaptive LASSO)</h3>
+                                        <h2 id="estimation-two-stage-adaptive-lasso">Estimation (two-stage adaptive LASSO)</h2>
                                         <ol>
                                           <li><strong>Stage 1: change-point candidates (per location).</strong>
                                             For each location \(i\), fit a lower-triangular “step” design with adaptive LASSO to detect level changes in the overall mean trajectory
@@ -186,7 +142,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Penalty selection</h3>
+                                        <h2 id="penalty-selection">Penalty selection</h2>
                                         <p>
                                           Standard CV on prediction error can neglect spatial error correlation. The paper proposes selecting \(\lambda_b\) by matching
                                           the <em>sample spatial autocorrelation</em> (from mean-adjusted data) with the <em>model-implied spatial autocorrelation</em>
@@ -195,7 +151,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Practical guidance</h3>
+                                        <h2 id="practical-guidance">Practical guidance</h2>
                                         <ul>
                                           <li><strong>Diagnostics:</strong> If residual maps suggest level shifts at different times across locations, and SAR estimates depend heavily on the chosen \(W\),
                                             consider this estimator.</li>
@@ -207,7 +163,7 @@
                                       </section>
 
                                       <section>
-                                        <h3>Application</h3>
+                                        <h2 id="application">Application</h2>
                                         <p>
                                         The method is illustrated with Berlin condominium prices (1995–2014),
                                               where both spatial spillovers and structural breaks are evident.
@@ -222,13 +178,13 @@
                                               where simultaneous spatial spillovers and regime changes are common.
                                         </p>
                                       </section>
-                                      
-                                      
-                                      
+
+
+
                                     <a href="https://www.scimagojr.com/journalsearch.php?q=23863&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=23863" alt="SCImago Journal &amp; Country Rank"  /></a>
 								</article>
 							</div>
-                            
+
 							<div class="col-4 col-12-mobile" id="sidebar">
 								<hr class="first" />
 								<section>
@@ -294,7 +250,7 @@
 									<p>
 										Information about the external research funding can be found here:
 									</p>
-									
+
 									<footer>
 										<a href="projects.html" class="button">More details</a>
 									</footer>
@@ -331,168 +287,16 @@
                                     <p>
                                          I usually publish all my research first on arXiv open access:
                                     </p>
-                                    
+
                                     <footer>
                                         <a href="https://arxiv.org/a/otto_p_1.html" class="button">arXiv</a>
                                     </footer>
                                 </section>
 							</div>
 						</div>
-						
-                        
-						
+
+
+
 					</div>
 
 				</div>
-
-                <!-- Footer -->
-                    <div id="footer">
-    <!--                    <div class="container">-->
-    <!--                        <div class="row">-->
-    <!--                            <!-- Tweets -->
-    <!--                                <section class="col-4 col-12-mobile">-->
-    <!--                                    <header>-->
-    <!--                                        <h2 class="icon brands fa-twitter circled"><span class="label">Tweets</span></h2>-->
-    <!--                                    </header>-->
-    <!--                                    <ul class="divided">-->
-    <!--                                        <li>-->
-    <!--                                            <article class="tweet">-->
-    <!--                                                Amet nullam fringilla nibh nulla convallis tique ante sociis accumsan.-->
-    <!--                                                <span class="timestamp">5 minutes ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="tweet">-->
-    <!--                                                Hendrerit rutrum quisque.-->
-    <!--                                                <span class="timestamp">30 minutes ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="tweet">-->
-    <!--                                                Curabitur donec nulla massa laoreet nibh. Lorem praesent montes.-->
-    <!--                                                <span class="timestamp">3 hours ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="tweet">-->
-    <!--                                                Lacus natoque cras rhoncus curae dignissim ultricies. Convallis orci aliquet.-->
-    <!--                                                <span class="timestamp">5 hours ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                    </ul>-->
-    <!--                                </section>-->
-    <!---->
-    <!--                            <!-- Posts -->
-    <!--                                <section class="col-4 col-12-mobile">-->
-    <!--                                    <header>-->
-    <!--                                        <h2 class="icon solid fa-file circled"><span class="label">Posts</span></h2>-->
-    <!--                                    </header>-->
-    <!--                                    <ul class="divided">-->
-    <!--                                        <li>-->
-    <!--                                            <article class="post stub">-->
-    <!--                                                <header>-->
-    <!--                                                    <h3><a href="#">Nisl fermentum integer</a></h3>-->
-    <!--                                                </header>-->
-    <!--                                                <span class="timestamp">3 hours ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="post stub">-->
-    <!--                                                <header>-->
-    <!--                                                    <h3><a href="#">Phasellus portitor lorem</a></h3>-->
-    <!--                                                </header>-->
-    <!--                                                <span class="timestamp">6 hours ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="post stub">-->
-    <!--                                                <header>-->
-    <!--                                                    <h3><a href="#">Magna tempus consequat</a></h3>-->
-    <!--                                                </header>-->
-    <!--                                                <span class="timestamp">Yesterday</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                        <li>-->
-    <!--                                            <article class="post stub">-->
-    <!--                                                <header>-->
-    <!--                                                    <h3><a href="#">Feugiat lorem ipsum</a></h3>-->
-    <!--                                                </header>-->
-    <!--                                                <span class="timestamp">2 days ago</span>-->
-    <!--                                            </article>-->
-    <!--                                        </li>-->
-    <!--                                    </ul>-->
-    <!--                                </section>-->
-    <!---->
-    <!--                            <!-- Photos -->
-    <!--                                <section class="col-4 col-12-mobile">-->
-    <!--                                    <header>-->
-    <!--                                        <h2 class="icon solid fa-camera circled"><span class="label">Photos</span></h2>-->
-    <!--                                    </header>-->
-    <!--                                    <div class="row gtr-25">-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic10.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic11.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic12.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic13.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic14.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="col-6">-->
-    <!--                                            <a href="#" class="image fit"><img src="images/pic15.jpg" alt="" /></a>-->
-    <!--                                        </div>-->
-    <!--                                    </div>-->
-    <!--                                </section>-->
-    <!--                        </div>-->
-    <!--                        <hr />-->
-                            <div class="row">
-                                <div class="col-12">
-
-                                    <!-- Contact -->
-                                        <section class="contact">
-                                            <header>
-                                                <h3>Missing anything?</h3>
-                                            </header>
-                                            <p>You can also find my profiles here:</p>
-                                            <ul class="icons">
-                                                <li><a href="https://www.researchgate.net/profile/Philipp-Otto-2" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
-                                                <li><a href="https://www.instagram.com/stats.o.phil.e/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                                                <li><a href="https://www.linkedin.com/in/philipp-otto-0a9887264/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-                                                <li><a href="https://www.xing.com/profile/Philipp_Otto8/cv" class="icon brands fa-xing"><span class="label">Xing</span></a></li>
-                                                <li><a href="https://twitter.com/PhilOt5" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                                            </ul>
-                                        </section>
-
-                                    <!-- Copyright -->
-                                        <div class="copyright">
-                                            <ul class="menu">
-                                                <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                                            </ul>
-                                        </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-            </div>
-            
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
-</html>
