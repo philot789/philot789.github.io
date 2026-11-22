@@ -10,3 +10,8 @@
 .srl-page .srl-site-header:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#01145140,#01145155);pointer-events:none}
 .srl-home-feature img{height:auto}
 @media(min-width:737px){.srl-page .srl-site-header{padding:4em 0 1.25em}}
+
+/* The App Store QR is also a direct, keyboard-accessible download link. */
+.srl-qr-card>a.srl-qr-link{display:block;width:100%;max-width:228px;margin:0 auto 20px;border:0}
+.srl-qr-link img{display:block;width:100%;height:auto;background:#fff;border-radius:3px}
+@media(max-width:736px){.srl-qr-card>a.srl-qr-link{max-width:220px}}
