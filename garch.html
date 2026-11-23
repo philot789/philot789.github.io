@@ -24,6 +24,7 @@ citation_authors:
 - Wolfgang Schmid
 citation_publication_date: '2023'
 citation_journal_title: Statistical Papers
+citation_pdf_url: https://eprints.gla.ac.uk/306106/1/306106.pdf
 schema_authors:
 - "@type": Person
   name: Philipp Otto
@@ -48,6 +49,10 @@ based_on:
     name: Statistical Papers
   url: https://doi.org/10.1007/s00362-022-01357-1
   identifier: https://doi.org/10.1007/s00362-022-01357-1
+  encoding:
+    "@type": MediaObject
+    contentUrl: https://eprints.gla.ac.uk/306106/1/306106.pdf
+    encodingFormat: application/pdf
 ---
 <div class="wrapper style1">
 
@@ -60,71 +65,29 @@ based_on:
 <p>Philipp Otto, Wolfgang Schmid (2023). <a href="https://doi.org/10.1007/s00362-022-01357-1">A general framework for spatial GARCH models</a>. <em>Statistical Papers</em>.</p>
 </header>
 
-<section aria-labelledby="what-problem">
-<h2 id="what-problem">What problem does this model address?</h2>
-<p>Spatial GARCH allows the local volatility scale to depend on scales at connected locations as well as on observed shocks. The spatial weights specify which connections enter the model. This lets researchers study how volatility can propagate across a network within a single observation period.</p>
-</section>
-
-<section aria-labelledby="when-to-use">
-<h2 id="when-to-use">When should this model be used?</h2>
-<p>Use this framework when local shocks and volatility at connected sites may both contribute to the scale of a response. Specify which neighbours can interact and check the existence conditions for the chosen model and weights.</p>
-</section>
-
 <section aria-labelledby="summary">
 <h2 id="summary">Summary</h2>
-<p>Otto and Schmid (2023) develop a framework for spatial and spatiotemporal generalised autoregressive conditional heteroscedasticity (GARCH). Its spatial GARCH specification links local scales to neighbouring squared shocks and to neighbouring scales. The framework includes spatial ARCH, symmetric spatial log-GARCH and, with temporal weights, standard time-series GARCH.</p>
-</section>
-
-<section aria-labelledby="key-contributions">
-<h2 id="key-contributions">Main contributions</h2>
-<ul>
-    <li>Separate weight matrices describe interactions through observed shock magnitudes and through the scale process.</li>
-    <li>A fixed-point formulation gives conditions for existence and uniqueness.</li>
-    <li>The paper derives a nonlinear least-squares estimator and illustrates it in simulations and an application to Berlin property prices.</li>
-</ul>
-</section>
-
-<section aria-labelledby="why-needed">
-<h2 id="why-needed">When do neighbouring scales matter?</h2>
-<p>A spatial ARCH term can describe clustering associated with shocks at neighbouring locations. The additional GARCH term allows scale changes to propagate through the weights even where a neighbouring realised shock is small.</p>
-</section>
-
-<section aria-labelledby="intuition">
-<h2 id="intuition">Contemporaneous spatial spillovers</h2>
-<p>Unlike lagged time-series GARCH, spatial GARCH can link sites observed in the same period. Reciprocal links imply a simultaneous system. Interpret its spillovers as modelled dependence given the chosen weights.</p>
+<p>Spatial GARCH extends spatial ARCH by letting the scale at a location respond both to neighbouring squared shocks and to neighbouring scales. Otto and Schmid (2023) give a common framework for spatial and spatiotemporal ARCH and GARCH specifications. Different transformations and weight structures recover particular models, including spatial log-scale specifications and classical time-series GARCH.</p>
+<p>The paper studies when the simultaneous system has a solution and develops nonlinear least squares for the general framework. Its simulation study examines finite-sample estimation accuracy. The Berlin application shows how spatial GARCH errors can describe local uncertainty in long-run condominium price changes after accounting for spatial dependence in the mean.</p>
 </section>
 
 <section aria-labelledby="minimal-maths">
-<h2 id="minimal-maths">Spatial GARCH and log-GARCH equations</h2>
-<p>Let \(Y^{(2)}=Y\odot Y\) denote squared residuals, \(h\) the vector of squared local scales and \(E=\operatorname{diag}(\varepsilon_i^2)\). The spatial GARCH model writes</p>
-<p>\[Y=\operatorname{diag}(h)^{1/2}\varepsilon,\qquad h=\alpha+W_1Y^{(2)}+W_2h.\]</p>
-<p>Substituting \(Y^{(2)}=Eh\) gives \(h=(I-W_1 E-W_2)^{-1}\alpha\) under the relevant existence conditions. With nonnegative weights and positive baseline scales, \(\lVert W_1E+W_2\rVert&lt;1\) in a submultiplicative matrix norm is sufficient. Setting \(W_2=0\) gives spatial ARCH.</p>
-<p>In the symmetric spatial log-GARCH example, \(\log h=\alpha+W_1\log Y^{(2)}+W_2\log h\), with elementwise logarithms and nonzero innovations. A sufficient condition for a unique solution is \(\lVert W_1+W_2\rVert&lt;1\).</p>
-</section>
-
-<section aria-labelledby="estimation-nlse-and-weights">
-<h2 id="estimation-nlse-and-weights">Estimation by nonlinear least squares</h2>
-<p>The paper develops nonlinear least squares based on the log-squared transformation. A common specification is \(W_1=\rho W_1^*\) and \(W_2=\lambda W_2^*\), with known weight structures and estimated coefficients. The consistency result uses identification and regularity conditions.</p>
-</section>
-
-<section aria-labelledby="practical-advice">
-<h2 id="practical-advice">Diagnostics and interpretation</h2>
-<ul>
-    <li>Inspect squared residuals after fitting a plausible mean model. Spatial clustering in their magnitudes motivates comparing alternative mean and scale structures.</li>
-    <li>Compare weights based on adjacency, distance or an application-specific network. Check existence conditions and inspect standardised residuals after fitting.</li>
-    <li>In simultaneous settings, interpret \(h_i\) as a squared local scale. A directional model with an appropriate ordering permits a conditional-variance interpretation.</li>
-</ul>
+<h2 id="minimal-maths">Shock propagation and scale feedback</h2>
+<p>Let \(Y\) denote the centred response or residual vector and \(h\) its squared local scales. The level-scale specification is</p>
+<p class="paper-equation">\[Y=\operatorname{diag}(h)^{1/2}\varepsilon,\qquad h=\alpha+W_1(Y\odot Y)+W_2h.\]
+The two matrices play different roles. \(W_1\) links observed shock magnitudes to the scale equation, while \(W_2\) links the scales themselves. This allows a scale change to propagate through intermediate locations, including locations whose own realised shock happens to be small.</p>
+<p>Writing \(E=\operatorname{diag}(\varepsilon_i^2)\) yields \(h=(I-W_1E-W_2)^{-1}\alpha\) whenever the solution is well defined. The paper gives sufficient conditions for existence and positivity and shows how the choice of weights and innovation support affects those conditions. With oriented triangular matrices, the system can be solved in order. A log-scale formulation instead ensures positive scales through exponentiation. The nonlinear least-squares estimator uses log-squared observations and separates the strengths of the shock and scale terms for specified weight structures. Estimation error generally fell with increasing lattice size in the simulations.</p>
 </section>
 
 <section aria-labelledby="application-berlin-real-estate-prices">
-<h2 id="application-berlin-real-estate-prices">Application to Berlin property prices</h2>
-<p>The paper studies long-run property price changes across Berlin postcode areas from 1995 to 2014. After fitting a spatial autoregressive mean with regressors and spatial GARCH errors, the squared standardised residuals no longer showed significant spatial autocorrelation in the reported diagnostic. The fitted scale highlighted areas with larger local uncertainty.</p>
+<h2 id="application-berlin-real-estate-prices">Berlin condominium prices</h2>
+<p>The Berlin data contain one log price change per postcode area, calculated over 1995–2014 for 190 areas. The authors fitted a SAR mean, with and without covariates, and examined the resulting residuals. In the covariate model, the signed residuals showed little spatial autocorrelation, while absolute residuals still clustered (Moran's \(I=0.081\), \(p=0.018\), Section 5). The subsequent GARCH fit produced a map of geographically varying scales and little evidence of positive spatial clustering in squared standardised residuals.</p>
+<p>The scale map describes where the fitted mean leaves more uncertainty about long-run price changes. Its interpretation is conditional on the spatial weights and mean specification. The application uses a spatial cross-section of long-run returns, so the results concern geographical variation over that interval.</p>
 </section>
 
 <section aria-labelledby="citation-links">
 <h2 id="citation-links">Paper and related resources</h2>
-<p>Philipp Otto, Wolfgang Schmid (2023). <a href="https://doi.org/10.1007/s00362-022-01357-1">A general framework for spatial GARCH models</a>. <em>Statistical Papers</em>.</p>
-<p><a class="button" href="https://doi.org/10.1007/s00362-022-01357-1">Journal article</a> <a class="button" href="https://cran.r-project.org/package=spGARCH">R package spGARCH</a></p>
+<p><a class="button" href="https://doi.org/10.1007/s00362-022-01357-1">Journal article</a> <a class="button" href="https://eprints.gla.ac.uk/306106/1/306106.pdf">Open article (PDF)</a> <a class="button" href="https://cran.r-project.org/package=spGARCH">R package spGARCH</a></p>
 </section>
 <section aria-labelledby="related-explainers">
 <h2 id="related-explainers">Related research explainers</h2>

@@ -75,80 +75,26 @@ based_on:
 <p>Philipp Otto, Alessandro Fassò, Paolo Maranzano (2024). <a href="https://doi.org/10.1214/24-SS150">A review of regularised estimation methods and cross-validation in spatiotemporal statistics</a>. <em>Statistics Surveys</em>.</p>
 </header>
 
-<section aria-labelledby="what-problem">
-<h2 id="what-problem">What problem does this review address?</h2>
-<p>Choose the validation split to match the prediction task. Predicting the future at observed sites calls for a temporal split. Predicting in an unobserved region calls for holding out locations together. The same distinction matters when tuning a regularisation penalty.</p>
-</section>
-
-<section aria-labelledby="when-to-use">
-<h2 id="when-to-use">When should this review be used?</h2>
-<p>Use this review when selecting covariates, estimating a large dependence structure or tuning a penalty for georeferenced observations. Define whether predictions will concern new sites, future periods or both before choosing validation folds.</p>
-</section>
-
 <section aria-labelledby="summary">
 <h2 id="summary">Summary</h2>
-<p>Otto, Fassò and Maranzano (2024) review regularised estimation for geostatistical and spatial econometric models. The survey covers variable selection, regularisation of covariance and precision matrices, and estimation of spatial interactions. It connects penalty selection with validation designs tailored to prediction at new places, future times, or both.</p>
-</section>
-
-<section aria-labelledby="key-contributions">
-<h2 id="key-contributions">Main contributions</h2>
-<p>The general estimation problem combines a loss and a complexity penalty, \[\widehat\theta=\arg\min_\theta\{L(\theta;X,y)+P(\theta,\theta_0,\lambda)\}.\] The parameter \(\lambda\) controls the strength of the penalty towards a reference \(\theta_0\), often zero for sparsity.</p>
-<ul>
-    <li>For fixed effects, LASSO and related penalties can select predictors or groups of terms.</li>
-    <li>For geostatistical dependence, covariance tapering and sparse precision estimates constrain different parts of the model. Low-rank and Vecchia approximations address computation.</li>
-    <li>For spatial autoregression, penalisation can select among candidate weights or help estimate a structured weights matrix.</li>
-</ul>
-</section>
-
-<section aria-labelledby="why-needed">
-<h2 id="why-needed">Why this approach is needed</h2>
-<p>
-                                            Big geospatial datasets require models that are <em>interpretable</em> and <em>computationally feasible</em>. Regularisation provides both: it controls complexity, selects relevant structure, and enables scalable inference in mixed-effects geostatistics and spatial autoregression. The survey unifies these ideas and connects them to CV procedures tailored for dependence.
-                                        </p>
-</section>
-
-<section aria-labelledby="intuition">
-<h2 id="intuition">Why regularise a spatiotemporal model?</h2>
-<p>Regularisation trades bias against sampling variability and can make estimation feasible with many predictors or dependence parameters. The preferred degree of regularisation can differ across prediction tasks, so tune it using a split that reflects how the model will be deployed.</p>
+<p>Regularisation helps when a spatiotemporal model has many potential predictors or a dependence structure with too many parameters to estimate precisely. Otto, Fassò and Maranzano (2024) review how penalties and related constraints are used in geostatistics and spatial econometrics. They distinguish regularising the mean, the covariance or precision matrix, and the spatial weights matrix. These operations target different scientific questions even when they use similar optimisation tools.</p>
+<p>The paper also reviews how to choose tuning parameters and evaluate predictions when observations are dependent. A validation split defines the prediction task: interpolation near known observations, transfer to unobserved sites or regions, forecasting beyond the observed period, or prediction across both space and time.</p>
 </section>
 
 <section aria-labelledby="regularisation-highlights">
-<h2 id="regularisation-highlights">Regularisation highlights</h2>
-<ul>
-                                          <li>
-<strong>Fixed-effects selection:</strong> high-dimensional regressors via (adaptive) LASSO; extensions to functional predictors with penalised splines.</li>
-                                          <li>
-<strong>Covariance/precision structure:</strong> tapering (distance-based zeros), sparse precision via graphical LASSO, and low-rank Cholesky/Vecchia for large N.</li>
-                                          <li>
-<strong>Spatial weights:</strong> boosting or LASSO to choose among candidate \(W_k\); constrained procedures to estimate \(W\) (identifiability via structure or sparsity).</li>
-                                        </ul>
+<h2 id="regularisation-highlights">What the penalty changes</h2>
+<p>Penalised estimation combines a measure of fit with a penalty on model complexity. Ridge penalties shrink coefficients, LASSO penalties can set coefficients to zero, and group penalties can select an entire block together. For example, a spatiotemporal regression can select a covariate together with its associated basis coefficients or lag terms if those parameters form a scientifically meaningful group. The penalty introduces bias in exchange for potentially lower estimation variability.</p>
+<p>Covariance tapering induces sparsity by attenuating or removing covariance at larger distances, which can reduce computational cost. Penalising a precision matrix instead concerns conditional associations, while penalising a SAR weights matrix selects directed terms in an autoregressive equation. A zero therefore carries a different interpretation in each model. Methods for those matrices also have to respect the relevant conditions, such as positive definiteness or invertibility.</p>
 </section>
 
 <section aria-labelledby="cross-validation-that-respects-dependence">
-<h2 id="cross-validation-that-respects-dependence">Cross-validation for new sites and future periods</h2>
-<ul>
-    <li><strong>Forecasting at observed sites.</strong> Hold out a later period and fit using only observations available at the forecast origin. Rolling-origin evaluation can cover several origins and horizons.</li>
-    <li><strong>Predicting at unobserved sites.</strong> Hold out complete locations or spatial blocks. Add a buffer when the intended predictions are distant from the training locations.</li>
-    <li><strong>Forecasting at unobserved sites.</strong> Hold out both the target sites and the target period so that the split matches the information available in deployment.</li>
-</ul>
-<p>Random folds can produce optimistic estimates when nearby or consecutive observations make the task easier than intended. Blocking and buffering can reduce dependence across folds. They do not guarantee independence.</p>
-</section>
-
-<section aria-labelledby="practical-advice">
-<h2 id="practical-advice">Tuning penalties and measuring performance</h2>
-<p>Fit preprocessing steps and select the penalty within the training data for each split. When estimating the performance of a tuned procedure, use an outer holdout or nested resampling that mirrors the intended prediction task.</p>
-</section>
-
-<section aria-labelledby="applications">
-<h2 id="applications">Applications in spatiotemporal statistics</h2>
-<p>
-                                           Environmental monitoring (geostatistical interpolation and forecasting), regional economics (panel SAR/CAR with variable selection), health and epidemiology (areal models with sparse precision), transportation and networks (directional weights), and remote sensing (functional predictors and basis selection).
-                                        </p>
+<h2 id="cross-validation-that-respects-dependence">Validation for space and time</h2>
+<p>If the task is to interpolate at an unobserved monitoring station, holding out all observations from that station makes the test resemble the intended use. Spatial blocks or buffers can better represent transfer across a larger gap. If the task is forecasting, forward validation uses only observations available at each forecast origin. To assess a model intended for both new places and future periods, the holdout must reflect both restrictions.</p>
+<p>Random folds can be informative for some interpolation tasks where nearby data are part of the information actually available at prediction time. Those same folds can give optimistic estimates for transfer or forecasting. The choice of block size, gap and forecast horizon should reflect the dependence and the deployment setting. When estimating the error of a tuning procedure, repeat the tuning inside each training split so that test outcomes stay outside model selection.</p>
 </section>
 
 <section aria-labelledby="citation-links">
 <h2 id="citation-links">Paper and related resources</h2>
-<p>Philipp Otto, Alessandro Fassò, Paolo Maranzano (2024). <a href="https://doi.org/10.1214/24-SS150">A review of regularised estimation methods and cross-validation in spatiotemporal statistics</a>. <em>Statistics Surveys</em>.</p>
 <p><a class="button" href="https://doi.org/10.1214/24-SS150">Journal article</a> <a class="button" href="https://eprints.gla.ac.uk/341198/2/341198.pdf">Open article (PDF)</a></p>
 </section>
 <section aria-labelledby="related-explainers">

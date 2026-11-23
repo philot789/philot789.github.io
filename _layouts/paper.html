@@ -64,15 +64,50 @@
             border-bottom: 0;
         }
 
-        /* main.css sizes H2 but not a content-page H1, so match the former title size. */
         #main > header > h1 {
-            font-size: 2.85em;
-            line-height: 1.25em;
+            font-size: 2.35em;
+            line-height: 1.16;
+        }
+
+        #main > header > p {
+            font-size: 1em;
+            line-height: 1.5;
+            margin: 0.8em 0 1.65em;
+        }
+
+        #main > section {
+            margin-bottom: 1.9em;
+        }
+
+        #main > section:last-child {
+            margin-bottom: 0;
+        }
+
+        #main > section > h2 {
+            font-size: 1.35em;
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 0.48em;
+        }
+
+        #main > section p {
+            text-align: left;
+        }
+
+        #main .paper-equation,
+        #main mjx-container[display="true"] {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        #main .button {
+            margin: 0.15em 0.2em 0.15em 0;
         }
 
         @media screen and (max-width: 736px) {
             #header .paper-site-title { font-size: 1.75em; }
             #main > header > h1 { font-size: 1.75em; }
+            #main > section > h2 { font-size: 1.22em; }
         }
     </style>
 </head>

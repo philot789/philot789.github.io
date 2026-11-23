@@ -75,58 +75,26 @@ based_on:
 <p>Philipp Otto, Osman Doğan, Süleyman Taşpınar, Wolfgang Schmid, Anil K. Bera (2025). <a href="https://doi.org/10.1111/joes.12643">Spatial and spatiotemporal volatility models: A review</a>. <em>Journal of Economic Surveys</em>.</p>
 </header>
 
-<section aria-labelledby="what-problem">
-<h2 id="what-problem">What problem does this review address?</h2>
-<p>The review distinguishes models that express local volatility through observed shocks and connected scales from models that introduce a latent volatility process. The distinction matters when choosing how to estimate the model and interpret a cluster of unusually variable observations.</p>
-</section>
-
-<section aria-labelledby="when-to-use">
-<h2 id="when-to-use">When should this review be used?</h2>
-<p>Consult this review when choosing between a spatial ARCH or GARCH specification and a stochastic volatility model. The distinction is particularly relevant when a scientific question concerns dependence in variability across sites.</p>
-</section>
-
 <section aria-labelledby="summary">
 <h2 id="summary">Summary</h2>
-<p>Otto, Doğan, Taşpınar, Schmid and Bera (2025) review spatial and spatiotemporal models for dependence in volatility. They connect time-series ARCH, GARCH and stochastic volatility to methods for sites, regions and networks, and compare their formulations, assumptions and estimation strategies.</p>
-</section>
-
-<section aria-labelledby="key-contributions">
-<h2 id="key-contributions">Main contributions</h2>
-<ul>
-    <li>Compares spatial ARCH and GARCH, log-scale formulations and latent stochastic volatility models.</li>
-    <li>Distinguishes contemporaneous spatial interactions from effects that propagate across time lags.</li>
-    <li>Discusses likelihood-based, moment-based and Bayesian estimation across model families.</li>
-</ul>
-</section>
-
-<section aria-labelledby="why-needed">
-<h2 id="why-needed">Why model volatility as spatially dependent?</h2>
-<p>Connected locations can experience clusters of large residual magnitudes even when their signed residuals show little spatial autocorrelation. A volatility model describes dependence in their scale and can improve uncertainty quantification where that dependence matters.</p>
+<p>Otto, Doğan, Taşpınar, Schmid and Bera (2025) review models for dependence in volatility across locations and over time. The starting point is a familiar feature of financial time series: large shocks tend to occur in clusters. If risk also varies across connected sites, dependence can appear in squared or absolute deviations even when the signed deviations show little correlation. The review works from time-series and multivariate foundations towards models that encode geographical or network structure explicitly.</p>
+<p>The survey distinguishes two broad families by how their volatility is generated. ARCH and GARCH specifications build the scale from observed shocks and, in GARCH, other scales. Stochastic volatility models give the scale its own latent process. This choice determines the interpretation of a volatility cluster, the role of observed past data and the estimation methods available.</p>
 </section>
 
 <section aria-labelledby="main-idea">
-<h2 id="main-idea">Observation-driven and latent-volatility models</h2>
-<p><strong>Spatial ARCH and GARCH</strong> use observed squared shocks and, in GARCH specifications, other scales as inputs to the scale equation. <strong>Spatial stochastic volatility</strong> models the volatility as a latent process with its own innovations. A latent process can evolve across locations and time even when observed shocks are small.</p>
-</section>
-
-<section aria-labelledby="intuition-and-interpretation">
-<h2 id="intuition-and-interpretation">Contemporaneous and lagged interactions</h2>
-<p>Contemporaneous models link observations or scales from the same period, often through a simultaneous system. Lagged models describe how past shocks or scales at one site relate to current scales elsewhere. With simultaneous feedback, the scale need not equal the variance conditional on every other observation.</p>
-</section>
-
-<section aria-labelledby="applications">
-<h2 id="applications">Applications of spatial volatility models</h2>
-<p>Potential applications include clusters of unexplained changes in local property prices, variability in environmental measurements and connected risks in financial networks. With repeated measurements, a model can represent geographic clustering and temporal persistence together.</p>
+<h2 id="main-idea">Comparing models for spatial volatility</h2>
+<p>Spatial weights encode which locations can interact. Contemporaneous links can create a simultaneous system, so well-defined solutions depend on the weights and transformation. In spatiotemporal data, further terms can represent persistence at a site or transmission from other sites with a lag. The review covers level-scale and logarithmic specifications, including models that use log-squared responses to give the transformed system a spatial autoregressive form.</p>
+<p>In a stochastic volatility model, innovations to an unobserved log-scale process can generate a cluster of high variability. Inference must then integrate over or estimate the latent states. The review discusses likelihood and moment-based approaches for particular ARCH/GARCH specifications and Bayesian computation for several stochastic volatility models. The appendices give technical details for selected estimators and samplers.</p>
 </section>
 
 <section aria-labelledby="practical-advice">
-<h2 id="practical-advice">Choosing a model for spatial volatility</h2>
-<p>Check whether squared or absolute residuals cluster after a plausible mean model. Compare alternative explanations, including omitted predictors and spatially varying measurement quality. Choose weights that correspond to the application, check stability, and compare fitted volatility or predictive intervals against the intended use.</p>
+<h2 id="practical-advice">Choosing a specification</h2>
+<p>A useful first diagnostic is whether absolute or squared residuals still cluster after fitting the mean. If the question concerns how observed shocks relate to neighbouring scales, a spatial ARCH or GARCH model makes that link explicit. If the scientific question calls for a separate evolving risk process, stochastic volatility provides a different interpretation. The sampling design also matters. Repeated observations can distinguish persistence from same-period spatial association when the model and data support both.</p>
+<p>The review identifies open problems, including asymmetric responses to shocks, direction-dependent spatial transmission and more flexible structures for multivariate volatility. For a worked example of same-period scale feedback and its diagnostics, see the <a href="garch.html">spatial GARCH application to Berlin prices</a>.</p>
 </section>
 
 <section aria-labelledby="citation-links">
 <h2 id="citation-links">Paper and related resources</h2>
-<p>Philipp Otto, Osman Doğan, Süleyman Taşpınar, Wolfgang Schmid, Anil K. Bera (2025). <a href="https://doi.org/10.1111/joes.12643">Spatial and spatiotemporal volatility models: A review</a>. <em>Journal of Economic Surveys</em>.</p>
 <p><a class="button" href="https://doi.org/10.1111/joes.12643">Journal article</a> <a class="button" href="https://eprints.gla.ac.uk/326270/1/326270.pdf">Open article (PDF)</a></p>
 </section>
 <section aria-labelledby="related-explainers">

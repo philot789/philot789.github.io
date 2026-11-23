@@ -16,7 +16,6 @@ keywords:
 - Philipp Otto
 canonical_url: https://philot789.github.io/profiles.html
 date_modified: '2026-11-23'
-mathjax: true
 citation_title: Statistical analysis of beach profiles – A spatiotemporal functional
   approach
 citation_authors:
@@ -25,6 +24,7 @@ citation_authors:
 - Rik Gijsman
 citation_publication_date: '2021'
 citation_journal_title: Coastal Engineering
+citation_pdf_url: https://ris.utwente.nl/ws/portalfiles/portal/277650292/1_s2.0_S0378383921001526_main.pdf
 schema_authors:
 - "@type": Person
   name: Philipp Otto
@@ -51,6 +51,10 @@ based_on:
     name: Coastal Engineering
   url: https://doi.org/10.1016/j.coastaleng.2021.103999
   identifier: https://doi.org/10.1016/j.coastaleng.2021.103999
+  encoding:
+    "@type": MediaObject
+    contentUrl: https://ris.utwente.nl/ws/portalfiles/portal/277650292/1_s2.0_S0378383921001526_main.pdf
+    encodingFormat: application/pdf
 ---
 <div class="wrapper style1">
 
@@ -63,61 +67,27 @@ based_on:
 <p>Philipp Otto, Andreas Piter, Rik Gijsman (2021). <a href="https://doi.org/10.1016/j.coastaleng.2021.103999">Statistical analysis of beach profiles – A spatiotemporal functional approach</a>. <em>Coastal Engineering</em>.</p>
 </header>
 
-<section aria-labelledby="what-problem">
-<h2 id="what-problem">What problem does this method address?</h2>
-<p>The approach treats an elevation profile as a function of cross-shore position. It accommodates surveys that cover different portions of the beach and occur at irregular intervals. The Sylt case studies examine how profile evolution varies with storms and beach nourishment.</p>
-</section>
-
-<section aria-labelledby="when-to-use">
-<h2 id="when-to-use">When should this method be used?</h2>
-<p>Use the functional approach when repeated coastal surveys record elevations along transects with unequal spacing, survey dates or offshore coverage. It is suited to questions about which parts of a profile change together.</p>
-</section>
-
 <section aria-labelledby="summary">
 <h2 id="summary">Summary</h2>
-<p>Otto, Piter and Gijsman (2021) model sandy beach profiles as elevation curves indexed by cross-shore distance. Their functional spatiotemporal model accommodates incomplete surveys, describes dependence over observation times and alongshore locations, and supports interpolation and forecasting. Two studies on Sylt illustrate the method.</p>
-</section>
-
-<section aria-labelledby="key-contributions">
-<h2 id="key-contributions">Main contributions</h2>
-<ul>
-    <li>Represent irregularly sampled profiles as curves rather than requiring a common cross-shore observation grid.</li>
-    <li>Estimate spatiotemporal dependence and associations with external influences such as storms and beach nourishment.</li>
-    <li>Predict profiles between observed transects or at later survey times, conditional on available information.</li>
-</ul>
-</section>
-
-<section aria-labelledby="why-needed">
-<h2 id="why-needed">Why this approach is needed</h2>
-<p>
-                                          Monitoring sandy shorelines is critical for coastal management, yet beach profile data are often
-                                          <em>irregular, incomplete, and heterogeneous</em>. Conventional analyses discard incomplete profiles
-                                          and miss important temporal and spatial dependencies. This study introduces a
-                                          <strong>functional spatiotemporal model</strong> that can handle such complexities and integrate external influences
-                                          like storms and nourishments.
-                                        </p>
+<p>Coastal monitoring programmes record beach elevation along transects, often at uneven intervals in space and time. Some surveys cover only the dry beach or only the submerged part. Otto, Piter and Gijsman (2021) apply a functional spatiotemporal model in which each measurement contributes at its recorded cross-shore position. A partly surveyed transect can still inform estimation and help predict the missing portion of a profile.</p>
+<p>The paper uses two case studies from Sylt, Germany. One examines how dependence changes from nearshore to offshore in submerged profiles. The other estimates the shape of the beach following storms and nourishment in the emerged zone. The cases illustrate how the same statistical framework can support different questions about monitoring and beach morphology.</p>
 </section>
 
 <section aria-labelledby="main-ideas">
-<h2 id="main-ideas">How the functional spatiotemporal model works</h2>
-<p>B-spline basis functions represent elevation over cross-shore distance. Fixed effects describe the mean profile and associations with external variables. Random components account for dependence across survey times and alongshore locations. Likelihood-based estimation uses the measured portions of the profiles.</p>
+<h2 id="main-ideas">Modelling incomplete transects</h2>
+<p>The response is an elevation curve indexed by distance from the shoreline. B-splines express the average shape and how covariate effects vary along the profile. A hidden dynamic geostatistical component allows nearby transects to share information and represents persistence across survey times. The model separates this dependence from measurement and modelling error. Evaluating the basis at the actual survey points avoids requiring an identical grid for every transect.</p>
+<p>The fitted model can interpolate a profile at an unsurveyed alongshore location and predict a future profile under specified conditions. The authors use subsampling to make fitting feasible and hold out groups of transects to assess interpolation. Errors can then be examined as a function of cross-shore distance, which is more informative for survey planning than one average error for the whole curve.</p>
 </section>
 
 <section aria-labelledby="applications-sylt-island-case-studies">
-<h2 id="applications-sylt-island-case-studies">Applications to submerged and emerged profiles on Sylt</h2>
-<p><strong>Submerged profiles at Puan Klent.</strong> Estimated temporal dependence decreased in the offshore direction. The paper discusses how the results could inform the frequency of offshore surveys.</p>
-<p><strong>Emerged profiles at List.</strong> The estimated change following storms with wave heights above 5 m corresponded to a loss of about 0.2–0.7 m in elevation across parts of the profile. The analysis also examined changes associated with beach nourishment.</p>
-</section>
-
-<section aria-labelledby="why-this-matters">
-<h2 id="why-this-matters">What the estimates can inform</h2>
-<p>The fitted model can help identify where repeated surveys add information and estimate how different parts of the profile respond to environmental events. Forecasting depends on available information about future conditions, and extrapolation to poorly sampled parts of a transect is more uncertain.</p>
+<h2 id="applications-sylt-island-case-studies">What the Sylt surveys show</h2>
+<p>For the submerged profiles at Puan Klent, estimated temporal dependence weakened offshore. The authors connect that pattern to survey design and discuss more frequent measurements nearshore. The finding is specific to the temporal dependence in this dataset. Choosing survey intervals also requires considering the precision needed for the particular part of the profile.</p>
+<p>For the emerged profiles at List, the selected model used indicators for major wave conditions and nourishment. Following events with wave heights above 5 m, the fitted storm effect amounted to about 0.2–0.7 m of elevation loss across parts of the profile. The estimated changes describe a difference in profile shape, so the magnitude is tied to cross-shore position and should be read together with the uncertainty in the fitted curves.</p>
 </section>
 
 <section aria-labelledby="citation-links">
 <h2 id="citation-links">Paper and related resources</h2>
-<p>Philipp Otto, Andreas Piter, Rik Gijsman (2021). <a href="https://doi.org/10.1016/j.coastaleng.2021.103999">Statistical analysis of beach profiles – A spatiotemporal functional approach</a>. <em>Coastal Engineering</em>.</p>
-<p><a class="button" href="https://doi.org/10.1016/j.coastaleng.2021.103999">Journal article</a> <a class="button" href="https://eprints.gla.ac.uk/306119/">University publication record</a></p>
+<p><a class="button" href="https://doi.org/10.1016/j.coastaleng.2021.103999">Journal article</a> <a class="button" href="https://ris.utwente.nl/ws/portalfiles/portal/277650292/1_s2.0_S0378383921001526_main.pdf">Open article (PDF)</a> <a class="button" href="https://eprints.gla.ac.uk/306119/">University publication record</a></p>
 </section>
 <section aria-labelledby="related-explainers">
 <h2 id="related-explainers">Related research explainers</h2>

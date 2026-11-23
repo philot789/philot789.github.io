@@ -69,111 +69,26 @@ based_on:
 <p>Philipp Otto, Rick Steinert (2023). <a href="https://doi.org/10.1080/10618600.2022.2107530">Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks</a>. <em>Journal of Computational and Graphical Statistics</em>. <a href="https://arxiv.org/abs/1810.06940">Open preprint</a>.</p>
 </header>
 
-<section aria-labelledby="what-problem">
-<h2 id="what-problem">What problem does this method address?</h2>
-<p>Otto and Steinert use a two-stage LASSO approach to estimate connections among locations while allowing for structural breaks in local mean levels. Accounting for these breaks matters because simultaneous changes in level can otherwise resemble dependence between locations.</p>
-</section>
-
-<section aria-labelledby="when-to-use">
-<h2 id="when-to-use">When should this method be used?</h2>
-<p>Use the method when repeated observations are available for the same locations, the spatial weights are unknown, and mean levels may change during the observation period. Sparse connections are central to the penalised estimation strategy.</p>
-</section>
-
 <section aria-labelledby="summary">
 <h2 id="summary">Summary</h2>
-<p>Otto and Steinert (2023) estimate a sparse spatial weights matrix and location-specific changes in mean levels from a panel of repeated observations. A first adaptive LASSO selects candidate break dates. A second constrained LASSO estimates spatial weights and retains changes in the local means. The paper illustrates the method with Berlin property prices.</p>
-</section>
-
-<section aria-labelledby="key-contributions">
-<h2 id="key-contributions">Main contributions</h2>
-<ul>
-    <li>Estimates the spatial weights matrix from the panel rather than fixing it from a geographical rule.</li>
-    <li>Allows unknown break dates that can differ by location.</li>
-    <li>Uses a constrained optimisation to estimate sparse weights and local mean changes jointly after screening candidate dates.</li>
-</ul>
-</section>
-
-<section aria-labelledby="why-needed">
-<h2 id="why-needed">Why this approach is needed</h2>
-<p>
-                                          Spatial autoregressive (SAR) and related models require a spatial weighting matrix \(W\). In practice, \(W\) is often assumed
-                                          or selected from a small candidate set, which risks misspecification. This work proposes a data-driven method to
-                                          <em>estimate the full matrix \(W\)</em> while also allowing for an unknown number of <em>location-specific structural breaks</em> in the mean.
-                                        </p>
-</section>
-
-<section aria-labelledby="intuition">
-<h2 id="intuition">Intuition</h2>
-<p>
-                                          If means jump at different times across locations, those jumps can mimic spatial spillovers; conversely, strong spatial spillovers
-                                          can look like simultaneous breaks. The estimator separates these by first over-detecting plausible change points in each local series,
-                                          then letting the full spatiotemporal model retain only those needed while estimating \(W\).
-                                        </p>
+<p>Spatial autoregressive models usually take a spatial weights matrix as given, often based on distance or shared boundaries. Otto and Steinert (2023) estimate that matrix from repeated observations of the same locations. Their model also lets each location's mean change at unknown times. This matters because an estimated link can absorb a shift in the mean, while a shift originating elsewhere can appear as a local break.</p>
+<p>The paper proposes a two-stage LASSO estimator, a tuning criterion based on spatial correlation and conditions for parameter identification. Simulations reveal a practical limit: the procedure can recover many links and breaks, but it has difficulty determining direction when the true links are one-way. The application estimates a sparse network of connections among Berlin housing markets and separates it from changes in local price levels.</p>
 </section>
 
 <section aria-labelledby="model">
-<h2 id="model">Model</h2>
-<p>
-                                          Observations at time \(t=1,\dots,T\) and locations \(s_1,\dots,s_n\):
-                                        </p>
-<p>
-                                        \[
-                                          Y_t = W Y_t + a_t + \varepsilon_t,\quad \varepsilon_t \sim \mathcal{N}(0,\sigma^2 I_n),\qquad
-                                          \text{with } \rho(W) &lt; 1,\; \mathrm{diag}(W)=0,\; W\ge 0.
-                                        \]
-                                        </p>
-<p>
-                                          The vector \(a_t\) collects location-specific mean levels that may change at unknown times (structural breaks, not necessarily synchronized across locations).
-                                          Reduced form:
-                                        </p>
-<p>
-                                        \[
-                                          Y_t = (I - W)^{-1} a_t + (I - W)^{-1}\varepsilon_t.
-                                        \]
-                                        </p>
-</section>
-
-<section aria-labelledby="estimation-two-stage-adaptive-lasso">
-<h2 id="estimation-two-stage-adaptive-lasso">Estimation (two-stage adaptive LASSO)</h2>
-<ol>
-                                          <li>
-<strong>Stage 1: change-point candidates (per location).</strong>
-                                            For each location \(i\), fit a lower-triangular step design with adaptive LASSO to detect level changes in the overall mean trajectory
-                                            \(\alpha_{t,i}\) (which already contains spillovers). Collect candidate change times \(\mathcal{T}^{(1)}_i\).</li>
-                                          <li>
-<strong>Stage 2: joint estimation of \(W\) and local means.</strong>
-                                            Stack all times/locations and solve a constrained LASSO:
-                                            \[
-                                              \min_{\tilde a,\;\xi}\;\|Z\xi + \Phi \tilde a - y\|_2^2 + \lambda_b \|\xi\|_1,
-                                            \]
-                                            subject to \( \tilde a_{t,i}=0\) for \(t\notin \mathcal{T}^{(1)}_i\), \(w_{ii}=0\), \(w_{ij}\ge 0\), and \(\sum_j w_{ij}\le 1\) for all \(i\).
-                                            Here \( \xi=\mathrm{vec}(W)\), \( \Phi\) maps change increments to levels, and \(Z = I_n \otimes Y\).</li>
-                                        </ol>
+<h2 id="model">Local mean changes and spatial dependence</h2>
+<p>The model at time \(t\) is \(Y_t=WY_t+a_t+\varepsilon_t\), where \(a_t\) contains piecewise-constant local mean levels, \(W\) is shared across time and the innovations are assumed independent across locations and times. The observed mean is \((I-W)^{-1}a_t\). A change in one entry of \(a_t\) can therefore affect the observed mean at other locations even if their own local levels are unchanged.</p>
+<p>In the first stage, the adaptive LASSO screens for possible breaks in each location's observed mean, using a step-function design. The second stage jointly fits the local level changes and \(W\), using a constrained LASSO over the weights and allowing level changes only at retained candidate dates. A break missed during screening cannot be recovered in the joint fit. The fitted weights have a zero diagonal, are nonnegative and have row sums bounded by one. Stability of the spatial multiplier requires the strict spectral-radius bound \(\rho(W)&lt;1\).</p>
 </section>
 
 <section aria-labelledby="penalty-selection">
-<h2 id="penalty-selection">Penalty selection</h2>
-<p>
-                                          Standard CV on prediction error can neglect spatial error correlation. The paper proposes selecting \(\lambda_b\) by matching
-                                          the <em>sample spatial autocorrelation</em> (from mean-adjusted data) with the <em>model-implied spatial autocorrelation</em>
-                                          (from \((I-W)^{-1}\varepsilon\)), e.g., via an MAE between correlation matrices. This targets the correct strength and pattern of \(W\).
-                                        </p>
-</section>
-
-<section aria-labelledby="practical-guidance">
-<h2 id="practical-guidance">Stability and interpretation</h2>
-<p>The structural spatial autoregression requires \(\rho(W)&lt;1\) for the stable spatial multiplier. Nonnegative weights with row sums at most one give \(\rho(W)\le1\), so check the strict bound for fitted weights. A strict maximum row-sum bound is sufficient.</p>
-<p>The fitted weights describe directed associations under the model. Use the orientation of the matrix and the spatial multiplier to interpret direct connections and the resulting network of indirect dependence.</p>
-</section>
-
-<section aria-labelledby="application">
-<h2 id="application">Application to Berlin condominium prices</h2>
-<p>The case study uses monthly real-estate prices in Berlin postcode areas from 1995 to 2014. The method separates estimated changes in local mean levels from spatially transmitted departures and gives a sparse map of connections. Some fitted connections extend beyond immediate geographical neighbours.</p>
+<h2 id="penalty-selection">Tuning and interpreting the fitted network</h2>
+<p>Instead of selecting the penalty by point prediction error, the paper compares the sample spatial correlation of the mean-adjusted observations with the correlation implied by the fitted spatial multiplier. The comparison targets whether the model reproduces the cross-location dependence. It is particularly relevant when the matrix is itself the object of interest. In the experiments, genuinely directed links sometimes appeared as pairs of reciprocal links. Individual edge directions therefore warrant caution, especially for small weights or short panels.</p>
+<p>The Berlin application uses monthly condominium prices across postcode areas. Some fitted links joined areas beyond immediate neighbours, illustrating how a contiguity matrix can miss associations between geographically separated market segments. Such links are statistical associations under the assumed model. Omitted cross-correlated shocks or covariates can also contribute to the estimated weights.</p>
 </section>
 
 <section aria-labelledby="citation-links">
 <h2 id="citation-links">Paper and related resources</h2>
-<p>Philipp Otto, Rick Steinert (2023). <a href="https://doi.org/10.1080/10618600.2022.2107530">Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks</a>. <em>Journal of Computational and Graphical Statistics</em>. <a href="https://arxiv.org/abs/1810.06940">Open preprint</a>.</p>
 <p><a class="button" href="https://doi.org/10.1080/10618600.2022.2107530">Journal article</a> <a class="button" href="https://arxiv.org/abs/1810.06940">Open preprint</a></p>
 </section>
 <section aria-labelledby="related-explainers">

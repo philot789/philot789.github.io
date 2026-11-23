@@ -33,7 +33,7 @@ citation_authors:
 - Philipp Otto
 citation_publication_date: '2023'
 citation_journal_title: Scientific Data
-citation_pdf_url: https://www.nature.com/articles/s41597-023-02034-0.pdf
+citation_pdf_url: https://eprints.gla.ac.uk/306103/1/306103.pdf
 schema_authors:
 - "@type": Person
   name: Philipp Otto
@@ -77,7 +77,7 @@ based_on:
   identifier: https://doi.org/10.1038/s41597-023-02034-0
   encoding:
     "@type": MediaObject
-    contentUrl: https://www.nature.com/articles/s41597-023-02034-0.pdf
+    contentUrl: https://eprints.gla.ac.uk/306103/1/306103.pdf
     encodingFormat: application/pdf
 ---
 <div class="wrapper style1">
@@ -91,70 +91,27 @@ based_on:
 <p>Alessandro Fassò, Jacopo Rodeschini, Alessandro Fusta Moro, Qendrim Shaboviq, Paolo Maranzano, Michela Cameletti, Francesco Finazzi, Natalia Golini, Rosaria Ignaccolo, Philipp Otto (2023). <a href="https://doi.org/10.1038/s41597-023-02034-0">Agrimonia: a dataset on livestock, meteorology and air quality in the Lombardy region, Italy</a>. <em>Scientific Data</em>.</p>
 </header>
 
-<section aria-labelledby="what-problem">
-<h2 id="what-problem">What problem does this dataset address?</h2>
-<p>Agrimonia links air-quality observations with meteorology, emissions, livestock and land information at monitoring locations. Researchers can use these data to investigate how pollution varies with agricultural activity and weather across Lombardy. The observational design matters when interpreting those associations.</p>
-</section>
-
-<section aria-labelledby="when-to-use">
-<h2 id="when-to-use">When should this dataset be used?</h2>
-<p>Use Agrimonia when the unit of analysis is a monitoring location observed over time in or around Lombardy. Check the source resolution of each variable before interpreting a station-level association, particularly for livestock and emissions.</p>
-</section>
-
 <section aria-labelledby="summary">
 <h2 id="summary">Summary</h2>
-<p>The Agrimonia dataset harmonises daily air-quality, weather, emissions, livestock and land-use variables for 141 monitoring stations in Lombardy and a surrounding buffer from 2016 to 2021. Fassò and co-authors (2023) document the original sources, processing and variable definitions.</p>
-</section>
-
-<section aria-labelledby="key-contributions">
-<h2 id="key-contributions">Main contributions</h2>
-<ul>
-    <li>Links source datasets at monitoring-station locations and on a common daily time scale.</li>
-    <li>Combines air-quality records from European and Italian monitoring networks with Copernicus products, Italian livestock records and CORINE Land Cover.</li>
-    <li>Provides data and metadata for reproducible analysis, including information on missingness and uncertainty for relevant processed variables.</li>
-</ul>
-</section>
-
-<section aria-labelledby="why-needed">
-<h2 id="why-needed">Why harmonise livestock and air-quality data?</h2>
-<p>Particulate matter and its precursors depend on weather, emissions and other local conditions. A harmonised panel lets researchers examine these variables together and account for variation across stations and over time.</p>
+<p>Agricultural ammonia can contribute to secondary particulate matter, but the underlying air-quality observations, emissions estimates, weather and agricultural records are collected at different scales. Fassò and co-authors (2023) bring these sources together in the Agrimonia dataset. The harmonised panel contains daily records for 2016–2021 at 141 ground-level monitoring stations in Lombardy and a 0.3° buffer around the region.</p>
+<p>The publication is a data descriptor. It documents the sources, the transformations needed to obtain a station-day panel, and checks on the resulting variables. The linked data support pollution mapping, prediction at unobserved locations and studies of associations between farming activity, weather and air quality. The emissions and livestock records retain the interpretation imposed by their original geographical and temporal resolution.</p>
 </section>
 
 <section aria-labelledby="main-idea">
-<h2 id="main-idea">How the station-day panel was assembled</h2>
-<p>The data descriptor explains how measurements and gridded estimates at different spatial and temporal resolutions were matched to station locations and daily records. Hourly measurements were aggregated and other variables were aligned with the daily station grid using methods appropriate to their sources.</p>
-</section>
-
-<section aria-labelledby="applications">
-<h2 id="applications">Applications in air-quality research</h2>
-<p>The data support pollution mapping, station-level prediction and exploratory studies of associations among meteorology, agricultural activity and pollutants. Causal interpretation of intervention effects requires an appropriate design and assumptions about confounding.</p>
-</section>
-
-<section aria-labelledby="practical-advice">
-<h2 id="practical-advice">Coverage, missingness and resolution</h2>
-<p>Stations monitor different pollutants. Check sensor coverage, the original resolution and any imputation or uncertainty fields before selecting variables. For prediction at new stations, assess performance by holding out stations and keeping processing within each training split where applicable.</p>
-</section>
-
-<section aria-labelledby="data-access">
-<h2 id="data-access">Data access</h2>
-<p>
-                                        The data descriptor documents Agrimonia version 2.0.1. The dataset releases and metadata are available on Zenodo.
-                                        <a href="https://doi.org/10.5281/zenodo.6620529">Download the Agrimonia dataset</a>.
-                                        Source code for data processing is on GitHub:
-                                        <a href="https://github.com/Agrimonia-project/Agrimonia_Data">Agrimonia_Data repository</a>.
-                                      </p>
+<h2 id="main-idea">From source data to station-day records</h2>
+<p>The air-quality measurements come from regional and European monitoring networks, while meteorological fields and emissions inventories come from Copernicus. Livestock counts are drawn from the Italian zootechnical registry, and land-cover information includes CORINE. The workflow aggregates hourly values and aligns gridded or area-level information with station locations. Some slower-moving series, including livestock counts, are interpolated in time, so their daily resolution reflects the harmonisation process.</p>
+<p>Pollutant coverage is uneven because stations observe different sets of pollutants. The descriptor explains how problematic measurements and missing values were handled and provides metadata on imputation uncertainty. These details matter if the analysis relies on extremes, comparisons among pollutants or station-based validation. The <a href="https://doi.org/10.5281/zenodo.6620529">Zenodo record</a> provides the data and metadata, and the <a href="https://github.com/AgrImOnIA-project/AgrImOnIA_Data">project repository</a> provides the processing code.</p>
 </section>
 
 <section aria-labelledby="methodological-follow-up-comparative-modelling-study">
-<h2 id="methodological-follow-up-comparative-modelling-study">Application to PM₂.₅ prediction in Lombardy</h2>
-<p>A <a href="https://doi.org/10.1007/s10651-023-00589-0">follow-up study by Otto and co-authors (2024)</a> used 49 PM₂.₅ monitoring stations from 2016 to 2020. It compared a hidden dynamic geostatistical model, a generalised additive mixed model and random forest spatiotemporal kriging.</p>
-<p>The models gave broadly similar performance in leave-one-station-out cross-validation, with differences across stations. The hidden dynamic geostatistical model gave the strongest overall predictive performance in the study. Random forests helped explore nonlinearities and interactions.</p>
+<h2 id="methodological-follow-up-comparative-modelling-study">Predicting PM₂.₅ at held-out stations</h2>
+<p>A <a href="https://doi.org/10.1007/s10651-023-00589-0">separate study by Otto and co-authors (2024)</a> compares a hidden dynamic geostatistical model, a generalised additive mixed model and random forest spatiotemporal kriging. Using PM₂.₅ observations at 49 stations from 2016 to 2020, the authors evaluated predictions by leaving out one station at a time. The hidden dynamic geostatistical model had the lowest average RMSE in that comparison (6.31 µg/m³).</p>
+<p>The more flexible models were useful for exploring nonlinear relationships with the covariates. Together the analyses illustrate two uses of the same harmonised panel: assessing accuracy at unobserved stations and identifying possible improvements to the model for large-scale variation. An analysis of what would happen under an emissions intervention would require additional identification assumptions.</p>
 </section>
 
 <section aria-labelledby="citation-links">
 <h2 id="citation-links">Paper and related resources</h2>
-<p>Alessandro Fassò, Jacopo Rodeschini, Alessandro Fusta Moro, Qendrim Shaboviq, Paolo Maranzano, Michela Cameletti, Francesco Finazzi, Natalia Golini, Rosaria Ignaccolo, Philipp Otto (2023). <a href="https://doi.org/10.1038/s41597-023-02034-0">Agrimonia: a dataset on livestock, meteorology and air quality in the Lombardy region, Italy</a>. <em>Scientific Data</em>.</p>
-<p><a class="button" href="https://doi.org/10.1038/s41597-023-02034-0">Journal article</a> <a class="button" href="https://doi.org/10.5281/zenodo.6620529">Open dataset</a></p>
+<p><a class="button" href="https://doi.org/10.1038/s41597-023-02034-0">Journal article</a> <a class="button" href="https://eprints.gla.ac.uk/306103/1/306103.pdf">Open article (PDF)</a> <a class="button" href="https://doi.org/10.5281/zenodo.6620529">Open dataset</a></p>
 </section>
 <section aria-labelledby="related-explainers">
 <h2 id="related-explainers">Related research explainers</h2>

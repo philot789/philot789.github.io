@@ -67,61 +67,28 @@ based_on:
 <header>
 <h1>{{ page.title | escape }}</h1>
 <p>Anna Malinovskaya, Pavlo Mozharovskyi, Philipp Otto (2024). <a href="https://doi.org/10.1080/00401706.2023.2239886">Statistical process monitoring of artificial neural networks</a>. <em>Technometrics</em>.</p>
-<p><a href="https://arxiv.org/abs/2209.07436">Read the open preprint</a></p>
 </header>
-
-<section aria-labelledby="what-problem">
-<h2 id="what-problem">What problem does this method address?</h2>
-<p>The method follows the representations that a trained network assigns to incoming observations. A control chart can flag a change relative to reference data before outcome labels arrive. An alarm warrants investigation because a shift in representations alone does not establish a loss of predictive accuracy.</p>
-</section>
-
-<section aria-labelledby="when-to-use">
-<h2 id="when-to-use">When should this method be used?</h2>
-<p>Use this approach when a deployed network exposes an internal representation and comparable reference observations are available from a stable period. It is especially relevant when outcome labels arrive too late for routine monitoring.</p>
-</section>
 
 <section aria-labelledby="summary">
 <h2 id="summary">Summary</h2>
-<p>Malinovskaya, Mozharovskyi and Otto (2024) apply statistical process monitoring to embeddings from a deployed artificial neural network. Data depth measures how central an embedding is relative to a reference sample. The method converts depth values to normalised ranks and monitors them sequentially with control charts.</p>
-</section>
-
-<section aria-labelledby="key-contributions">
-<h2 id="key-contributions">Main contributions</h2>
-<ul>
-    <li>Uses internal feature representations from a trained network to monitor incoming observations.</li>
-    <li>Combines multivariate data depth, normalised ranks and statistical process control.</li>
-    <li>Compares benchmark detectors across different network architectures and input formats.</li>
-</ul>
-</section>
-
-<section aria-labelledby="why-needed">
-<h2 id="why-needed">Why monitor a deployed neural network?</h2>
-<p>Labels needed to measure prediction errors can arrive with a lag. Embeddings provide an earlier signal when the model’s representation of incoming inputs changes relative to its baseline.</p>
+<p>A deployed neural network may receive inputs from a different population before outcome labels arrive to reveal a change in prediction quality. Malinovskaya, Mozharovskyi and Otto (2024) monitor this possibility using the network's own embeddings, the vectors of activations produced by an internal layer. A nonparametric control chart compares the incoming embeddings with a reference sample from stable operation.</p>
+<p>The paper compares data depth functions, benchmark outlier detectors and reference-sample construction. Its experiments cover convolutional image classification, LSTM-based question classification and feed-forward classification of sonar returns. The authors found asymmetric projection depth the most reliable option among the depth measures they examined, particularly when the embedding distribution was asymmetric.</p>
 </section>
 
 <section aria-labelledby="main-idea">
-<h2 id="main-idea">How embedding-based control charts work</h2>
-<p>Select a layer, keep the trained network fixed, and collect reference embeddings from a stable period. Use a depth function to compare new embeddings with the reference distribution. A sequential control chart uses the ranks derived from these depth values to signal changes.</p>
-</section>
-
-<section aria-labelledby="intuition-and-interpretation">
-<h2 id="intuition-and-interpretation">What does a monitoring alarm show?</h2>
-<p>An alarm indicates evidence of a shift in the monitored representation. Changes in the relationship between inputs and outcomes can occur without moving the embedding distribution. Evaluate prediction errors and subgroup performance when labels become available.</p>
+<h2 id="main-idea">Data depth and control charts</h2>
+<p>A data depth measures how central an embedding is relative to a reference cloud. For example, projection depth examines departures in multiple directions, so an embedding can receive low depth even if no individual coordinate is extreme. The authors turn these depths into ranks by comparing new and reference observations. A small rank provides a signal that the new embedding is unusual relative to the reference. This makes the monitoring statistic one-dimensional while preserving information about multivariate outlyingness.</p>
+<p>The most useful layer, reference sample and depth depend on the network and data. The paper evaluates reference sets built from different subsets of the original data, including selections based on prediction confidence. A larger reference set did not consistently improve detection. Geometry mattered too. Simplicial depth can give the same zero depth to multiple points outside the reference convex hull, whereas projection depth can distinguish among them.</p>
 </section>
 
 <section aria-labelledby="applications">
-<h2 id="applications">Applications of embedding-based monitoring</h2>
-<p>The paper compares approaches for several neural-network architectures and input formats. In deployment, changes in image acquisition, text sources or sensor conditions can motivate monitoring using an appropriate historical reference sample.</p>
-</section>
-
-<section aria-labelledby="practical-advice">
-<h2 id="practical-advice">Choosing a reference period and responding to alarms</h2>
-<p>Choose a representative period under stable operation and calibrate the chart to its expected false-alarm behaviour. After an alarm, check data quality and changes in the mix of inputs. Use labels where available to assess changes in performance and decide whether updating the model is warranted.</p>
+<h2 id="applications">What the experiments and alarms show</h2>
+<p>The image experiment uses a ten-class classifier and assesses detection on held-out observations and observations supplied to represent a change. The question and sonar experiments extend the comparison to other input types and architectures. Across these experiments, the authors assess detection alongside false alarms in the stable test data. An apparent gain in sensitivity is less informative when the method also signals frequently on stable observations.</p>
+<p>A chart alarm indicates a change in the representations it monitors. An investigation can then check acquisition conditions or changes in the input population and, once labels are available, measure prediction errors. Changes in the response given the inputs can leave the embedding distribution stable, so the chart addresses one observable aspect of model monitoring.</p>
 </section>
 
 <section aria-labelledby="citation-links">
 <h2 id="citation-links">Paper and related resources</h2>
-<p>Anna Malinovskaya, Pavlo Mozharovskyi, Philipp Otto (2024). <a href="https://doi.org/10.1080/00401706.2023.2239886">Statistical process monitoring of artificial neural networks</a>. <em>Technometrics</em>.</p>
 <p><a class="button" href="https://doi.org/10.1080/00401706.2023.2239886">Journal article</a> <a class="button" href="https://eprints.gla.ac.uk/317168/">University publication record</a> <a class="button" href="https://arxiv.org/abs/2209.07436">Open preprint</a></p>
 </section>
 <section aria-labelledby="related-explainers">

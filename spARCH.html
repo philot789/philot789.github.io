@@ -70,60 +70,28 @@ based_on:
 <p>Philipp Otto, Wolfgang Schmid, Robert Garthoff (2018). <a href="https://doi.org/10.1016/j.spasta.2018.07.005">Generalised spatial and spatiotemporal autoregressive conditional heteroscedasticity</a>. <em>Spatial Statistics</em>.</p>
 </header>
 
-<section aria-labelledby="what-problem">
-<h2 id="what-problem">What problem does this model address?</h2>
-<p>Spatial ARCH links the scale of a response at one location to squared responses at connected locations. Large deviations of either sign can therefore occur near one another even when a map of the mean shows little spatial structure.</p>
-</section>
-
-<section aria-labelledby="when-to-use">
-<h2 id="when-to-use">When should this model be used?</h2>
-<p>Use spatial ARCH when a mean model leaves clusters of unusually large or small residual magnitudes and a weights matrix can represent plausible links between locations. A map of squared residuals can help identify this pattern.</p>
-</section>
-
 <section aria-labelledby="summary">
 <h2 id="summary">Summary</h2>
-<p>Spatial autoregressive conditional heteroscedasticity (spARCH) models dependence in the magnitude of shocks across locations. Otto, Schmid and Garthoff (2018) define a spatial and spatiotemporal ARCH process, develop likelihood-based estimation and combine it with a spatial autoregression for the mean. Their application examines lung-cancer mortality across 3,108 US counties.</p>
-</section>
-
-<section aria-labelledby="key-contributions">
-<h2 id="key-contributions">Main contributions</h2>
-<ul>
-    <li>The spatial weights matrix specifies which squared shocks enter the local scale equation.</li>
-    <li>The likelihood accounts for simultaneous interactions between locations.</li>
-    <li>A spatial autoregressive mean can be combined with spARCH errors to model separate patterns in the level and scale of the response.</li>
-</ul>
-</section>
-
-<section aria-labelledby="why-needed">
-<h2 id="why-needed">Why model spatial dependence in volatility?</h2>
-<p>A mean model describes where the expected response is high or low. Residuals can still show geographical clustering in magnitude after the mean has been modelled. An ARCH error process describes that second pattern.</p>
-</section>
-
-<section aria-labelledby="main-idea">
-<h2 id="main-idea">From temporal ARCH to spatial ARCH</h2>
-<p>Temporal ARCH uses earlier squared shocks. Spatial ARCH uses squared shocks at linked sites, which can be observed at the same time. A large positive or negative deviation enters the scale equation through its square.</p>
+<p>A map of residuals can look unstructured even when nearby locations tend to have unusually large residuals at the same time. Spatial autoregressive conditional heteroscedasticity (spARCH) describes this clustering in the magnitude of deviations. Otto, Schmid and Garthoff (2018) extend the ARCH idea from time series to spatial and spatiotemporal data, where the squared deviations that enter a site's scale equation can be contemporaneous.</p>
+<p>The paper gives conditions for the process to exist, derives likelihood-based estimation and combines a spatial autoregressive mean with spARCH errors. Simulations examine the behaviour of the estimators. In an application to lung and bronchus cancer mortality across US counties, the model accounts for spatial dependence in squared residuals that persisted after the authors fitted a spatial mean model.</p>
 </section>
 
 <section aria-labelledby="model-representation">
-<h2 id="model-representation">Spatial ARCH model</h2>
-<p>For a response vector \(Y\), mean model \(m(X,\theta)\), and innovation vector \(\varepsilon\), write</p>
-<p>\[Y=m(X,\theta)+\xi,\qquad \xi=\operatorname{diag}(h)^{1/2}\varepsilon,\qquad h=\alpha+W(\xi\odot\xi).\]</p>
-<p>Here \(h\) gives the squared local scales, \(\odot\) denotes elementwise multiplication, \(\alpha\) gives baseline levels, and \(W\) contains the spatial weights. In a simultaneous specification the shocks and scales must be solved jointly. Existence and positivity depend on the weights and the innovation specification.</p>
-</section>
-
-<section aria-labelledby="interpretation-and-intuition">
-<h2 id="interpretation-and-intuition">Interpreting local scale and diagnosing clustering</h2>
-<p>For simultaneous spatial feedback, \(h_i\) is a local scale parameter. Its equality to a conditional variance depends on the ordering and conditioning set. Moran’s \(I\) on squared residuals can reveal remaining clustering. Compare plausible mean specifications and weight matrices before attributing that pattern to spatial volatility.</p>
+<h2 id="model-representation">How spatial ARCH works</h2>
+<p>Write the residuals as \(\xi=\operatorname{diag}(h)^{1/2}\varepsilon\), where \(\varepsilon\) is a vector of innovations and \(h\) contains the squared local scales. The basic scale equation is</p>
+<p class="paper-equation">\[h=\alpha+W(\xi\odot\xi),\]
+where \(\alpha\) represents the baseline, \(\odot\) denotes elementwise multiplication and \(W\) specifies which locations contribute to each site's scale. Squaring gives large positive and negative residuals the same role. The mean equation can use a different spatial weights matrix from the scale equation.</p>
+<p>In a time series, earlier shocks are known when the next scale is computed. With reciprocal spatial links, residuals and scales instead form a simultaneous system. The paper treats the existence of a nonnegative solution explicitly and distinguishes general spatial weights from oriented, triangular weights. In a simultaneous model, interpret \(h_i\) as a local squared scale. Its interpretation as a conditional variance depends on the conditioning set and the ordering.</p>
 </section>
 
 <section aria-labelledby="applications">
-<h2 id="applications">Application to US county lung-cancer mortality</h2>
-<p>The authors fitted spatial mean models to county-level lung-cancer mortality and compared specifications with and without spatially dependent heteroscedastic errors. The example illustrates how a separate scale model can describe geographical variation left by the mean model.</p>
+<h2 id="applications">Evidence from US county mortality</h2>
+<p>The paper analyses average lung and bronchus cancer mortality for 2008–2012 across 3,108 US counties. It compares ordinary regression, a spatial autoregressive (SAR) mean model and a SAR model with spARCH errors. In the SAR fit, Moran's \(I\) was close to zero for signed residuals, while the squared residuals remained positively spatially autocorrelated (\(I=0.321\), Table 2). With the spARCH error model, Moran's \(I\) for the squared standardised residuals was about 0.007.</p>
+<p>This comparison shows why a diagnostic on signed residuals alone can miss spatial heterogeneity relevant to uncertainty. The application models departures from county-level expected mortality under the selected covariates and weights. The estimated scale describes geographical variation in the size of those departures.</p>
 </section>
 
 <section aria-labelledby="citation-links">
 <h2 id="citation-links">Paper and related resources</h2>
-<p>Philipp Otto, Wolfgang Schmid, Robert Garthoff (2018). <a href="https://doi.org/10.1016/j.spasta.2018.07.005">Generalised spatial and spatiotemporal autoregressive conditional heteroscedasticity</a>. <em>Spatial Statistics</em>.</p>
 <p><a class="button" href="https://doi.org/10.1016/j.spasta.2018.07.005">Journal article</a> <a class="button" href="https://arxiv.org/abs/1609.00711">Open preprint</a></p>
 </section>
 <section aria-labelledby="related-explainers">
