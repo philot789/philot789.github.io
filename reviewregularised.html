@@ -3,10 +3,7 @@ layout: paper
 nav_section: research
 title: Regularised estimation and cross-validation for spatiotemporal data
 title_suffix: Philipp Otto
-description: Choose the validation split to match the prediction task. Predicting
-  the future at observed sites calls for a temporal split. Predicting in an unobserved
-  region calls for holding out locations together. The same distinction matters when
-  tuning a regularisation penalty.
+description: "A review of regularisation for spatial and spatiotemporal models, with cross-validation designs for forecasting and prediction at unobserved sites."
 meta_author: Philipp Otto
 keywords:
 - regularisation
@@ -24,7 +21,7 @@ keywords:
 - cross-validation
 - spatiotemporal statistics
 canonical_url: https://philot789.github.io/reviewregularised.html
-date_modified: '2026-11-22'
+date_modified: '2026-11-23'
 mathjax: true
 citation_title: A review of regularised estimation methods and cross-validation in
   spatiotemporal statistics
@@ -34,6 +31,7 @@ citation_authors:
 - Paolo Maranzano
 citation_publication_date: '2024'
 citation_journal_title: Statistics Surveys
+citation_pdf_url: https://eprints.gla.ac.uk/341198/2/341198.pdf
 schema_authors:
 - "@type": Person
   name: Philipp Otto
@@ -61,94 +59,107 @@ based_on:
     name: Statistics Surveys
   url: https://doi.org/10.1214/24-SS150
   identifier: https://doi.org/10.1214/24-SS150
+  encoding:
+    "@type": MediaObject
+    contentUrl: https://eprints.gla.ac.uk/341198/2/341198.pdf
+    encodingFormat: application/pdf
 ---
-
 <div class="wrapper style1">
 
                     <div class="container">
                         <div class="row gtr-200">
                             <div class="col-8 col-12-mobile" id="content">
                                 <article id="main">
-                                    <header>
+<header>
 <h1>{{ page.title | escape }}</h1>
 <p>Philipp Otto, Alessandro Fassò, Paolo Maranzano (2024). <a href="https://doi.org/10.1214/24-SS150">A review of regularised estimation methods and cross-validation in spatiotemporal statistics</a>. <em>Statistics Surveys</em>.</p>
 </header>
-<h2 id="research-question">How should cross-validation reflect spatial and temporal dependence?</h2>
-<p>Choose the validation split to match the prediction task. Predicting the future at observed sites calls for a temporal split. Predicting in an unobserved region calls for holding out locations together. The same distinction matters when tuning a regularisation penalty.</p>
-                                    <h2 id="abstract">Abstract</h2>
-                                    <p>
-                                        This review surveys regularised (penalised) estimation for geostatistical and spatial autoregressive models, and cross-validation (CV) strategies that remain valid under spatial/temporal dependence.
-                                        Topics include variable selection in fixed effects (LASSO, adaptive LASSO, SCAD, MCP), shrinkage of covariance and precision structures (tapering, graphical LASSO, low-rank/Vecchia/Cholesky factorizations), data-driven learning of spatial interaction matrices, and target-oriented CV schemes (blocked and buffered LTO/LLO/LLTO).
-                                        The paper emphasises scalability for big geospatial data and software considerations.
-                                    </p>
 
-                                    <section>
-                                        <h2 id="background">Background</h2>
-                                        <p>
+<section aria-labelledby="what-problem">
+<h2 id="what-problem">What problem does this review address?</h2>
+<p>Choose the validation split to match the prediction task. Predicting the future at observed sites calls for a temporal split. Predicting in an unobserved region calls for holding out locations together. The same distinction matters when tuning a regularisation penalty.</p>
+</section>
+
+<section aria-labelledby="when-to-use">
+<h2 id="when-to-use">When should this review be used?</h2>
+<p>Use this review when selecting covariates, estimating a large dependence structure or tuning a penalty for georeferenced observations. Define whether predictions will concern new sites, future periods or both before choosing validation folds.</p>
+</section>
+
+<section aria-labelledby="summary">
+<h2 id="summary">Summary</h2>
+<p>Otto, Fassò and Maranzano (2024) review regularised estimation for geostatistical and spatial econometric models. The survey covers variable selection, regularisation of covariance and precision matrices, and estimation of spatial interactions. It connects penalty selection with validation designs tailored to prediction at new places, future times, or both.</p>
+</section>
+
+<section aria-labelledby="key-contributions">
+<h2 id="key-contributions">Main contributions</h2>
+<p>The general estimation problem combines a loss and a complexity penalty, \[\widehat\theta=\arg\min_\theta\{L(\theta;X,y)+P(\theta,\theta_0,\lambda)\}.\] The parameter \(\lambda\) controls the strength of the penalty towards a reference \(\theta_0\), often zero for sparsity.</p>
+<ul>
+    <li>For fixed effects, LASSO and related penalties can select predictors or groups of terms.</li>
+    <li>For geostatistical dependence, covariance tapering and sparse precision estimates constrain different parts of the model. Low-rank and Vecchia approximations address computation.</li>
+    <li>For spatial autoregression, penalisation can select among candidate weights or help estimate a structured weights matrix.</li>
+</ul>
+</section>
+
+<section aria-labelledby="why-needed">
+<h2 id="why-needed">Why this approach is needed</h2>
+<p>
                                             Big geospatial datasets require models that are <em>interpretable</em> and <em>computationally feasible</em>. Regularisation provides both: it controls complexity, selects relevant structure, and enables scalable inference in mixed-effects geostatistics and spatial autoregression. The survey unifies these ideas and connects them to CV procedures tailored for dependence.
                                         </p>
-                                    </section>
+</section>
 
-                                    <section aria-labelledby="key">
-                                        <h3 id="key">Key takeaways</h3>
-                                        <ul>
-                                          <li><strong>General objective:</strong>
-                                            \[
-                                              \hat{\theta}=\arg\min_{\theta}\;\big\{L(\theta;X,y)+P(\theta,\theta_0,\lambda)\big\},
-                                            \]
-                                            with loss \(L\) (e.g., negative log-likelihood) and penalty \(P\) toward target \(\theta_0\) (e.g., zero for sparsity).</li>
-                                          <li><strong>Fixed effects:</strong> LASSO/adaptive-LASSO/SCAD/MCP for variable selection; group penalties for functional and additive components.</li>
-                                          <li><strong>Random effects (geostatistics):</strong> covariance tapering for sparsity; graphical LASSO for sparse precision; low-rank and Vecchia approximations for scalability.</li>
-                                          <li><strong>Spatial autoregression:</strong> penalised estimation can select among multiple weight matrices or estimate \(W\) under structural constraints.</li>
-                                          <li><strong>Cross-validation under dependence:</strong> use blocked/buffered schemes—Leave-Time-Out (LTO), Leave-Location-Out (LLO), and Leave-Location-and-Time-Out (LLTO)—to avoid leakage.</li>
+<section aria-labelledby="intuition">
+<h2 id="intuition">Why regularise a spatiotemporal model?</h2>
+<p>Regularisation trades bias against sampling variability and can make estimation feasible with many predictors or dependence parameters. The preferred degree of regularisation can differ across prediction tasks, so tune it using a split that reflects how the model will be deployed.</p>
+</section>
+
+<section aria-labelledby="regularisation-highlights">
+<h2 id="regularisation-highlights">Regularisation highlights</h2>
+<ul>
+                                          <li>
+<strong>Fixed-effects selection:</strong> high-dimensional regressors via (adaptive) LASSO; extensions to functional predictors with penalised splines.</li>
+                                          <li>
+<strong>Covariance/precision structure:</strong> tapering (distance-based zeros), sparse precision via graphical LASSO, and low-rank Cholesky/Vecchia for large N.</li>
+                                          <li>
+<strong>Spatial weights:</strong> boosting or LASSO to choose among candidate \(W_k\); constrained procedures to estimate \(W\) (identifiability via structure or sparsity).</li>
                                         </ul>
-                                    </section>
+</section>
 
-                                    <section>
-                                        <h2 id="intuition">Intuition</h2>
-                                        <p>
-                                            Regularisation trades a small amount of bias for a large variance reduction and computational tractability. In space–time, this often means (i) selecting a small set of informative covariates or basis functions, (ii) enforcing sparsity in precision matrices to reflect conditional independences, or (iii) constraining spatial interactions to interpretable structures. CV must mirror the data’s dependence to yield honest out-of-sample performance.
-                                        </p>
-                                    </section>
+<section aria-labelledby="cross-validation-that-respects-dependence">
+<h2 id="cross-validation-that-respects-dependence">Cross-validation for new sites and future periods</h2>
+<ul>
+    <li><strong>Forecasting at observed sites.</strong> Hold out a later period and fit using only observations available at the forecast origin. Rolling-origin evaluation can cover several origins and horizons.</li>
+    <li><strong>Predicting at unobserved sites.</strong> Hold out complete locations or spatial blocks. Add a buffer when the intended predictions are distant from the training locations.</li>
+    <li><strong>Forecasting at unobserved sites.</strong> Hold out both the target sites and the target period so that the split matches the information available in deployment.</li>
+</ul>
+<p>Random folds can produce optimistic estimates when nearby or consecutive observations make the task easier than intended. Blocking and buffering can reduce dependence across folds. They do not guarantee independence.</p>
+</section>
 
-                                    <section>
-                                        <h2 id="regularisation-highlights">Regularisation highlights</h2>
-                                        <ul>
-                                          <li><strong>Fixed-effects selection:</strong> high-dimensional regressors via (adaptive) LASSO; extensions to functional predictors with penalised splines.</li>
-                                          <li><strong>Covariance/precision structure:</strong> tapering (distance-based zeros), sparse precision via graphical LASSO, and low-rank Cholesky/Vecchia for large N.</li>
-                                          <li><strong>Spatial weights:</strong> boosting or LASSO to choose among candidate \(W_k\); constrained procedures to estimate \(W\) (identifiability via structure or sparsity).</li>
-                                        </ul>
-                                    </section>
+<section aria-labelledby="practical-advice">
+<h2 id="practical-advice">Tuning penalties and measuring performance</h2>
+<p>Fit preprocessing steps and select the penalty within the training data for each split. When estimating the performance of a tuned procedure, use an outer holdout or nested resampling that mirrors the intended prediction task.</p>
+</section>
 
-                                    <section>
-                                        <h2 id="cross-validation-that-respects-dependence">Cross-validation that respects dependence</h2>
-                                        <ul>
-                                          <li><strong>Avoid random k-fold:</strong> it overestimates skill under spatial/temporal autocorrelation.</li>
-                                          <li><strong>LTO/LLO/LLTO:</strong> blocked and <em>buffered</em> partitions in time and/or space; ensure independence between training and test sets (e.g., hv-blocks, spatial buffers).</li>
-                                          <li><strong>Diagnostics:</strong> compare performance decay with distance (SPEPs) and check “area of applicability” to avoid extrapolation far from training support.</li>
-                                        </ul>
-                                    </section>
-
-                                    <section>
-                                        <h2 id="practical-advice">Practical advice</h2>
-                                        <ul>
-                                          <li>Start simple: penalise fixed effects first; add covariance/precision regularisation if residual dependence persists.</li>
-                                          <li>For big N: prefer tapering or low-rank/Vecchia approximations; for multivariate data, consider sparse precision structures.</li>
-                                          <li>When interactions matter: define a plausible set of weight matrices \( \{W_k\} \) (distance, contiguity, directionality, networks) and select via penalisation.</li>
-                                          <li>Always validate with LTO/LLO/LLTO (with buffers). If random k-fold looks “too good”, re-do CV with target-oriented blocking.</li>
-                                        </ul>
-                                    </section>
-
-                                    <section>
-                                        <h2 id="applications">Applications</h2>
-                                        <p>
+<section aria-labelledby="applications">
+<h2 id="applications">Applications in spatiotemporal statistics</h2>
+<p>
                                            Environmental monitoring (geostatistical interpolation and forecasting), regional economics (panel SAR/CAR with variable selection), health and epidemiology (areal models with sparse precision), transportation and networks (directional weights), and remote sensing (functional predictors and basis selection).
                                         </p>
-                                    </section>
+</section>
 
-                                    <a href="https://www.scimagojr.com/journalsearch.php?q=21100198229&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=21100198229" alt="SCImago Journal &amp; Country Rank"  /></a>
-
-                                </article>
+<section aria-labelledby="citation-links">
+<h2 id="citation-links">Paper and related resources</h2>
+<p>Philipp Otto, Alessandro Fassò, Paolo Maranzano (2024). <a href="https://doi.org/10.1214/24-SS150">A review of regularised estimation methods and cross-validation in spatiotemporal statistics</a>. <em>Statistics Surveys</em>.</p>
+<p><a class="button" href="https://doi.org/10.1214/24-SS150">Journal article</a> <a class="button" href="https://eprints.gla.ac.uk/341198/2/341198.pdf">Open article (PDF)</a></p>
+</section>
+<section aria-labelledby="related-explainers">
+<h2 id="related-explainers">Related research explainers</h2>
+<ul>
+    <li><a href="lasso.html">Estimating spatial weights with structural breaks</a></li>
+    <li><a href="agrimonia.html">Agrimonia air-quality data for Lombardy</a></li>
+    <li><a href="profiles.html">Functional spatiotemporal models for beach profiles</a></li>
+</ul>
+</section>
+</article>
                             </div>
 
                             <div class="col-4 col-12-mobile" id="sidebar">

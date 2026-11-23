@@ -3,9 +3,7 @@ layout: paper
 nav_section: research
 title: Spatial ARCH models for volatility clustering across locations
 title_suffix: Philipp Otto
-description: Spatial ARCH links the scale of a response at one location to squared
-  responses at connected locations. Large deviations of either sign can therefore
-  occur near one another even when a map of the mean shows little spatial structure.
+description: "Spatial ARCH models the clustering of large shocks across connected locations. See the model, its assumptions, and an application to US county mortality."
 meta_author: Philipp Otto
 keywords:
 - Spatial ARCH
@@ -18,7 +16,7 @@ keywords:
 - statistical modelling
 - spatial statistics
 canonical_url: https://philot789.github.io/spARCH.html
-date_modified: '2026-11-22'
+date_modified: '2026-11-23'
 mathjax: true
 citation_title: Generalised spatial and spatiotemporal autoregressive conditional
   heteroscedasticity
@@ -28,6 +26,7 @@ citation_authors:
 - Robert Garthoff
 citation_publication_date: '2018'
 citation_journal_title: Spatial Statistics
+citation_pdf_url: https://arxiv.org/pdf/1609.00711
 schema_authors:
 - "@type": Person
   name: Philipp Otto
@@ -54,106 +53,87 @@ based_on:
     name: Spatial Statistics
   url: https://doi.org/10.1016/j.spasta.2018.07.005
   identifier: https://doi.org/10.1016/j.spasta.2018.07.005
+  encoding:
+    "@type": MediaObject
+    contentUrl: https://arxiv.org/pdf/1609.00711
+    encodingFormat: application/pdf
+  sameAs: https://arxiv.org/abs/1609.00711
 ---
-
 <div class="wrapper style1">
 
 					<div class="container">
 						<div class="row gtr-200">
 							<div class="col-8 col-12-mobile" id="content">
 								<article id="main">
-									<header>
+<header>
 <h1>{{ page.title | escape }}</h1>
 <p>Philipp Otto, Wolfgang Schmid, Robert Garthoff (2018). <a href="https://doi.org/10.1016/j.spasta.2018.07.005">Generalised spatial and spatiotemporal autoregressive conditional heteroscedasticity</a>. <em>Spatial Statistics</em>.</p>
 </header>
-<h2 id="research-question">How does spatial ARCH represent volatility clustering?</h2>
+
+<section aria-labelledby="what-problem">
+<h2 id="what-problem">What problem does this model address?</h2>
 <p>Spatial ARCH links the scale of a response at one location to squared responses at connected locations. Large deviations of either sign can therefore occur near one another even when a map of the mean shows little spatial structure.</p>
-                                    <h2 id="abstract">Abstract</h2>
-                                    <p>
-                                    In this paper, we introduce a new spatial model that incorporates heteroscedastic variance depending on neighbouring locations. The proposed process is considered as the spatial equivalent to the temporal autoregressive conditional heteroscedasticity (ARCH) model. We also show how the newly introduced spatial ARCH model can be used in spatiotemporal settings. In contrast to the temporal ARCH model, in which the distribution is known given the full information set for the prior periods, the distribution is not straightforward in the spatial and spatiotemporal setting. However, the model parameters can be estimated using the maximum-likelihood approach. Via Monte Carlo simulations, we demonstrate the performance of the estimator for a specific spatial weighting matrix. Moreover, we combine the known spatial autoregressive model with the spatial ARCH model assuming heteroscedastic errors. Eventually, the proposed autoregressive process is illustrated by an empirical example. Specifically, we model lung cancer mortality in 3108 U.S. counties and compare the newly introduced model with four benchmark approaches.
-                                    </p>
+</section>
 
+<section aria-labelledby="when-to-use">
+<h2 id="when-to-use">When should this model be used?</h2>
+<p>Use spatial ARCH when a mean model leaves clusters of unusually large or small residual magnitudes and a weights matrix can represent plausible links between locations. A map of squared residuals can help identify this pattern.</p>
+</section>
 
+<section aria-labelledby="summary">
+<h2 id="summary">Summary</h2>
+<p>Spatial autoregressive conditional heteroscedasticity (spARCH) models dependence in the magnitude of shocks across locations. Otto, Schmid and Garthoff (2018) define a spatial and spatiotemporal ARCH process, develop likelihood-based estimation and combine it with a spatial autoregression for the mean. Their application examines lung-cancer mortality across 3,108 US counties.</p>
+</section>
 
-                                    <h2 id="background">Background</h2>
-                                        <p>
-                                          ARCH and GARCH models are widely used for time series with volatility clustering, for example in finance.
-                                          In our 2018 paper we introduced a spatial analogue, the <em>spatial ARCH (spARCH) process</em>.
-                                          Here, conditional variances depend on neighbouring observations, rather than on past values in time.
-                                          This provides a natural extension of the ARCH idea to spatial data,
-                                          where uncertainty itself often shows spatial structure.
-                                        </p>
-                                      </section>
+<section aria-labelledby="key-contributions">
+<h2 id="key-contributions">Main contributions</h2>
+<ul>
+    <li>The spatial weights matrix specifies which squared shocks enter the local scale equation.</li>
+    <li>The likelihood accounts for simultaneous interactions between locations.</li>
+    <li>A spatial autoregressive mean can be combined with spARCH errors to model separate patterns in the level and scale of the response.</li>
+</ul>
+</section>
 
-                                      <section aria-labelledby="key-takeaways">
-                                        <h3 id="key-takeaways">Key takeaways</h3>
-                                        <ul>
-                                          <li><strong>Novelty:</strong> spARCH generalises ARCH/GARCH from time series to space by allowing local variances to depend on neighbouring values.</li>
-                                          <li><strong>Two uses:</strong> as an <em>error process</em> (SARspARCH, improving regression models) or as a <em>direct model</em> for observed processes (e.g. financial networks).</li>
-                                          <li><strong>Interpretation:</strong> extends Tobler’s law (“near things are more related”) from means to variances — volatility also clusters in space.</li>
-                                          <li><strong>Practical gain:</strong> reduces residual variance clustering, improves fit, and yields more reliable inference and risk maps.</li>
-                                          <li><strong>Flag to watch for:</strong> significant spatial dependence (e.g., measured by Moran's I for areal data) on squared residuals of your mean model is a clear signal that spARCH may be appropriate.</li>
-                                        </ul>
-                                      </section>
+<section aria-labelledby="why-needed">
+<h2 id="why-needed">Why model spatial dependence in volatility?</h2>
+<p>A mean model describes where the expected response is high or low. Residuals can still show geographical clustering in magnitude after the mean has been modelled. An ARCH error process describes that second pattern.</p>
+</section>
 
-                                      <section>
-                                        <h2 id="main-idea">Main idea</h2>
-                                        <p>
-                                          In time series, ARCH captures that today’s volatility depends on yesterday’s squared return.
-                                          In spARCH, a location’s variance depends on the squared residuals of its neighbours.
-                                          If your neighbours are noisy, your location is more likely to be noisy as well.
-                                          This mirrors how pollution, disease risk, or financial shocks spread across connected regions or agents.
-                                        </p>
-                                      </section>
+<section aria-labelledby="main-idea">
+<h2 id="main-idea">From temporal ARCH to spatial ARCH</h2>
+<p>Temporal ARCH uses earlier squared shocks. Spatial ARCH uses squared shocks at linked sites, which can be observed at the same time. A large positive or negative deviation enters the scale equation through its square.</p>
+</section>
 
-                                      <section>
-                                        <h2 id="model-representation">Model representation</h2>
-                                        <p>
-                                          A compact formulation is:
-                                        </p>
-                                        <p>
-                                        \[
-                                          Y = m(X, \theta) + \xi, \quad
-                                          \xi = \mathrm{diag}(h)^{1/2}\varepsilon, \quad
-                                          h = \alpha + W\,\mathrm{diag}(\xi)\,\xi.
-                                        \]
-                                        </p>
-                                        <p>
-                                          Here \(Y\) is the observed vector, \(m(X, \theta)\) is any mean model (e.g., linear regression, GAM, (deep) neural networks, etc.), \(\xi\) the residuals, and \(h\) their variances.
-                                          The spatial weights matrix \(W\) defines neighbours (contiguity, distance, or network).
-                                          This is directly analogous to ARCH, with “space” replacing “time”.
-                                        </p>
-                                      </section>
+<section aria-labelledby="model-representation">
+<h2 id="model-representation">Spatial ARCH model</h2>
+<p>For a response vector \(Y\), mean model \(m(X,\theta)\), and innovation vector \(\varepsilon\), write</p>
+<p>\[Y=m(X,\theta)+\xi,\qquad \xi=\operatorname{diag}(h)^{1/2}\varepsilon,\qquad h=\alpha+W(\xi\odot\xi).\]</p>
+<p>Here \(h\) gives the squared local scales, \(\odot\) denotes elementwise multiplication, \(\alpha\) gives baseline levels, and \(W\) contains the spatial weights. In a simultaneous specification the shocks and scales must be solved jointly. Existence and positivity depend on the weights and the innovation specification.</p>
+</section>
 
-                                      <section>
-                                        <h2 id="interpretation-and-intuition">Interpretation and intuition</h2>
-                                        <p>
-                                          spARCH translates Tobler’s law of geography from the mean to the variance:
-                                          <em>uncertainty is also spatially related</em>.
-                                          Variance is not homogeneous, but clustered across space.
-                                          This can be used either:
-                                        </p>
-                                        <ul>
-                                          <li><strong>As an error process:</strong> SARspARCH models residual heteroscedasticity in regression settings, improving inference when covariates miss local drivers.</li>
-                                          <li><strong>As a direct process:</strong> spARCH can model observed outcomes directly, e.g. volatility in financial networks.</li>
-                                        </ul>
-                                      </section>
+<section aria-labelledby="interpretation-and-intuition">
+<h2 id="interpretation-and-intuition">Interpreting local scale and diagnosing clustering</h2>
+<p>For simultaneous spatial feedback, \(h_i\) is a local scale parameter. Its equality to a conditional variance depends on the ordering and conditioning set. Moran’s \(I\) on squared residuals can reveal remaining clustering. Compare plausible mean specifications and weight matrices before attributing that pattern to spatial volatility.</p>
+</section>
 
-                                      <section>
-                                        <h2 id="applications">Applications</h2>
-                                        <p>
-                                          In U.S. county-level lung-cancer mortality, SARspARCH removed residual variance clustering,
-                                          improved fit statistics, and identified regions with higher uncertainty.
-                                          More broadly, spARCH is relevant for financial returns in networks,
-                                          environmental monitoring, or regional economics — any setting where volatility itself shows spatial patterns.
-                                        </p>
-                                      </section>
+<section aria-labelledby="applications">
+<h2 id="applications">Application to US county lung-cancer mortality</h2>
+<p>The authors fitted spatial mean models to county-level lung-cancer mortality and compared specifications with and without spatially dependent heteroscedastic errors. The example illustrates how a separate scale model can describe geographical variation left by the mean model.</p>
+</section>
 
-
-
-
-                                    <a href="https://www.scimagojr.com/journalsearch.php?q=21100206605&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=21100206605" alt="SCImago Journal &amp; Country Rank"  /></a>
-								</article>
+<section aria-labelledby="citation-links">
+<h2 id="citation-links">Paper and related resources</h2>
+<p>Philipp Otto, Wolfgang Schmid, Robert Garthoff (2018). <a href="https://doi.org/10.1016/j.spasta.2018.07.005">Generalised spatial and spatiotemporal autoregressive conditional heteroscedasticity</a>. <em>Spatial Statistics</em>.</p>
+<p><a class="button" href="https://doi.org/10.1016/j.spasta.2018.07.005">Journal article</a> <a class="button" href="https://arxiv.org/abs/1609.00711">Open preprint</a></p>
+</section>
+<section aria-labelledby="related-explainers">
+<h2 id="related-explainers">Related research explainers</h2>
+<ul>
+    <li><a href="garch.html">Spatial GARCH and contemporaneous volatility spillovers</a></li>
+    <li><a href="review.html">Review of spatial and spatiotemporal volatility models</a></li>
+</ul>
+</section>
+</article>
 							</div>
 
 							<div class="col-4 col-12-mobile" id="sidebar">

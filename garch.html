@@ -3,10 +3,7 @@ layout: paper
 nav_section: research
 title: A general framework for spatial GARCH models
 title_suffix: Philipp Otto
-description: Spatial GARCH allows the local volatility scale to depend on scales at
-  connected locations as well as on observed shocks. The spatial weights specify which
-  connections enter the model. This lets researchers study how volatility can propagate
-  across a network within a single observation period.
+description: "Spatial GARCH models contemporaneous dependence in volatility through neighbouring shocks and scales. See the model equations, estimation, and Berlin case study."
 meta_author: Philipp Otto
 keywords:
 - spatial GARCH
@@ -19,7 +16,7 @@ keywords:
 - nonlinear least squares
 - risk spillovers
 canonical_url: https://philot789.github.io/garch.html
-date_modified: '2026-11-22'
+date_modified: '2026-11-23'
 mathjax: true
 citation_title: A general framework for spatial GARCH models
 citation_authors:
@@ -52,113 +49,92 @@ based_on:
   url: https://doi.org/10.1007/s00362-022-01357-1
   identifier: https://doi.org/10.1007/s00362-022-01357-1
 ---
-
 <div class="wrapper style1">
 
 					<div class="container">
 						<div class="row gtr-200">
 							<div class="col-8 col-12-mobile" id="content">
 								<article id="main">
-									<header>
+<header>
 <h1>{{ page.title | escape }}</h1>
 <p>Philipp Otto, Wolfgang Schmid (2023). <a href="https://doi.org/10.1007/s00362-022-01357-1">A general framework for spatial GARCH models</a>. <em>Statistical Papers</em>.</p>
 </header>
-<h2 id="research-question">What does spatial GARCH add to spatial ARCH?</h2>
+
+<section aria-labelledby="what-problem">
+<h2 id="what-problem">What problem does this model address?</h2>
 <p>Spatial GARCH allows the local volatility scale to depend on scales at connected locations as well as on observed shocks. The spatial weights specify which connections enter the model. This lets researchers study how volatility can propagate across a network within a single observation period.</p>
-                                    <h2 id="abstract">Abstract</h2>
-                                    <p>
-                                    In time-series analysis, particularly in finance, generalized autoregressive conditional heteroscedasticity (GARCH) models are widely applied statistical tools for modelling volatility clusters (i.e., periods of increased or decreased risk). In contrast, it has not been considered to be of critical importance until now to model spatial dependence in the conditional second moments. Only a few models have been proposed for modelling local clusters of increased risks. In this paper, we introduce a novel spatial GARCH process in a unified spatial and spatiotemporal GARCH framework, which also covers all previously proposed spatial ARCH models, exponential spatial GARCH, and time-series GARCH models. In contrast to previous spatiotemporal and time series models, this spatial GARCH allows for instantaneous spill-overs across all spatial units. For this common modelling framework, estimators are derived based on a non-linear least-squares approach. Eventually, the use of the model is demonstrated by a Monte Carlo simulation study and by an empirical example that focuses on real estate prices from 1995 to 2014 across the postal code areas of Berlin. A spatial autoregressive model is applied to the data to illustrate how locally varying model uncertainties (e.g., due to latent regressors) can be captured by the spatial GARCH-type models.
-                                    </p>
+</section>
 
+<section aria-labelledby="when-to-use">
+<h2 id="when-to-use">When should this model be used?</h2>
+<p>Use this framework when local shocks and volatility at connected sites may both contribute to the scale of a response. Specify which neighbours can interact and check the existence conditions for the chosen model and weights.</p>
+</section>
 
+<section aria-labelledby="summary">
+<h2 id="summary">Summary</h2>
+<p>Otto and Schmid (2023) develop a framework for spatial and spatiotemporal generalised autoregressive conditional heteroscedasticity (GARCH). Its spatial GARCH specification links local scales to neighbouring squared shocks and to neighbouring scales. The framework includes spatial ARCH, symmetric spatial log-GARCH and, with temporal weights, standard time-series GARCH.</p>
+</section>
 
-                                    <section>
-                                        <h2 id="background">Background</h2>
-                                        <p>
-                                          The paper develops a unified framework for <strong>spatial and spatiotemporal GARCH-type models</strong> that allows
-                                          <em>instantaneous</em> variance spillovers across locations. The framework nests earlier spatial ARCH and spatial log-GARCH
-                                          specifications as well as classical time-series GARCH, and provides a consistent nonlinear least-squares (NLSE) estimator.
-                                          An empirical illustration uses Berlin condominium price changes.
-                                        </p>
-                                      </section>
+<section aria-labelledby="key-contributions">
+<h2 id="key-contributions">Main contributions</h2>
+<ul>
+    <li>Separate weight matrices describe interactions through observed shock magnitudes and through the scale process.</li>
+    <li>A fixed-point formulation gives conditions for existence and uniqueness.</li>
+    <li>The paper derives a nonlinear least-squares estimator and illustrates it in simulations and an application to Berlin property prices.</li>
+</ul>
+</section>
 
-                                      <section aria-labelledby="key">
-                                        <h3 id="key">Key takeaways</h3>
-                                        <ul>
-                                          <li><strong>Unified model class:</strong> one setup covers spatial ARCH, spatial GARCH, spatial log-GARCH, and (as a special case) time-series GARCH. </li>
-                                          <li><strong>Instantaneous spatial spillovers:</strong> conditional variances can influence each other within the same index set (no temporal lag needed).  </li>
-                                          <li><strong>Estimation:</strong> parameters estimated via NLSE; consistency is shown under regularity conditions; practical implementations available (R package <code>spGARCH</code>). </li>
-                                          <li><strong>Use either as error model or direct process:</strong> model residual uncertainty in spatial regressions, or model observed volatility itself (e.g., real-estate, labour, networks). </li>
-                                          <li><strong>Flag to watch for:</strong> significant Moran’s I of <em>squared residuals</em> in a mean model suggests missing spatial volatility structure.</li>
-                                        </ul>
-                                      </section>
+<section aria-labelledby="why-needed">
+<h2 id="why-needed">When do neighbouring scales matter?</h2>
+<p>A spatial ARCH term can describe clustering associated with shocks at neighbouring locations. The additional GARCH term allows scale changes to propagate through the weights even where a neighbouring realised shock is small.</p>
+</section>
 
-                                      <section>
-                                        <h2 id="intuition">Intuition</h2>
-                                        <p>
-                                          Time-series GARCH lets today’s variance depend on past shocks. Spatially, it is natural that a location’s variance depends on its neighbours:
-                                          uncertainty itself clusters in space (Tobler’s law applied to variance). The framework formalises this by letting local conditional variances
-                                          co-move via spatial weight matrices.
-                                        </p>
-                                      </section>
+<section aria-labelledby="intuition">
+<h2 id="intuition">Contemporaneous spatial spillovers</h2>
+<p>Unlike lagged time-series GARCH, spatial GARCH can link sites observed in the same period. Reciprocal links imply a simultaneous system. Interpret its spillovers as modelled dependence given the chosen weights.</p>
+</section>
 
-                                      <section>
-                                        <h2 id="minimal-maths">Minimal maths</h2>
-                                        <p>Core representation:</p>
-                                        <p>
-                                          \[
-                                            Y = \operatorname{diag}(h)^{1/2}\,\varepsilon,\qquad
-                                            F = \alpha + W_1\,\gamma\!\left(Y^{(2)}\right) + W_2\,F,
-                                          \]
-                                          where \(h=(h(s_i))_{i=1}^n\), \(Y^{(2)}=(Y(s_i)^2)_{i=1}^n\), and \(F=(f(h(s_i)))_{i=1}^n\). Choosing \(f,\gamma,W_1,W_2\) yields different models.
-                                          Existence/uniqueness follow from a contraction (random fixed-point) argument under Lipschitz-type conditions.
-                                        </p>
-                                        <p><em>Nested examples.</em></p>
-                                        <ul>
-                                          <li>Spatial ARCH (spARCH): \(f(x)=x\), \(\gamma_i(x)=x_i\), \(W_2=0\) → \(h=\alpha+W_1 Y^{(2)}\). </li>
-                                          <li>Spatial GARCH (spGARCH): \(f(x)=x\), \(\gamma_i(x)=x_i\) → \(h=\alpha+W_1 Y^{(2)}+W_2 h\) so \(h=(I-W_2-W_1E)^{-1}\alpha\) (when the inverse exists; \(E=\mathrm{diag}(\varepsilon^2)\)).  </li>
-                                          <li>Spatial log-GARCH: \(f(x)=\log x\) → \(\log h=\alpha+W_1 \log\!\left(Y^{(2)}\right)+W_2 \log h\) with simpler existence condition \(\|W_1+W_2\|\le 1 \). </li>
-                                        </ul>
-                                      </section>
+<section aria-labelledby="minimal-maths">
+<h2 id="minimal-maths">Spatial GARCH and log-GARCH equations</h2>
+<p>Let \(Y^{(2)}=Y\odot Y\) denote squared residuals, \(h\) the vector of squared local scales and \(E=\operatorname{diag}(\varepsilon_i^2)\). The spatial GARCH model writes</p>
+<p>\[Y=\operatorname{diag}(h)^{1/2}\varepsilon,\qquad h=\alpha+W_1Y^{(2)}+W_2h.\]</p>
+<p>Substituting \(Y^{(2)}=Eh\) gives \(h=(I-W_1 E-W_2)^{-1}\alpha\) under the relevant existence conditions. With nonnegative weights and positive baseline scales, \(\lVert W_1E+W_2\rVert&lt;1\) in a submultiplicative matrix norm is sufficient. Setting \(W_2=0\) gives spatial ARCH.</p>
+<p>In the symmetric spatial log-GARCH example, \(\log h=\alpha+W_1\log Y^{(2)}+W_2\log h\), with elementwise logarithms and nonzero innovations. A sufficient condition for a unique solution is \(\lVert W_1+W_2\rVert&lt;1\).</p>
+</section>
 
-                                      <section>
-                                        <h2 id="estimation-nlse-and-weights">Estimation (NLSE) and weights</h2>
-                                        <p>
-                                          In practice one often sets \(W_1=\rho W_1^*,\,W_2=\lambda W_2^*,\,\alpha=\alpha\mathbf{1}\) and estimates \((\rho,\lambda,\alpha)\) by nonlinear least squares
-                                          using a log-squared transformation; consistency and identification conditions are provided. Choice of \(W_k^*\) is flexible (contiguity, distance, anisotropy, network).
-                                        </p>
-                                      </section>
+<section aria-labelledby="estimation-nlse-and-weights">
+<h2 id="estimation-nlse-and-weights">Estimation by nonlinear least squares</h2>
+<p>The paper develops nonlinear least squares based on the log-squared transformation. A common specification is \(W_1=\rho W_1^*\) and \(W_2=\lambda W_2^*\), with known weight structures and estimated coefficients. The consistency result uses identification and regularity conditions.</p>
+</section>
 
-                                      <section>
-                                        <h2 id="practical-advice">Practical advice</h2>
-                                        <ul>
-                                          <li><strong>Diagnostic:</strong> after fitting your mean model (SAR/SEM/GLM), compute Moran’s I on \(\xi^2\) (squared residuals). If significant, add a spatial GARCH-type variance model.</li>
-                                          <li><strong>Weights sensitivity:</strong> compare plausible \(W\) (contiguity vs. distance; directional for flows); check stability of \((\hat\rho,\hat\lambda)\) and fit criteria.</li>
-                                          <li><strong>Interpretation:</strong> large \(\hat h(s)\) indicates locally elevated uncertainty; \(\hat\rho,\hat\lambda\) quantify variance spillovers and persistence in space.</li>
-                                          <li><strong>Software:</strong> an implementation is available in R:
-                                                  <a href="https://cran.r-project.org/web/packages/spGARCH/index.html">CRAN package spGARCH</a>.
-                                                </li>
-                                          <li><strong>Instantaneous vs. lagged spillovers:</strong> Unlike many spatiotemporal GARCH variants that embed spatial effects with a time lag, this framework permits instantaneous spatial/network interactions (due to simultaneity of investors' decisions) and also covers purely spatial settings.</li>
-                                        </ul>
-                                      </section>
+<section aria-labelledby="practical-advice">
+<h2 id="practical-advice">Diagnostics and interpretation</h2>
+<ul>
+    <li>Inspect squared residuals after fitting a plausible mean model. Spatial clustering in their magnitudes motivates comparing alternative mean and scale structures.</li>
+    <li>Compare weights based on adjacency, distance or an application-specific network. Check existence conditions and inspect standardised residuals after fitting.</li>
+    <li>In simultaneous settings, interpret \(h_i\) as a squared local scale. A directional model with an appropriate ordering permits a conditional-variance interpretation.</li>
+</ul>
+</section>
 
-                                      <section>
-                                        <h2 id="application-berlin-real-estate-prices">Application: Berlin real-estate prices</h2>
-                                        <p>
-                                        Using long-term logarithmic price changes by postcode, the paper fits SAR mean models and then spatial GARCH to residuals.
-                                              Squared residuals show spatial autocorrelation that the spGARCH captures; resulting uncertainty maps highlight districts with higher local risk.
-                                              This matters for real-estate pricing and investment: ignoring volatility clustering can lead to biased valuations,
-                                              underestimation of risks, and poorly informed policy or lending decisions.
-                                              By explicitly modelling spatial dependence in volatility, the framework offers a way to measure <em>local market risk</em> —
-                                              a key concern for banks, investors, and urban policy makers.
-                                        </p>
-                                      </section>
+<section aria-labelledby="application-berlin-real-estate-prices">
+<h2 id="application-berlin-real-estate-prices">Application to Berlin property prices</h2>
+<p>The paper studies long-run property price changes across Berlin postcode areas from 1995 to 2014. After fitting a spatial autoregressive mean with regressors and spatial GARCH errors, the squared standardised residuals no longer showed significant spatial autocorrelation in the reported diagnostic. The fitted scale highlighted areas with larger local uncertainty.</p>
+</section>
 
-
-
-
-                                    <a href="https://www.scimagojr.com/journalsearch.php?q=14233&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=14233" alt="SCImago Journal &amp; Country Rank"  /></a>
-								</article>
+<section aria-labelledby="citation-links">
+<h2 id="citation-links">Paper and related resources</h2>
+<p>Philipp Otto, Wolfgang Schmid (2023). <a href="https://doi.org/10.1007/s00362-022-01357-1">A general framework for spatial GARCH models</a>. <em>Statistical Papers</em>.</p>
+<p><a class="button" href="https://doi.org/10.1007/s00362-022-01357-1">Journal article</a> <a class="button" href="https://cran.r-project.org/package=spGARCH">R package spGARCH</a></p>
+</section>
+<section aria-labelledby="related-explainers">
+<h2 id="related-explainers">Related research explainers</h2>
+<ul>
+    <li><a href="spARCH.html">Spatial ARCH and volatility clustering</a></li>
+    <li><a href="review.html">Review of spatial and spatiotemporal volatility models</a></li>
+    <li><a href="lasso.html">Estimating spatial weights with structural breaks</a></li>
+</ul>
+</section>
+</article>
 							</div>
 
 							<div class="col-4 col-12-mobile" id="sidebar">

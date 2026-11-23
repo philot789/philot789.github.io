@@ -3,10 +3,7 @@ layout: paper
 nav_section: research
 title: Estimating spatial weights in panels with structural breaks
 title_suffix: Philipp Otto
-description: Otto and Steinert use a two-stage LASSO approach to estimate connections
-  among locations while allowing for structural breaks in local mean levels. Accounting
-  for these breaks matters because simultaneous changes in level can otherwise resemble
-  dependence between locations.
+description: "A two-stage LASSO estimates spatial weights and location-specific structural breaks jointly in spatiotemporal panels. Illustrated with Berlin property prices."
 meta_author: Philipp Otto
 keywords:
 - spatial weights
@@ -20,7 +17,7 @@ keywords:
 - Steinert
 - JCGS 2022
 canonical_url: https://philot789.github.io/lasso.html
-date_modified: '2026-11-22'
+date_modified: '2026-11-23'
 mathjax: true
 citation_title: Estimation of the Spatial Weighting Matrix for Spatiotemporal Data
   under the Presence of Structural Breaks
@@ -29,6 +26,7 @@ citation_authors:
 - Rick Steinert
 citation_publication_date: '2023'
 citation_journal_title: Journal of Computational and Graphical Statistics
+citation_pdf_url: https://arxiv.org/pdf/1810.06940
 schema_authors:
 - "@type": Person
   name: Philipp Otto
@@ -54,84 +52,96 @@ based_on:
     name: Journal of Computational and Graphical Statistics
   url: https://doi.org/10.1080/10618600.2022.2107530
   identifier: https://doi.org/10.1080/10618600.2022.2107530
+  encoding:
+    "@type": MediaObject
+    contentUrl: https://arxiv.org/pdf/1810.06940
+    encodingFormat: application/pdf
+  sameAs: https://arxiv.org/abs/1810.06940
 ---
-
 <div class="wrapper style1">
 
 					<div class="container">
 						<div class="row gtr-200">
 							<div class="col-8 col-12-mobile" id="content">
 								<article id="main">
-									<header>
+<header>
 <h1>{{ page.title | escape }}</h1>
 <p>Philipp Otto, Rick Steinert (2023). <a href="https://doi.org/10.1080/10618600.2022.2107530">Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks</a>. <em>Journal of Computational and Graphical Statistics</em>. <a href="https://arxiv.org/abs/1810.06940">Open preprint</a>.</p>
 </header>
-<h2 id="research-question">How can a spatial weights matrix be estimated when local means change?</h2>
+
+<section aria-labelledby="what-problem">
+<h2 id="what-problem">What problem does this method address?</h2>
 <p>Otto and Steinert use a two-stage LASSO approach to estimate connections among locations while allowing for structural breaks in local mean levels. Accounting for these breaks matters because simultaneous changes in level can otherwise resemble dependence between locations.</p>
-                                    <h2 id="abstract">Abstract</h2>
-                                    <p>
-                                    In this paper, we propose a two-stage LASSO estimation approach for the estimation of a full spatial weights matrix of spatiotemporal autoregressive models. In addition, we allow for an unknown number of structural breaks in the local means of each spatial location. These locally varying mean levels, however, can easily be mistaken as spatial dependence and vice versa. Thus, the proposed approach jointly estimates the spatial dependence, all structural breaks, and the local mean levels. For selection of the penalty parameter, we propose a completely new selection criterion based on the distance between the empirical spatial autocorrelation and the spatial dependence estimated in the model. Through simulation studies, we will show the finite-sample performance of the estimators and provide practical guidance as to when the approach could be applied. Finally, the invented method will be illustrated by an empirical example of regional monthly real-estate prices in Berlin between 1995 and 2014. The spatial units will be defined by the respective ZIP codes. The new approach allows us to estimate local mean levels and quantify the deviation of the observed prices from these levels due to spatial spillover effects.
-                                    </p>
+</section>
 
+<section aria-labelledby="when-to-use">
+<h2 id="when-to-use">When should this method be used?</h2>
+<p>Use the method when repeated observations are available for the same locations, the spatial weights are unknown, and mean levels may change during the observation period. Sparse connections are central to the penalised estimation strategy.</p>
+</section>
 
-                                    <section>
-                                        <h2 id="background">Background</h2>
-                                        <p>
+<section aria-labelledby="summary">
+<h2 id="summary">Summary</h2>
+<p>Otto and Steinert (2023) estimate a sparse spatial weights matrix and location-specific changes in mean levels from a panel of repeated observations. A first adaptive LASSO selects candidate break dates. A second constrained LASSO estimates spatial weights and retains changes in the local means. The paper illustrates the method with Berlin property prices.</p>
+</section>
+
+<section aria-labelledby="key-contributions">
+<h2 id="key-contributions">Main contributions</h2>
+<ul>
+    <li>Estimates the spatial weights matrix from the panel rather than fixing it from a geographical rule.</li>
+    <li>Allows unknown break dates that can differ by location.</li>
+    <li>Uses a constrained optimisation to estimate sparse weights and local mean changes jointly after screening candidate dates.</li>
+</ul>
+</section>
+
+<section aria-labelledby="why-needed">
+<h2 id="why-needed">Why this approach is needed</h2>
+<p>
                                           Spatial autoregressive (SAR) and related models require a spatial weighting matrix \(W\). In practice, \(W\) is often assumed
                                           or selected from a small candidate set, which risks misspecification. This work proposes a data-driven method to
                                           <em>estimate the full matrix \(W\)</em> while also allowing for an unknown number of <em>location-specific structural breaks</em> in the mean.
                                         </p>
-                                      </section>
+</section>
 
-                                      <section>
-                                        <h2 id="key-takeaways">Key takeaways</h2>
-                                        <ul>
-                                          <li><strong>Joint problem:</strong> Spatial dependence and mean breaks can be easily confounded. The method estimates both simultaneously.</li>
-                                          <li><strong>Two-stage adaptive LASSO:</strong> Stage 1 finds candidate change points per location; Stage 2 estimates \(W\) and local mean paths with constraints.</li>
-                                          <li><strong>Model-based selection of \(\lambda\):</strong> A criterion aligns sample and model-implied spatial autocorrelation to choose the penalty parameter.</li>
-                                          <li><strong>Output:</strong> A sparse, interpretable estimate of \(W\) (nonnegative, row sums \(\le 1\)) and location-wise mean trajectories over time.</li>
-                                          <li><strong>Use cases:</strong> Panels with possible regime shifts (policy, markets) where spatial link strength and directionality are unknown.</li>
-                                        </ul>
-                                      </section>
-
-                                      <section>
-                                        <h2 id="intuition">Intuition</h2>
-                                        <p>
+<section aria-labelledby="intuition">
+<h2 id="intuition">Intuition</h2>
+<p>
                                           If means jump at different times across locations, those jumps can mimic spatial spillovers; conversely, strong spatial spillovers
                                           can look like simultaneous breaks. The estimator separates these by first over-detecting plausible change points in each local series,
                                           then letting the full spatiotemporal model retain only those needed while estimating \(W\).
                                         </p>
-                                      </section>
+</section>
 
-                                      <section>
-                                        <h2 id="model">Model</h2>
-                                        <p>
+<section aria-labelledby="model">
+<h2 id="model">Model</h2>
+<p>
                                           Observations at time \(t=1,\dots,T\) and locations \(s_1,\dots,s_n\):
                                         </p>
-                                        <p>
+<p>
                                         \[
                                           Y_t = W Y_t + a_t + \varepsilon_t,\quad \varepsilon_t \sim \mathcal{N}(0,\sigma^2 I_n),\qquad
-                                          \text{with } \rho(W) < 1,\; \mathrm{diag}(W)=0,\; W\ge 0.
+                                          \text{with } \rho(W) &lt; 1,\; \mathrm{diag}(W)=0,\; W\ge 0.
                                         \]
                                         </p>
-                                        <p>
+<p>
                                           The vector \(a_t\) collects location-specific mean levels that may change at unknown times (structural breaks, not necessarily synchronized across locations).
                                           Reduced form:
                                         </p>
-                                        <p>
+<p>
                                         \[
                                           Y_t = (I - W)^{-1} a_t + (I - W)^{-1}\varepsilon_t.
                                         \]
                                         </p>
-                                      </section>
+</section>
 
-                                      <section>
-                                        <h2 id="estimation-two-stage-adaptive-lasso">Estimation (two-stage adaptive LASSO)</h2>
-                                        <ol>
-                                          <li><strong>Stage 1: change-point candidates (per location).</strong>
-                                            For each location \(i\), fit a lower-triangular “step” design with adaptive LASSO to detect level changes in the overall mean trajectory
+<section aria-labelledby="estimation-two-stage-adaptive-lasso">
+<h2 id="estimation-two-stage-adaptive-lasso">Estimation (two-stage adaptive LASSO)</h2>
+<ol>
+                                          <li>
+<strong>Stage 1: change-point candidates (per location).</strong>
+                                            For each location \(i\), fit a lower-triangular step design with adaptive LASSO to detect level changes in the overall mean trajectory
                                             \(\alpha_{t,i}\) (which already contains spillovers). Collect candidate change times \(\mathcal{T}^{(1)}_i\).</li>
-                                          <li><strong>Stage 2: joint estimation of \(W\) and local means.</strong>
+                                          <li>
+<strong>Stage 2: joint estimation of \(W\) and local means.</strong>
                                             Stack all times/locations and solve a constrained LASSO:
                                             \[
                                               \min_{\tilde a,\;\xi}\;\|Z\xi + \Phi \tilde a - y\|_2^2 + \lambda_b \|\xi\|_1,
@@ -139,50 +149,42 @@ based_on:
                                             subject to \( \tilde a_{t,i}=0\) for \(t\notin \mathcal{T}^{(1)}_i\), \(w_{ii}=0\), \(w_{ij}\ge 0\), and \(\sum_j w_{ij}\le 1\) for all \(i\).
                                             Here \( \xi=\mathrm{vec}(W)\), \( \Phi\) maps change increments to levels, and \(Z = I_n \otimes Y\).</li>
                                         </ol>
-                                      </section>
+</section>
 
-                                      <section>
-                                        <h2 id="penalty-selection">Penalty selection</h2>
-                                        <p>
+<section aria-labelledby="penalty-selection">
+<h2 id="penalty-selection">Penalty selection</h2>
+<p>
                                           Standard CV on prediction error can neglect spatial error correlation. The paper proposes selecting \(\lambda_b\) by matching
                                           the <em>sample spatial autocorrelation</em> (from mean-adjusted data) with the <em>model-implied spatial autocorrelation</em>
                                           (from \((I-W)^{-1}\varepsilon\)), e.g., via an MAE between correlation matrices. This targets the correct strength and pattern of \(W\).
                                         </p>
-                                      </section>
+</section>
 
-                                      <section>
-                                        <h2 id="practical-guidance">Practical guidance</h2>
-                                        <ul>
-                                          <li><strong>Diagnostics:</strong> If residual maps suggest level shifts at different times across locations, and SAR estimates depend heavily on the chosen \(W\),
-                                            consider this estimator.</li>
-                                          <li><strong>Weights interpretation:</strong> Estimated links need not be purely geographic; they may reflect network or functional proximity.
-                                            Inspect on a map or network graph.</li>
-                                          <li><strong>Directionality:</strong> In short panels with few breaks, one-way links can be partially mirrored (weak reverse links). Focus on the stronger edge.</li>
-                                          <li><strong>Constraints:</strong> Nonnegativity and row-sum \(\le 1\) stabilize estimation and ensure \((I-W)\) invertibility in practice.</li>
-                                        </ul>
-                                      </section>
+<section aria-labelledby="practical-guidance">
+<h2 id="practical-guidance">Stability and interpretation</h2>
+<p>The structural spatial autoregression requires \(\rho(W)&lt;1\) for the stable spatial multiplier. Nonnegative weights with row sums at most one give \(\rho(W)\le1\), so check the strict bound for fitted weights. A strict maximum row-sum bound is sufficient.</p>
+<p>The fitted weights describe directed associations under the model. Use the orientation of the matrix and the spatial multiplier to interpret direct connections and the resulting network of indirect dependence.</p>
+</section>
 
-                                      <section>
-                                        <h2 id="application">Application</h2>
-                                        <p>
-                                        The method is illustrated with Berlin condominium prices (1995–2014),
-                                              where both spatial spillovers and structural breaks are evident.
-                                              It detected location-specific regime shifts (e.g. around the 2008 financial crisis)
-                                              and recovered a spatial weights matrix \(W\) that highlighted heterogeneous connections between districts.
-                                              Importantly, the analysis shows that intra-city dependence often extends beyond simple geographical proximity,
-                                              reflecting similarities in culture, lifestyle, or socio-economic conditions.
-                                              This provides a more realistic picture of market dynamics than standard SAR models with pre-specified weights
-                                              and is particularly valuable for real-estate pricing, where overlooking such hidden dependencies can lead
-                                              to biased valuations and misguided investment or policy decisions.
-                                              The approach is broadly relevant for urban economics, finance, and regional studies,
-                                              where simultaneous spatial spillovers and regime changes are common.
-                                        </p>
-                                      </section>
+<section aria-labelledby="application">
+<h2 id="application">Application to Berlin condominium prices</h2>
+<p>The case study uses monthly real-estate prices in Berlin postcode areas from 1995 to 2014. The method separates estimated changes in local mean levels from spatially transmitted departures and gives a sparse map of connections. Some fitted connections extend beyond immediate geographical neighbours.</p>
+</section>
 
-
-
-                                    <a href="https://www.scimagojr.com/journalsearch.php?q=23863&amp;tip=sid&amp;exact=no" title="SCImago Journal &amp; Country Rank"><img border="0" src="https://www.scimagojr.com/journal_img.php?id=23863" alt="SCImago Journal &amp; Country Rank"  /></a>
-								</article>
+<section aria-labelledby="citation-links">
+<h2 id="citation-links">Paper and related resources</h2>
+<p>Philipp Otto, Rick Steinert (2023). <a href="https://doi.org/10.1080/10618600.2022.2107530">Estimation of the Spatial Weighting Matrix for Spatiotemporal Data under the Presence of Structural Breaks</a>. <em>Journal of Computational and Graphical Statistics</em>. <a href="https://arxiv.org/abs/1810.06940">Open preprint</a>.</p>
+<p><a class="button" href="https://doi.org/10.1080/10618600.2022.2107530">Journal article</a> <a class="button" href="https://arxiv.org/abs/1810.06940">Open preprint</a></p>
+</section>
+<section aria-labelledby="related-explainers">
+<h2 id="related-explainers">Related research explainers</h2>
+<ul>
+    <li><a href="reviewregularised.html">Regularised estimation and cross-validation for spatiotemporal data</a></li>
+    <li><a href="compositions.html">Spatiotemporal autoregression for areal compositions</a></li>
+    <li><a href="garch.html">Spatial GARCH and contemporaneous volatility spillovers</a></li>
+</ul>
+</section>
+</article>
 							</div>
 
 							<div class="col-4 col-12-mobile" id="sidebar">
