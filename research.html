@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Research</title>
+		<title>Research &amp; Publications | Philipp Otto</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -29,18 +29,20 @@
         <meta name="keywords" content="Philipp Otto, publications, research, Statistics, Data Science, University of Glasgow, spatial statistics, spatiotemporal models, GARCH, volatility, environmetrics, statistical learning, process monitoring, econometrics, R software, open data" />
         <meta name="author" content="Philipp Otto" />
 
+        <link rel="canonical" href="https://philot789.github.io/research.html" />
+
         <!-- Open Graph -->
         <meta property="og:title" content="Research & Publications – Philipp Otto" />
         <meta property="og:description" content="Full publication record of Philipp Otto, Professor of Statistics and Data Science at the University of Glasgow. Includes journal papers, books, software, and datasets." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://philot789.github.io/research.html" />
-        <meta property="og:image" content="images/me.jpg" />
+        <meta property="og:image" content="https://philot789.github.io/images/me.jpg" />
 
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Research & Publications – Philipp Otto" />
         <meta name="twitter:description" content="Research outputs of Philipp Otto: peer-reviewed journals, book chapters, edited volumes, R packages, and open datasets in statistics and data science." />
-        <meta name="twitter:image" content="images/me.jpg" />
+        <meta name="twitter:image" content="https://philot789.github.io/images/me.jpg" />
 
         <!-- Schema.org for a collection of publications -->
         <script type="application/ld+json">
@@ -122,6 +124,7 @@
                             <li><a href="research.html">Research</a>
                                 <ul>
                                     <li><a href="research.html">Publications</a></li>
+                                    <li><a href="software-data.html">Software &amp; Data</a></li>
                                     <li><a href="projects.html">Grants</a></li>
                                     <li><a href="presentations.html">Conferences</a></li>
                                 </ul>
@@ -149,6 +152,7 @@
 										</p>
 									</header>
 									<!-- <a href="#" class="image featured"><img src="images/panorama.jpg" alt="" /></a> -->
+                                    <p><a href="index.html#research-questions">Browse by research question</a> · <a href="software-data.html">Software &amp; Data with quick starts and citations</a></p>
                                     <h3>Peer-reviewed Journals</h3>
                                     <p></p>
                                     <h4>
@@ -177,7 +181,7 @@
                                             <li>Tedesco, L., Rodeschini, J., <strong>Otto, P.</strong> (2025): Computational Benchmark Study in Spatio-Temporal Statistics with a Hands-On Guide to Optimise R. <span class="highlight-journal">Environmetrics</span> 36(5) (<a href="https://doi.org/10.1002/env.70017">DOI</a>)</li>
                                             <li>Colombo, P., Mattera, R., <strong>Otto, P.</strong> (2025): Simple yet effective: a comparative study of statistical models for yearly hurricane forecasting. <span class="highlight-journal">Environmetrics</span> (<a href="https://doi.org/10.1002/env.70009">DOI</a>)</li>
                                             <li><strong>Otto, P.</strong>, Dogan, O., Taspinar, S. (2025): A Note on Dynamic Spatiotemporal ARCH Models: Small and Large Sample Results. <span class="highlight-journal">AStA Advances in Statistical Analysis</span> 109(4) (<a href="https://doi.org/10.1007/s10182-025-00552-3">DOI</a>)</li>
-                                            <li>Morelli, C., Boccaletti, S., Maranzano, P., <strong>Otto, P.</strong> (2025): Multidimensional spatiotemporal clustering – An application to environmental sustainability scores in Europe. <span class="highlight-journal">Environmetrics</span> 36(2) (<a href=" http://dx.doi.org/10.1002/env.2893">DOI</a>)</li>
+                                            <li>Morelli, C., Boccaletti, S., Maranzano, P., <strong>Otto, P.</strong> (2025): Multidimensional spatiotemporal clustering – An application to environmental sustainability scores in Europe. <span class="highlight-journal">Environmetrics</span> 36(2) (<a href="https://doi.org/10.1002/env.2893">DOI</a>)</li>
                                             <li>Heumann, M., Kraschewski, T., <strong>Otto, P.</strong>, Tilch, L., Brauner, T., Breitner, M. H. (2025): Factors influencing the usage of shared micromobility: Implications from Berlin. <span class="highlight-journal">Journal of Cycling and Micromobility Research</span> (<a href="https://doi.org/10.1016/j.jcmr.2025.100063">DOI</a>)</li>
                                             <li><strong>Otto, P.</strong> (2025): Discussion on “Assessing predictability of environmental time series with statistical and machine learning models” by Bonas et al. <span class="highlight-journal">Environmetrics</span> (<a href="https://doi.org/10.1002/env.2898">DOI</a>)</li>
                                         </ul>
@@ -312,10 +316,11 @@
                                         </ul>
                                         
                                     </p>
-                                    <h3>Statistical Software</h3>
+                                    <h3 id="statistical-software">Statistical Software</h3>
                                     <p>
                                         <ul>
-                                            <li> <strong>Otto, P.</strong>: R-Package <tt>spGARCH</tt>. A collection of functions to deal with spatial and spatiotemporal autoregressive conditional heteroscedasticity (spatial ARCH and GARCH models) <a href="https://cran.r-project.org/web/packages/spGARCH/index.html">(CRAN)</a></li>
+                                            <li><code>geossm</code> (Python) fits low-rank SPDE state-space models for multivariate spatial prediction. <a href="geossm.html#quickstart">Quick start</a> · <a href="https://pypi.org/project/geossm/">PyPI</a> · <a href="https://doi.org/10.1016/j.spasta.2026.100971">Model paper</a></li>
+                                            <li> <strong>Otto, P.</strong>: R-Package <tt>spGARCH</tt>. A collection of functions to deal with spatial and spatiotemporal autoregressive conditional heteroscedasticity (spatial ARCH and GARCH models) <a href="https://cran.r-project.org/web/packages/spGARCH/index.html">(CRAN)</a> · <a href="software-data.html#spgarch">Getting started and citation</a></li>
                                            
                                         </ul>
                                     </p>

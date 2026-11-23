@@ -34,16 +34,16 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "TechArticle",
+      "@type": {{ page.schema_type | default: "TechArticle" | jsonify }},
       "headline": {{ page.title | jsonify }},
       "description": {{ page.description | jsonify }},
       "mainEntityOfPage": {{ page.canonical_url | jsonify }},
       "dateModified": {{ page.date_modified | jsonify }},
       "author": {{ page.schema_authors | jsonify }},
       "about": {{ page.schema_about | jsonify }},
+      "keywords": {{ page.keywords | join: ", " | jsonify }}{% if page.based_on %},
       "learningResourceType": "Explainer",
-      "keywords": {{ page.keywords | join: ", " | jsonify }},
-      "isBasedOn": {{ page.based_on | jsonify }}
+      "isBasedOn": {{ page.based_on | jsonify }}{% endif %}
     }
     </script>
 

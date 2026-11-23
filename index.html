@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Philipp Otto</title>
+		<title>Philipp Otto | Spatial Statistics and Data Science</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -50,24 +50,27 @@
             <meta name="description" content="Philipp Otto, Professor of Statistics and Data Science at the University of Glasgow. Research in spatial statistics, spatiotemporal modelling, volatility, environmetrics, statistical process monitoring, and statistical learning." />
             <meta name="keywords" content="Philipp Otto, spatial statistics, spatiotemporal modelling, GARCH, volatility, environmetrics, machine learning, cross-validation, statistical process monitoring, University of Glasgow" />
 
+            <link rel="canonical" href="https://philot789.github.io/" />
+
             <!-- Open Graph -->
             <meta property="og:title" content="Philipp Otto – Research in Statistics and Data Science" />
             <meta property="og:description" content="Professor at University of Glasgow. Research in spatial statistics, volatility modelling, spatiotemporal methods, environmetrics, and process monitoring." />
             <meta property="og:type" content="website" />
-            <meta property="og:url" content="https://www.maths.gla.ac.uk/philipp.otto/" />
-            <meta property="og:image" content="images/me.jpg" />
+            <meta property="og:url" content="https://philot789.github.io/" />
+            <meta property="og:image" content="https://philot789.github.io/images/me.jpg" />
 
             <!-- Twitter -->
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content="Philipp Otto – Research in Statistics and Data Science" />
             <meta name="twitter:description" content="Professor at University of Glasgow. Research in spatial statistics, volatility modelling, environmetrics, and statistical learning." />
-            <meta name="twitter:image" content="images/me.jpg" />
+            <meta name="twitter:image" content="https://philot789.github.io/images/me.jpg" />
 
             <!-- Schema.org Person -->
             <script type="application/ld+json">
             {
               "@context": "https://schema.org",
               "@type": "Person",
+              "@id": "https://philot789.github.io/#philipp-otto",
               "name": "Philipp Otto",
               "jobTitle": "Professor of Statistics and Data Science",
               "affiliation": {
@@ -75,8 +78,9 @@
                 "name": "University of Glasgow",
                 "url": "https://www.gla.ac.uk/schools/mathematicsstatistics/"
               },
-              "url": "https://www.maths.gla.ac.uk/philipp.otto/",
+              "url": "https://philot789.github.io/",
               "sameAs": [
+                "https://www.gla.ac.uk/schools/mathematicsstatistics/staff/philippotto/",
                 "https://orcid.org/0000-0002-9796-6682",
                 "https://scholar.google.de/citations?user=URsnzm8AAAAJ",
                 "https://www.researchgate.net/profile/Philipp-Otto-2",
@@ -133,6 +137,7 @@
                                 <li><a href="research.html">Research</a>
                                     <ul>
                                         <li><a href="research.html">Publications</a></li>
+                                        <li><a href="software-data.html">Software &amp; Data</a></li>
                                         <li><a href="projects.html">Grants</a></li>
                                         <li><a href="presentations.html">Conferences</a></li>
                                     </ul>
@@ -151,7 +156,7 @@
 					<header>
 						<h2>Research Highlights</h2>
 						<p>
-							Selected papers
+							Explore <a href="#research-questions">research by question</a> or go to <a href="software-data.html">software and data</a>.
 						</p>
 					</header>
 				</section>
@@ -365,6 +370,44 @@
 
 			
 <!-- Spatial Risk Lab — permanent research-to-public outreach feature -->
+<section class="wrapper style1" id="research-questions" aria-labelledby="research-questions-title">
+    <div class="container">
+        <header>
+            <h2 id="research-questions-title">Research by question</h2>
+        </header>
+        <div class="row">
+            <section class="col-4 col-6-narrow col-12-mobile">
+                <h3>How does volatility spread across locations?</h3>
+                <p>Model clusters of large deviations and spillovers in risk. Read about <a href="spARCH.html">spatial ARCH</a>, <a href="garch.html">spatial GARCH</a> and <a href="review.html">spatial volatility models</a>, or explore <a href="software-data.html#spgarch">spGARCH for R</a>.</p>
+            </section>
+            <section class="col-4 col-6-narrow col-12-mobile">
+                <h3>How can I predict air quality at unmonitored sites?</h3>
+                <p>Use dependence between pollutants and nearby observations to interpolate air-quality fields. Start with <a href="geossm.html">geossm for Python</a> and the <a href="agrimonia.html">Agrimonia dataset</a>.</p>
+            </section>
+            <section class="col-4 col-6-narrow col-12-mobile">
+                <h3>How should I validate space–time predictions?</h3>
+                <p>Choose a holdout design that matches the prediction task. See the <a href="reviewregularised.html">review of regularisation and cross-validation</a> for spatial interpolation, regional transfer and temporal forecasting.</p>
+            </section>
+            <section class="col-4 col-6-narrow col-12-mobile">
+                <h3>How do regional shares change over time?</h3>
+                <p>Separate local dynamics from spatial spillovers when the responses are shares of a whole. See the <a href="compositions.html">spatiotemporal model for areal compositions</a>.</p>
+            </section>
+            <section class="col-4 col-6-narrow col-12-mobile">
+                <h3>Can the data reveal which locations interact?</h3>
+                <p>Estimate spatial links jointly with breaks in local mean levels. See the <a href="lasso.html">spatial weights and structural breaks explainer</a>.</p>
+            </section>
+            <section class="col-4 col-6-narrow col-12-mobile">
+                <h3>How can I monitor a deployed neural network?</h3>
+                <p>Track changes in network embeddings when new labels are delayed. See the <a href="monitoringANN.html">neural network monitoring explainer</a>.</p>
+            </section>
+            <section class="col-4 col-6-narrow col-12-mobile">
+                <h3>How do beach profiles evolve after storms?</h3>
+                <p>Use partial and irregular surveys to study changes along coastal transects. See the <a href="profiles.html">functional beach profiles explainer</a>.</p>
+            </section>
+        </div>
+    </div>
+</section>
+
 <section class="srl-home-feature" aria-labelledby="srl-home-title">
  <div class="srl-wrap srl-home-layout">
   <a href="spatial-risk-lab.html" class="srl-home-image"><img src="assets/spatial-risk-lab/network-card.webp" width="800" height="391" loading="lazy" alt="Spatial Risk Lab: a network of teal districts with two warm areas of pressure."></a>

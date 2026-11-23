@@ -1,0 +1,95 @@
+---
+layout: paper
+nav_section: research
+site_section_label: Research
+title: Software & Data for Spatial Statistics
+title_suffix: Philipp Otto
+description: "Find Python and R packages and open datasets for spatiotemporal geostatistics, spatial volatility modelling and air-quality research."
+meta_author: Philipp Otto
+canonical_url: https://philot789.github.io/software-data.html
+date_modified: '2026-11-23'
+schema_type: CollectionPage
+keywords:
+- geossm
+- spGARCH
+- Agrimonia dataset
+- spatial statistics software
+- spatiotemporal data
+schema_authors:
+- "@type": Person
+  "@id": https://philot789.github.io/#philipp-otto
+  name: Philipp Otto
+  sameAs: https://orcid.org/0000-0002-9796-6682
+schema_about:
+- "@type": SoftwareSourceCode
+  name: geossm
+  codeRepository: https://github.com/jacopoRodeschini/geossm
+  programmingLanguage: Python
+  url: https://jacoporodeschini.github.io/geossm/
+- "@type": SoftwareSourceCode
+  name: spGARCH
+  identifier: https://doi.org/10.32614/CRAN.package.spGARCH
+  programmingLanguage: R
+  url: https://cran.r-project.org/package=spGARCH
+- "@type": Dataset
+  name: AgrImOnIA
+  url: https://doi.org/10.5281/zenodo.6620529
+---
+<div class="wrapper style1">
+    <div class="container">
+        <div class="row gtr-200">
+            <div class="col-8 col-12-mobile" id="content">
+                <article id="main">
+                    <header>
+                        <h1>{{ page.title | escape }}</h1>
+                        <p>Open research tools for predicting spatial fields, modelling volatility and working with environmental monitoring data.</p>
+                    </header>
+
+                    <section aria-labelledby="geossm">
+                        <h2 id="geossm">geossm · Python for spatiotemporal geostatistics</h2>
+                        <p>Use <code>geossm</code> for multivariate spatial prediction when monitoring sites differ between variables and measurements can be aligned to a regular time grid. Its low-rank SPDE state-space model can use the dependence between pollutants to interpolate at unobserved stations within the fitted period. The quick start fits a PM₁₀ model on bundled Agrimonia data and describes the supported Linux environment.</p>
+                        <pre class="paper-code"><code>python -m pip install geossm</code></pre>
+                        <p><strong>Cite the model:</strong> Rodeschini, J., Tedesco, L., Finazzi, F., Otto, P., &amp; Fassò, A. (2026). <a href="https://doi.org/10.1016/j.spasta.2026.100971">Multivariate low-rank state–space model with SPDE approach for high-dimensional data</a>. <em>Spatial Statistics</em>, 73, 100971. Record the installed package version alongside the citation.</p>
+                        <p><a href="geossm.html#quickstart">Python quick start</a> · <a href="https://pypi.org/project/geossm/">PyPI</a> · <a href="https://jacoporodeschini.github.io/geossm/">Documentation</a> · <a href="https://github.com/jacopoRodeschini/geossm">Source code</a></p>
+                    </section>
+
+                    <section aria-labelledby="spgarch">
+                        <h2 id="spgarch">spGARCH · R for spatial volatility</h2>
+                        <p>Use <code>spGARCH</code> when the magnitude of deviations clusters across nearby or connected locations. The package simulates spatial ARCH processes, estimates spatial ARCH models and spatial autoregressions with ARCH errors by quasi-maximum likelihood, and provides residual diagnostics. A first step is to open the documented simulation examples in R.</p>
+                        <pre class="paper-code"><code>install.packages("spGARCH")
+library(spGARCH)
+help("sim.spARCH", package = "spGARCH")</code></pre>
+                        <p><strong>Cite the software:</strong> Otto, P. (2019). <a href="https://doi.org/10.32614/RJ-2019-053">spGARCH: An R-Package for Spatial and Spatiotemporal ARCH and GARCH models</a>. <em>The R Journal</em>, 11(2), 401–420. The <a href="https://doi.org/10.32614/CRAN.package.spGARCH">CRAN package DOI</a> identifies the software record.</p>
+                        <p><a href="RJ.html">Software paper overview</a> · <a href="https://cran.r-project.org/package=spGARCH">CRAN and reference manual</a> · <a href="spARCH.html">Spatial ARCH explainer</a></p>
+                    </section>
+
+                    <section aria-labelledby="agrimonia">
+                        <h2 id="agrimonia">Agrimonia · Open air-quality data</h2>
+                        <p>Use Agrimonia to study daily air pollution alongside meteorology, emissions, and agricultural activity at 141 monitoring stations in and around Lombardy from 2016 to 2021. Start with a single pollutant and check its station coverage, original measurement resolution, and imputation uncertainty before fitting a model. The data descriptor explains how the sources were harmonised.</p>
+                        <p><strong>Cite the data:</strong> Record the DOI of the exact version downloaded from Zenodo. For the data descriptor, cite Fassò et al. (2023), <a href="https://doi.org/10.1038/s41597-023-02034-0">Agrimonia: a dataset on livestock, meteorology and air quality in the Lombardy region, Italy</a>, <em>Scientific Data</em>, 10, 143.</p>
+                        <p><a href="agrimonia.html">Dataset explainer</a> · <a href="https://doi.org/10.5281/zenodo.6620529">Data and metadata on Zenodo</a> · <a href="https://github.com/AgrImOnIA-project/AgrImOnIA_Data">Data preparation code</a></p>
+                    </section>
+                </article>
+            </div>
+            <aside class="col-4 col-12-mobile" id="sidebar" aria-labelledby="resources-navigation">
+                <hr class="first" />
+                <section>
+                    <h3 id="resources-navigation">On this page</h3>
+                    <ul>
+                        <li><a href="#geossm">geossm for Python</a></li>
+                        <li><a href="#spgarch">spGARCH for R</a></li>
+                        <li><a href="#agrimonia">Agrimonia data</a></li>
+                    </ul>
+                </section>
+                <section aria-labelledby="explore-research">
+                    <h3 id="explore-research">Explore research</h3>
+                    <ul>
+                        <li><a href="index.html#research-questions">Research by question</a></li>
+                        <li><a href="research.html">Publications</a></li>
+                        <li><a href="projects.html">Research projects</a></li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+    </div>
+</div>
